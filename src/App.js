@@ -1,9 +1,9 @@
-import register from "./Register";
+import Register from "./Register";
 
 function App() {
   return (
     <main className="App">
-      <register />
+      <Register />
     </main>
   );
 }

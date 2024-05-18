@@ -100,14 +100,12 @@ const Register = () => {
 
         <label htmlFor="password">
           Password:
-          <FontAwesomeIcon
-            icon={faCheck}
-            className={validPwd ? "valid" : "hide"}
-          />
-          <FontAwesomeIcon
-            icon={faTimes}
-            className={validPwd || !pwd ? "hide" : "invalid"}
-          />
+          <span className={validPwd ? "valid" : "hide"}>
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+          <span className={validPwd || pwd ? "hide" : "invalid"}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
         </label>
         <input
           type="password"
@@ -140,14 +138,12 @@ const Register = () => {
 
         <label htmlFor="confirm_pwd">
           Confirm Password:
-          <FontAwesomeIcon
-            icon={faCheck}
-            className={validMatchPwd && matchPwd ? "valid" : "hide"}
-          />
-          <FontAwesomeIcon
-            icon={faTimes}
-            className={validMatchPwd || !matchPwd ? "hide" : "invalid"}
-          />
+          <span className={validMatchPwd && matchPwd ? "valid" : "hide"}>
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+          <span className={validMatchPwd || !matchPwd ? "hide" : "invalid"}>
+            <FontAwesomeIcon icone={faTimes} />
+          </span>
         </label>
         <input
           type="password"
