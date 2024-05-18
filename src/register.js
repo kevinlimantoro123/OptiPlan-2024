@@ -63,6 +63,41 @@ const Register = () => {
         {errMsg}
       </p>
       <h1>Register</h1>
+      <form>
+        <label htmlFor="username">
+          Username:
+          <span className={validName ? "valid" : "hide"}>
+            <FontAwesomeIcon icon={faCheck} />
+          </span>
+          <span className={validName || !user ? "hide" : "invalid"}>
+            <FontAwesomeIcon icon={faTimes} />
+          </span>
+        </label>
+        <input
+          type="text"
+          id="username"
+          ref={userRef}
+          autoComplete="off"
+          onChange={(a) => setUser(a.target.value)}
+          required
+          aria-invalid={validName ? "false" : "true"}
+          aria-describedby="uidnote"
+          onFocus={() => setUserFocus(true)}
+          onBlur={() => setUserFocus(false)}
+        />
+        <p
+          id="uidnote"
+          className={
+            userFocus && user && !validName ? "instructions" : "offscreen"
+          }
+        >
+          <FontAwesomeIcon icon={faInfoCircle} />
+          4 to 21 characters allowed.
+          <br />
+          Must begin with a letter.
+          <br />
+        </p>
+      </form>
     </section>
   );
 };
