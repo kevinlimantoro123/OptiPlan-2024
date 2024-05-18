@@ -3,12 +3,14 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //User and PW boundaries
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3, 20}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 
 const Register = () => {
   const userRef = useRef();
@@ -21,10 +23,12 @@ const Register = () => {
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
+  const [pwdVisible, setPwdVisible] = useState(false);
 
   const [matchPwd, setMatchPwd] = useState("");
   const [validMatchPwd, setValidMatchPwd] = useState(false);
   const [matchPwdFocus, setMatchPwdFocus] = useState(false);
+  const [matchVisible, setMatchVisible] = useState(false);
 
   const [errMsg, setErr] = useState("");
   const [success, setSuccess] = useState(false);
@@ -35,15 +39,11 @@ const Register = () => {
 
   useEffect(() => {
     const result = USER_REGEX.test(user); //Checks validation of username
-    console.log(result);
-    console.log(user);
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd); //Checks validation of pw
-    console.log(result);
-    console.log(pwd);
     setValidPwd(result);
     const match = pwd === matchPwd; //Checks if matchpw == original pw
     setValidMatchPwd(match);
@@ -78,7 +78,7 @@ const Register = () => {
           id="username"
           ref={userRef}
           autoComplete="off"
-          onChange={(a) => setUser(a.target.value)}
+          onChange={(e) => setUser(e.target.value)}
           required
           aria-invalid={validName ? "false" : "true"}
           aria-describedby="uidnote"
@@ -92,7 +92,7 @@ const Register = () => {
           }
         >
           <FontAwesomeIcon icon={faInfoCircle} />
-          4 to 21 characters allowed.
+          4 to 24 characters allowed.
           <br />
           Must begin with a letter.
           <br />
@@ -103,12 +103,12 @@ const Register = () => {
           <span className={validPwd ? "valid" : "hide"}>
             <FontAwesomeIcon icon={faCheck} />
           </span>
-          <span className={validPwd || pwd ? "hide" : "invalid"}>
+          <span className={validPwd || !pwd ? "hide" : "invalid"}>
             <FontAwesomeIcon icon={faTimes} />
           </span>
         </label>
         <input
-          type="password"
+          type={pwdVisible ? "text" : "password"}
           id="password"
           onChange={(e) => setPwd(e.target.value)}
           value={pwd}
@@ -118,6 +118,9 @@ const Register = () => {
           onFocus={() => setPwdFocus(true)}
           onBlur={() => setPwdFocus(false)}
         />
+        <div className="p-1" onClick={() => setPwdVisible(!pwdVisible)}>
+          {pwdVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+        </div>
         <p
           id="pwdnote"
           className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
@@ -125,15 +128,8 @@ const Register = () => {
           <FontAwesomeIcon icon={faInfoCircle} />
           8 to 24 characters.
           <br />
-          Must include uppercase and lowercase letters, a number and a special
-          character.
+          Must include uppercase and lowercase letters, a number.
           <br />
-          Allowed special characters:{" "}
-          <span aria-label="exclamation mark">!</span>{" "}
-          <span aria-label="at symbol">@</span>{" "}
-          <span aria-label="hashtag">#</span>{" "}
-          <span aria-label="dollar sign">$</span>{" "}
-          <span aria-label="percent">%</span>
         </p>
 
         <label htmlFor="confirm_pwd">
@@ -142,11 +138,11 @@ const Register = () => {
             <FontAwesomeIcon icon={faCheck} />
           </span>
           <span className={validMatchPwd || !matchPwd ? "hide" : "invalid"}>
-            <FontAwesomeIcon icone={faTimes} />
+            <FontAwesomeIcon icon={faTimes} />
           </span>
         </label>
         <input
-          type="password"
+          type={matchVisible ? "text" : "password"}
           id="confirm_pwd"
           onChange={(e) => setMatchPwd(e.target.value)}
           value={matchPwd}
@@ -156,6 +152,9 @@ const Register = () => {
           onFocus={() => setMatchPwdFocus(true)}
           onBlur={() => setMatchPwdFocus(false)}
         />
+        <div className="p-2" onClick={() => setMatchVisible(!matchVisible)}>
+          {matchVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+        </div>
         <p
           id="confirmnote"
           className={
@@ -165,7 +164,21 @@ const Register = () => {
           <FontAwesomeIcon icon={faInfoCircle} />
           Must match the password input field.
         </p>
+
+        <button
+          disabled={!validName || !validPwd || !validMatchPwd ? true : false}
+        >
+          Sign Up
+        </button>
       </form>
+      <p>
+        Already registered?
+        <br />
+        <span className="line">
+          {/*CHANGE HREF TO ACTUAL ROUTER LINK*/}
+          <a href="login">Sign in</a>
+        </span>
+      </p>
     </section>
   );
 };

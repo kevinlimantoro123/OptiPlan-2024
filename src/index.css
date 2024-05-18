@@ -9,12 +9,12 @@
 html {
   font-family: "Nunito", sans-serif;
   font-size: 22px;
-  color: #fff;
+  color: #ffffff;
 }
 
 body {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: #02afff;
 }
 
 .App {
