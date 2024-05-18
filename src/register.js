@@ -12,7 +12,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
   const userRef = useRef();
-  const errRef = errRef();
+  const errRef = useRef();
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false); //valid checker
