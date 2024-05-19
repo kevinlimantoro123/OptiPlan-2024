@@ -22,7 +22,7 @@ const Login = () => {
   }, [user, pwd]);
 
   const handleSubmit = async (e) => {
-    e.preventDefult();
+    e.preventDefault();
     try {
       const res = await axios.post(LOGIN_URL, JSON.stringify({ user, pwd }), {
         headers: { "Content-Type": "application/json" },
@@ -71,8 +71,6 @@ const Login = () => {
           onChange={(e) => setPwd(e.target.value)}
           value={pwd}
           required
-          onFocus={() => setPwdFocus(true)}
-          onBlur={() => setPwdFocus(false)}
         />
         <div className="p-1" onClick={() => setPwdVisible(!pwdVisible)}>
           {pwdVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
