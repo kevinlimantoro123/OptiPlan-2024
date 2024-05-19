@@ -66,11 +66,11 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      setSuccess(true);
-      console.log(res?.data);
+      console.log(JSON.stringify(res?.data));
       setUser("");
       setPwd("");
       setMatchPwd("");
+      setSuccess(true);
     } catch (err) {
       if (err.response?.status === 409) {
         setErrMsg("Username taken");
