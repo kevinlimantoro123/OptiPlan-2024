@@ -1,6 +1,6 @@
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Layout from "./pages/Layout";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import Layout from "./Components/Layout";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
