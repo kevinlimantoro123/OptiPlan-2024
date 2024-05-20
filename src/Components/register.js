@@ -3,10 +3,11 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
 
 const REGISTER_URL = "/register";
