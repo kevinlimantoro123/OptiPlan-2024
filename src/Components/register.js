@@ -3,7 +3,6 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
-  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
