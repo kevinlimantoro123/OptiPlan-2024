@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
 const REGISTER_URL = "/register";
@@ -14,6 +15,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 
 const Register = () => {
+  const navigate = useNavigate();
   const userRef = useRef();
   const errRef = useRef();
 
@@ -206,6 +208,7 @@ const Register = () => {
               disabled={
                 !validName || !validPwd || !validMatchPwd ? true : false
               }
+              onClick={() => navigate("success")}
             >
               Sign Up
             </button>
@@ -214,8 +217,7 @@ const Register = () => {
             Already registered?
             <br />
             <span className="line">
-              {/*CHANGE HREF TO ACTUAL ROUTER LINK*/}
-              <a href="#">Sign in</a>
+              <a href="login">Sign in</a>
             </span>
           </p>
         </section>
