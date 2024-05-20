@@ -81,7 +81,7 @@ const Login = () => {
         Haven't registered?
         <br />
         <span className="line">
-          <a href="#">Sign Up</a>
+          <a href="/register">Sign Up</a>
         </span>
       </p>
     </section>
