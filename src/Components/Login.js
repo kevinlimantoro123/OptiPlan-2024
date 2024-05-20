@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import axios from "./api/axios";
+import axios from "../api/axios";
 const LOGIN_URL = "/login";
 
 const Login = () => {
