@@ -60,15 +60,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ user, pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(res?.data));
+      const body = { user, pwd };
+      const res = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      console.log(res);
       setUser("");
       setPwd("");
       setMatchPwd("");
@@ -89,7 +87,7 @@ const Register = () => {
         <section>
           <h1>Your account has been created!</h1>
           <p>
-            <a href="#">Sign in</a>
+            <a href="login">Sign in</a>
           </p>
         </section>
       ) : (
@@ -209,7 +207,6 @@ const Register = () => {
               disabled={
                 !validName || !validPwd || !validMatchPwd ? true : false
               }
-              onClick={() => navigate("success")}
             >
               Sign Up
             </button>
