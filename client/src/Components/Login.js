@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import axios from "../api/axios";
+
 const LOGIN_URL = "/login";
 
 const Login = () => {
@@ -23,23 +23,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(LOGIN_URL, JSON.stringify({ user, pwd }), {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-      console.log(JSON.stringify(res?.data));
-      setUser("");
-      setPwd("");
-      setSuccess(true);
-    } catch (err) {
-      if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else {
-        setErrMsg("Login failed!");
-      }
-      errRef.current.focus();
-    }
   };
 
   return (
