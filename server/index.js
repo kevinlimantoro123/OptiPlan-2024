@@ -9,17 +9,13 @@ app.use(express.json());
 //Create a user
 app.post("/users", async (req, res) => {
   try {
-    const { user, pwd } = req.body;
+    console.log(req.body);
+    const { name, pwd } = req.body;
     const newUser = await pool.query(
-      "INSERT INTO users (name) VALUES($1) RETURNING*",
-      [user]
-    );
-    const newPwd = await pool.query(
-      "INSERT INTO users (password) VALUES($1) RETURNING*",
-      [pwd]
+      "INSERT INTO users (name, pwd) VALUES($1, $2) RETURNING*",
+      [name, pwd]
     );
     res.json(newUser);
-    res.json(newPwd);
   } catch (err) {
     console.error(err.message);
   }
@@ -29,7 +25,7 @@ app.post("/users", async (req, res) => {
 app.get("/users", async (red, res) => {
   try {
     const allUsers = await pool.query("SELECT * FROM users");
-    res.json(allUsers);
+    res.json(allUsers.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -40,7 +36,7 @@ app.get("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
-    res.json(user);
+    res.json(user.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -50,14 +46,10 @@ app.get("/users/:id", async (req, res) => {
 app.put("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { user, pwd } = req.body;
-    const updateName = await pool.query(
-      "UPDATE users SET name = $1 WHERE id = $2",
-      [user, id]
-    );
-    const updatePwd = await poolquert(
-      "UPDATE users SET password = $1 WHERE id = $2",
-      [pwd, id]
+    const { name, pwd } = req.body;
+    const updateUser = await pool.query(
+      "UPDATE users SET name = $1, pwd = $2 WHERE id = $3",
+      [name, pwd, id]
     );
     res.json("User has been updated");
   } catch (err) {
