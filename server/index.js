@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const pool = require("./src/db/database");
+const bcrypt = require("bcrypt");
+const jwtGenerator = require("./utils/jwtGenerator");
+const pool = require("./db/database");
+const authorization = require("./middleware/auth");
+const SECRET_KEY = "ib0AvWFO3ArcwQ24K1C3uJPGiswpa8QC";
 
 app.use(cors());
 app.use(express.json());
@@ -11,11 +15,13 @@ app.post("/users", async (req, res) => {
   try {
     console.log(req.body);
     const { name, pwd } = req.body;
+    const hashedPwd = await bcrypt.hash(pwd, 10);
     const newUser = await pool.query(
       "INSERT INTO users (name, pwd) VALUES($1, $2) RETURNING*",
-      [name, pwd]
+      [name, hashedPwd]
     );
-    res.json(newUser);
+    const token = jwtGenerator(newUser.rows[0].id);
+    res.json({ token });
   } catch (err) {
     console.error(err.message);
   }
@@ -67,6 +73,41 @@ app.delete("/users/:id", async (req, res) => {
     res.json("User has been deleted");
   } catch (err) {
     console.error(err.message);
+  }
+});
+
+//Login user
+app.post("/login", async (req, res) => {
+  try {
+    const { name, pwd } = req.body;
+    const userAuth = await pool.query("SELECT * FROM users WHERE name = $1", [
+      name,
+    ]);
+
+    const user = userAuth.rows[0];
+    if (!user) {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+
+    const pwdMatch = await bcrypt.compare(pwd, user.pwd);
+    if (!pwdMatch) {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+
+    const token = jwtGenerator(user.id);
+    res.json({ token });
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//Verify token
+app.get("/verify", authorization, async (req, res) => {
+  try {
+    res.json(true);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
 

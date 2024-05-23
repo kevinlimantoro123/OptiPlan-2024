@@ -23,6 +23,20 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const body = { name, pwd };
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      console.log(res);
+      setName("");
+      setPwd("");
+    } catch (err) {
+      setErrMsg("Login failed");
+      errRef.current.focus();
+    }
   };
 
   return (
