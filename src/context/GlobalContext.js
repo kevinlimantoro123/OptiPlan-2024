@@ -1,5 +1,4 @@
 import React from "react";
-import SmallCalendar from "../Components/SmallCalendar";
 
 const GlobalContext = React.createContext({
     monthIndex: 0,
@@ -10,7 +9,10 @@ const GlobalContext = React.createContext({
     setDaySelected: (day) => {},
     showEventModel: false,
     setShowEventModel: () => {},
-    dispatchCalEvent: ({type, payload}) => {}
+    dispatchCalEvent: ({type, payload}) => {},
+    savedEvents: [],
+    selectedEvent: null,
+    setSelectedEvent: () => {}
 })
 
 export default GlobalContext;

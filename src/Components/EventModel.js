@@ -2,18 +2,18 @@ import React, { useContext, useState } from "react";
 import GlobalContext from '../context/GlobalContext';
 
 export default function EventModel() {
-    const [ title, setTitle ] = useState("");
-    const { setShowEventModel, daySelected, dispatchCalEvent } = useContext(GlobalContext);
-    const [ description, setDescription ] = useState("");
-    const [ selectedLabel, setSelectedLabel ] = useState("");
+    const { setShowEventModel, daySelected, dispatchCalEvent, selectedEvent, setSelectedEvent } = useContext(GlobalContext);
+    const [ title, setTitle ] = useState(selectedEvent ? selectedEvent.title : "");
+    const [ description, setDescription ] = useState(selectedEvent ? selectedEvent.description : "");
+    const [ selectedLabel, setSelectedLabel ] = useState(selectedEvent ? selectedEvent.label : "bg-blue-500");
 
     const labelsClasses = [
-        "indigo",
-        "gray",
-        "green",
-        "blue",
-        "red",
-        "purple",
+        "bg-indigo-500",
+        "bg-gray-500",
+        "bg-green-500",
+        "bg-blue-500",
+        "bg-red-500",
+        "bg-purple-500",
     ];
 
     function handleSubmit(e) {
@@ -23,9 +23,15 @@ export default function EventModel() {
             description,
             label: selectedLabel,
             day: daySelected.valueOf(),
-            id: Date.now()
+            id: selectedEvent ? selectedEvent.id : Date.now()
         };
-        dispatchCalEvent({ type:'push', payload: calendarEvent });
+        if (selectedEvent) {
+            dispatchCalEvent({ type:'update', payload: calendarEvent });
+            setSelectedEvent(null);
+        } else {
+            dispatchCalEvent({ type:'push', payload: calendarEvent });
+            setSelectedEvent(null);
+        }
         setShowEventModel(false);
     }
 
@@ -36,11 +42,23 @@ export default function EventModel() {
                     <span className="material-icons-outlined text-gray-400" >
                         drag_handle
                     </span>
-                    <button onClick={() => setShowEventModel(false)}>
-                        <span className="material-icons-outlined text-gray-400">
-                            close
-                        </span>
-                    </button>
+                    <div>
+                        {selectedEvent && (
+                            <span 
+                                onClick={() => {
+                                    dispatchCalEvent({type: "delete", payload: selectedEvent})
+                                    setShowEventModel(false)
+                                    setSelectedEvent(null);}}
+                                className="material-icons-outlined text-gray-400 cursor-pointer">
+                                delete
+                            </span>
+                        )}
+                        <button onClick={() => setShowEventModel(false)}>
+                            <span className="material-icons-outlined text-gray-400 cursor-pointer">
+                                close
+                            </span>
+                        </button>
+                    </div>
                 </header>
                 <div className="p-3">
                     <div className="grid grid-cols-1/5 items-end gap-y-7">
@@ -76,7 +94,7 @@ export default function EventModel() {
                                 <span 
                                     key={i} 
                                     onClick={() => setSelectedLabel(lblClass)}
-                                    className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}>
+                                    className={`${lblClass} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}>
                                     {selectedLabel === lblClass && 
                                     (<span className="material-icons-outlined text-white text-sm" >
                                         check
