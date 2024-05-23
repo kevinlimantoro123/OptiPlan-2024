@@ -17,7 +17,7 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [validName, setValidName] = useState(false); //valid checker
   const [userFocus, setUserFocus] = useState(false); //user focus checker
 
@@ -39,9 +39,9 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    const result = USER_REGEX.test(user); //Checks validation of username
+    const result = USER_REGEX.test(name); //Checks validation of username
     setValidName(result);
-  }, [user]);
+  }, [name]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd); //Checks validation of pw
@@ -52,19 +52,19 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg(""); //clears err msg
-  }, [user, pwd, matchPwd]);
+  }, [name, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const body = { user, pwd };
+      const body = { name, pwd };
       const res = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
       console.log(res);
-      setUser("");
+      setName("");
       setPwd("");
       setMatchPwd("");
       setSuccess(true);
@@ -103,7 +103,7 @@ const Register = () => {
               <span className={validName ? "valid" : "hide"}>
                 <FontAwesomeIcon icon={faCheck} />
               </span>
-              <span className={validName || !user ? "hide" : "invalid"}>
+              <span className={validName || !name ? "hide" : "invalid"}>
                 <FontAwesomeIcon icon={faTimes} />
               </span>
             </label>
@@ -112,8 +112,8 @@ const Register = () => {
               id="username"
               ref={userRef}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               required
               aria-invalid={validName ? "false" : "true"}
               aria-describedby="uidnote"
@@ -123,7 +123,7 @@ const Register = () => {
             <p
               id="uidnote"
               className={
-                userFocus && user && !validName ? "instructions" : "offscreen"
+                userFocus && name && !validName ? "instructions" : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
