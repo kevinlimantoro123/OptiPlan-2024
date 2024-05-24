@@ -6,7 +6,6 @@ const LOGIN_URL = "/login";
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-
   const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
