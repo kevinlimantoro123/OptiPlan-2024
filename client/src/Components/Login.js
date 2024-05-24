@@ -1,13 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import axios from "../api/axios";
+
 const LOGIN_URL = "/login";
 
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-
-  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
@@ -19,25 +18,22 @@ const Login = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [name, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(LOGIN_URL, JSON.stringify({ user, pwd }), {
+      const body = { name, pwd };
+      const res = await fetch("http://localhost:5000/login", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        withCredentials: true,
+        body: JSON.stringify(body),
       });
-      console.log(JSON.stringify(res?.data));
-      setUser("");
+      console.log(res);
+      setName("");
       setPwd("");
-      setSuccess(true);
     } catch (err) {
-      if (err.response?.status === 400) {
-        setErrMsg("Missing Username or Password");
-      } else {
-        setErrMsg("Login failed!");
-      }
+      setErrMsg("Login failed");
       errRef.current.focus();
     }
   };
@@ -59,8 +55,8 @@ const Login = () => {
           id="username"
           ref={userRef}
           autoComplete="off"
-          onChange={(e) => setUser(e.target.value)}
-          value={user}
+          onChange={(e) => setName(e.target.value)}
+          value={name}
           required
         />
 

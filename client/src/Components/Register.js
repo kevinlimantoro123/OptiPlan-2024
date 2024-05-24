@@ -3,14 +3,10 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
-  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "../api/axios";
-
-const REGISTER_URL = "/register";
 //User and PW boundaries
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
@@ -20,7 +16,7 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [validName, setValidName] = useState(false); //valid checker
   const [userFocus, setUserFocus] = useState(false); //user focus checker
 
@@ -42,9 +38,9 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    const result = USER_REGEX.test(user); //Checks validation of username
+    const result = USER_REGEX.test(name); //Checks validation of username
     setValidName(result);
-  }, [user]);
+  }, [name]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd); //Checks validation of pw
@@ -55,21 +51,19 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg(""); //clears err msg
-  }, [user, pwd, matchPwd]);
+  }, [name, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ user, pwd }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(res?.data));
-      setUser("");
+      const body = { name, pwd };
+      const res = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      console.log(res);
+      setName("");
       setPwd("");
       setMatchPwd("");
       setSuccess(true);
@@ -89,7 +83,7 @@ const Register = () => {
         <section>
           <h1>Your account has been created!</h1>
           <p>
-            <a href="#">Sign in</a>
+            <a href="login">Sign in</a>
           </p>
         </section>
       ) : (
@@ -108,7 +102,7 @@ const Register = () => {
               <span className={validName ? "valid" : "hide"}>
                 <FontAwesomeIcon icon={faCheck} />
               </span>
-              <span className={validName || !user ? "hide" : "invalid"}>
+              <span className={validName || !name ? "hide" : "invalid"}>
                 <FontAwesomeIcon icon={faTimes} />
               </span>
             </label>
@@ -117,8 +111,8 @@ const Register = () => {
               id="username"
               ref={userRef}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               required
               aria-invalid={validName ? "false" : "true"}
               aria-describedby="uidnote"
@@ -128,7 +122,7 @@ const Register = () => {
             <p
               id="uidnote"
               className={
-                userFocus && user && !validName ? "instructions" : "offscreen"
+                userFocus && name && !validName ? "instructions" : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -206,10 +200,10 @@ const Register = () => {
             </p>
 
             <button
+              type="submit"
               disabled={
                 !validName || !validPwd || !validMatchPwd ? true : false
               }
-              onClick={() => navigate("success")}
             >
               Sign Up
             </button>
