@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-
-const LOGIN_URL = "/login";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const userRef = useRef();
@@ -9,7 +8,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [pwdVisible, setPwdVisible] = useState(false);
 
   useEffect(() => {
@@ -24,19 +23,27 @@ const Login = () => {
     e.preventDefault();
     try {
       const body = { name, pwd };
-      const res = await fetch("http://localhost:5000/login", {
+      //check credentials
+      const res = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(res);
+      //store token in local machine
+      const parseRes = await res.json();
+      localStorage.setItem("token", parseRes.token);
       setName("");
       setPwd("");
+      setLoggedIn(true);
     } catch (err) {
       setErrMsg("Login failed");
       errRef.current.focus();
     }
   };
+
+  if (loggedIn) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <section>
