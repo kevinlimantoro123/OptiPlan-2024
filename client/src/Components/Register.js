@@ -57,12 +57,15 @@ const Register = () => {
     e.preventDefault();
     try {
       const body = { name, pwd };
-      const res = await fetch("http://localhost:5000/users", {
+      const res = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(res);
+
+      const parseRes = await res.json();
+      localStorage.setItem("token", parseRes.token);
+
       setName("");
       setPwd("");
       setMatchPwd("");

@@ -1,6 +1,8 @@
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Layout from "./Components/Layout";
+import Dashboard from "./Components/Dashboard";
+import Calendar from "./Components/Calendar";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="calendar" element={<Calendar />} />
       </Route>
     </Routes>
   );

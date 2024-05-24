@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,8 +12,8 @@
 
 html {
   font-family: "Nunito", sans-serif;
-  font-size: 22px;
-  color: #ffffff;
+  font-size: 24px;
+  color: black;
 }
 
 body {
@@ -117,4 +116,4 @@ button {
 
 .line {
   display: inline-block;
-} */
+}

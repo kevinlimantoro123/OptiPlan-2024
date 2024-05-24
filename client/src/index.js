@@ -9,11 +9,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ContextWrapper>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/*" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </BrowserRouter>
     </ContextWrapper>
   </React.StrictMode>
 );
