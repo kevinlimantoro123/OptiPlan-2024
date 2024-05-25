@@ -146,7 +146,7 @@ const Register = () => {
                 <div>
                   {userFocus && name && !validName ? (
                     <div className="text-red-500 pl-12 px-5 py-2 w-11/12 h-3 text-xs justify-self-center">
-                      <p>4 - 24 characters, first character has to be a letter</p>
+                      <p>4 - 24 characters, first character has to be a letter, no special characters/symbols</p>
                     </div>
                   ) : (
                     <div className="pl-12 px-5 py-2 w-11/12 text-xs"></div>
@@ -264,7 +264,8 @@ const Register = () => {
                   className={
                     !validName || !validPwd || !validMatchPwd 
                       ? "w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 ring-gray-300 bg-gray-300 text-white"
-                      : "w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-blue-500 text-white"}
+                      : "w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-blue-500 text-white"
+                  }
                 >
                   Sign Up
                 </button>
@@ -274,8 +275,8 @@ const Register = () => {
               <p className="text-black">Already registered?</p>
             </div>
             <div className="grid p-3 pb-6">
-              <span className="w-11/12 h-12 justify-self-center flex items-center justify-center rounded-2xl border-none ring-2 bg-blue-500 text-white">
-                <a href="login">Sign in</a>
+              <span className="w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-blue-500 text-white">
+                <a className="w-full h-full flex items-center justify-center" href="/login">Sign in</a>
               </span>
             </div>
           </section>
