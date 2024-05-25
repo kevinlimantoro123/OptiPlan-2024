@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import GlobalContext from '../context/GlobalContext';
+import GlobalContext from '../../context/GlobalContext';
 
 export default function EventModel() {
     const { setShowEventModel, daySelected, dispatchCalEvent, selectedEvent, setSelectedEvent } = useContext(GlobalContext);

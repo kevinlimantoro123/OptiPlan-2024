@@ -2,7 +2,7 @@ import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Layout from "./Components/Layout";
 import Dashboard from "./Components/Dashboard";
-import Calendar from "./Components/Calendar";
+import Calendar from "./Components/calendar/Calendar";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
