@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
-import { getMonth } from "../util";
+import { getMonth } from "../../util";
 import CalendarHeader from "./CalendarHeader";
 import Sidebar from "./Sidebar";
 import Month from "./Month";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 import EventModel from "./EventModel";
 
 const Calendar = () => {
