@@ -1,5 +1,3 @@
-const { Grid } = require('@mantine/core');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
