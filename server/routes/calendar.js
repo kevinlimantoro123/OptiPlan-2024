@@ -10,7 +10,20 @@ router.post("/events", authorization, async (req, res) => {
       "INSERT INTO events (title, description, label, day, user_id) VALUES($1, $2, $3, $4, $5) RETURNING*",
       [title, description, label, day, req.user]
     );
-    res.json(event.rows[0]);
+    res.json(event.rows[0].id);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//Get all events
+router.get("/events", authorization, async (req, res) => {
+  try {
+    const allEvents = await pool.query(
+      "SELECT * FROM events WHERE user_id = $1",
+      [req.user]
+    );
+    res.json(allEvents.rows);
   } catch (err) {
     console.error(err.message);
   }
@@ -22,7 +35,7 @@ router.put("/events/:id", authorization, async (req, res) => {
     const { id } = req.params;
     const { title, description, label, day } = req.body;
     const updateEvent = await pool.query(
-      "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5",
+      "UPDATE events SET title = $1, description = $2, label = $3, day = $4 sWHERE id = $5",
       [title, description, label, day, id]
     );
   } catch (err) {
