@@ -1,4 +1,6 @@
-CREATE DATABASE test2705;
+CREATE DATABASE optiplan;
+
+\c optiplan
 
 CREATE TABLE users (
     id serial PRIMARY KEY,

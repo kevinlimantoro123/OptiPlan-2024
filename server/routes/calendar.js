@@ -21,7 +21,6 @@ router.put("/events/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, label, day } = req.body;
-    console.log(req.body);
     const updateEvent = await pool.query(
       "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5 AND user_id = $6",
       [title, description, label, day, id, req.user]
@@ -36,9 +35,9 @@ router.put("/events/:id", authorization, async (req, res) => {
 router.delete("/events/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteEvent = await pool.query("DELETE FROM events WHERE id = $1", [
-      id,
-    ]);
+    const deleteEvent = await pool.query("DELETE FROM events WHERE id = $1 AND user_id = $2",
+      [id, req.user],
+    );
     res.json("Event has been deleted");
   } catch (err) {
     console.error(err.message);

@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
-import dayjs from "dayjs";
 
 export default function EventModel() {
   const {setShowEventModel, daySelected, selectedEvent, setSelectedEvent} = useContext(GlobalContext);
@@ -9,15 +8,15 @@ export default function EventModel() {
     selectedEvent ? selectedEvent.description : ""
   );
   const [selectedLabel, setSelectedLabel] = useState(
-    selectedEvent ? selectedEvent.label : "bg-blue-500"
+    selectedEvent ? selectedEvent.label : "blue"
   );
   const labelsClasses = [
-    "bg-indigo-500",
-    "bg-gray-500",
-    "bg-green-500",
-    "bg-blue-500",
-    "bg-red-500",
-    "bg-purple-500",
+    "indigo",
+    "gray",
+    "green",
+    "blue",
+    "red",
+    "purple",
   ];
 
   async function handleSubmit(e) {
@@ -44,8 +43,6 @@ export default function EventModel() {
       } catch (err) {
         console.error(err.message);
       }
-      // dispatchCalEvent({ type:'update', payload: calendarEvent });
-      // setSelectedEvent(null);
     } else {
       try {
         const res = await fetch("http://localhost:5000/calendar/events", {
@@ -63,7 +60,20 @@ export default function EventModel() {
       } catch (err) {
         console.error(err.message);
       }
-      // dispatchCalEvent({ type:'push', payload: calendarEvent });
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      const event_id = Number(selectedEvent.id);
+      const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
+        method: "DELETE",
+        headers: { token: localStorage.token },
+      });
+      setSelectedEvent(null);
+      setShowEventModel(false);
+    } catch (err) {
+      console.error(err.message);
     }
   }
 
@@ -77,11 +87,7 @@ export default function EventModel() {
           <div>
             {selectedEvent && (
               <span
-                onClick={() => {
-                  // dispatchCalEvent({ type: "delete", payload: selectedEvent });
-                  setShowEventModel(false);
-                  setSelectedEvent(null);
-                }}
+                onClick={() => {handleDelete()}}
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >
                 delete
@@ -133,7 +139,7 @@ export default function EventModel() {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`${lblClass} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons-outlined text-white text-sm">
@@ -149,7 +155,12 @@ export default function EventModel() {
           <button
             type="submit"
             onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
+            disabled={
+              !title? true : false
+            }
+            className={!title
+              ? "bg-gray-300 px-6 py-2 rounded text-white" 
+              : "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"}
           >
             Save
           </button>

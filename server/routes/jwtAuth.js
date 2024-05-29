@@ -8,7 +8,6 @@ const authorization = require("../middleware/auth");
 //Create a user
 router.post("/register", async (req, res) => {
   try {
-    console.log(req.body);
     const { name, pwd } = req.body;
     const hashedPwd = await bcrypt.hash(pwd, 10);
     const newUser = await pool.query(
