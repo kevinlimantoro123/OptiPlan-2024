@@ -38,6 +38,7 @@ export default function EventModel() {
           },
           body: JSON.stringify(body),
         });
+        await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
       } catch (err) {
@@ -53,8 +54,7 @@ export default function EventModel() {
           },
           body: JSON.stringify(body),
         });
-
-        const parseRes = await res.json();
+        await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
       } catch (err) {
@@ -70,6 +70,7 @@ export default function EventModel() {
         method: "DELETE",
         headers: { token: localStorage.token },
       });
+      await res.json()
       setSelectedEvent(null);
       setShowEventModel(false);
     } catch (err) {

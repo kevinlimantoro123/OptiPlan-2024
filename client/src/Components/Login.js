@@ -1,12 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import {
-  faCheck,
-  faTimes,
-  faExclamation,
-  faUser,
-  faLock
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate } from "react-router-dom";
 

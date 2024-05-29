@@ -7,7 +7,7 @@ router.post("/events", authorization, async (req, res) => {
   try {
     const { title, description, label, day } = req.body;
     const event = await pool.query(
-      "INSERT INTO events (title, description, label, day, user_id) VALUES($1, $2, $3, $4, $5) RETURNING*",
+      "INSERT INTO events (title, description, label, day, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *",
       [title, description, label, day, req.user]
     );
     res.json(event.rows[0]);
@@ -25,7 +25,7 @@ router.put("/events/:id", authorization, async (req, res) => {
       "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5 AND user_id = $6",
       [title, description, label, day, id, req.user]
     );
-    res.json(updateEvent.rows[0]);
+    res.json(updateEvent);
   } catch (err) {
     console.error(err.message);
   }
