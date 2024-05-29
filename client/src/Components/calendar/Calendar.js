@@ -10,45 +10,45 @@ import { Navigate } from "react-router-dom";
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModel } = useContext(GlobalContext);
-  const [verified, setVerified] = useState(false);
+  //   const [verified, setVerified] = useState(false);
 
-  async function verify() {
-    try {
-      const res = await fetch("http://localhost:5000/auth/verify", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-      const parseRes = await res.json();
-      setVerified(parseRes.auth);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
+  //   async function verify() {
+  //     try {
+  //       const res = await fetch("http://localhost:5000/auth/verify", {
+  //         method: "GET",
+  //         headers: { token: localStorage.token },
+  //       });
+  //       const parseRes = await res.json();
+  //       setVerified(parseRes.auth);
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //   }
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
   }, [monthIndex]);
 
-  useEffect(() => {
-    verify();
-  }, []);
+  //   useEffect(() => {
+  //     verify();
+  //   }, []);
 
-  if (verified) {
-    return (
-      <React.Fragment>
-        {showEventModel && <EventModel />}
-        <div className="h-screen flex flex-col">
-          <CalendarHeader />
-          <div className="flex flex-1">
-            <Sidebar />
-            <Month month={currentMonth} />
-          </div>
+  //   if (verified) {
+  return (
+    <React.Fragment>
+      {showEventModel && <EventModel />}
+      <div className="h-screen flex flex-col">
+        <CalendarHeader />
+        <div className="flex flex-1">
+          <Sidebar />
+          <Month month={currentMonth} />
         </div>
-      </React.Fragment>
-    );
-  } else {
-    return <Navigate to="/dashboard" />;
-  }
+      </div>
+    </React.Fragment>
+  );
+  //   } else {
+  //     return <Navigate to="/dashboard" />;
+  //   }
 };
 
 export default Calendar;
