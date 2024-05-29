@@ -5,7 +5,7 @@ const jwtGenerator = require("../utils/jwtGenerator");
 const authorization = require("../middleware/auth");
 
 //Get all users
-router.get("/users", async (red, res) => {
+router.get("/users", async (req, res) => {
   try {
     const allUsers = await pool.query("SELECT * FROM users");
     res.json(allUsers.rows);

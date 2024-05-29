@@ -56,12 +56,17 @@ const Dashboard = () => {
     return (
       <Fragment>
         <h1>Welcome {name}</h1>
-        <button className="btn btn-primary border-black border-2 p-2 m-2" onClick={logout}>
+        <button
+          className="btn btn-primary border-black border-2 p-2 m-2"
+          onClick={logout}
+        >
           Logout
         </button>
-        <br/>
-        <span className= "text-black border-black border-2 p-2 m-2">
-          <a className="h-full" href="/calendar">calendar</a>
+        <br />
+        <span className="text-black border-black border-2 p-2 m-2">
+          <a className="h-full" href="/calendar">
+            calendar
+          </a>
         </span>
       </Fragment>
     );
@@ -69,7 +74,7 @@ const Dashboard = () => {
     return (
       <Fragment>
         <h1>INVALID CREDENTIALS/SESSION HAS EXPIRED</h1>
-        <button className="btn btn-primary" onClick={() => navigate(-2)}>
+        <button className="btn btn-primary" onClick={() => navigate("/login")}>
           Sign in
         </button>
       </Fragment>
