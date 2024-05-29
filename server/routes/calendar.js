@@ -21,10 +21,12 @@ router.put("/events/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description, label, day } = req.body;
+    console.log(req.body);
     const updateEvent = await pool.query(
-      "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5",
-      [title, description, label, day, id]
+      "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5 AND user_id = $6",
+      [title, description, label, day, id, req.user]
     );
+    res.json(updateEvent.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
@@ -40,6 +42,19 @@ router.delete("/events/:id", authorization, async (req, res) => {
     res.json("Event has been deleted");
   } catch (err) {
     console.error(err.message);
+  }
+});
+
+//Get all events
+router.post("/", authorization, async (req, res) => {
+  try {
+    const events = await pool.query("SELECT * FROM events WHERE user_id = $1", [
+      req.user,
+    ]);
+    res.json(events.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json("Server error");
   }
 });
 

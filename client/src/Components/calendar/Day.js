@@ -8,7 +8,7 @@ export default function Day({day, rowIdx}) {
     const { setDaySelected, setShowEventModel, savedEvents, setSelectedEvent } = useContext(GlobalContext);
 
     useEffect(() => {
-        const events = savedEvents.filter(event => dayjs(event.day).format("DD-MM-YYYY") === day.format("DD-MM-YYYY"));
+        const events = savedEvents.filter(event => dayjs(Number(event.day)).format("DD-MM-YYYY") === day.format("DD-MM-YYYY"));
         setDayEvents(events)
     }, [savedEvents, day]);
 

@@ -1,14 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
+import dayjs from "dayjs";
 
 export default function EventModel() {
-  const {
-    setShowEventModel,
-    daySelected,
-    dispatchCalEvent,
-    selectedEvent,
-    setSelectedEvent,
-  } = useContext(GlobalContext);
+  const {setShowEventModel, daySelected, selectedEvent, setSelectedEvent} = useContext(GlobalContext);
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
@@ -35,8 +30,8 @@ export default function EventModel() {
     };
     if (selectedEvent) {
       try {
-        //const event_id =;
-        const res = await fetch("http://localhost:5000/calendar/events/", {
+        const event_id = Number(selectedEvent.id);
+        const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
           method: "PUT",
           headers: {
             token: localStorage.token,
@@ -44,9 +39,8 @@ export default function EventModel() {
           },
           body: JSON.stringify(body),
         });
-
-        const parseRes = await res.json();
         setSelectedEvent(null);
+        setShowEventModel(false);
       } catch (err) {
         console.error(err.message);
       }
@@ -65,12 +59,12 @@ export default function EventModel() {
 
         const parseRes = await res.json();
         setSelectedEvent(null);
+        setShowEventModel(false);
       } catch (err) {
         console.error(err.message);
       }
       // dispatchCalEvent({ type:'push', payload: calendarEvent });
     }
-    setShowEventModel(false);
   }
 
   return (
@@ -84,7 +78,7 @@ export default function EventModel() {
             {selectedEvent && (
               <span
                 onClick={() => {
-                  dispatchCalEvent({ type: "delete", payload: selectedEvent });
+                  // dispatchCalEvent({ type: "delete", payload: selectedEvent });
                   setShowEventModel(false);
                   setSelectedEvent(null);
                 }}
@@ -93,7 +87,10 @@ export default function EventModel() {
                 delete
               </span>
             )}
-            <button onClick={() => setShowEventModel(false)}>
+            <button onClick={() => {
+                setShowEventModel(false);
+                setSelectedEvent(null);
+              }}>
               <span className="material-icons-outlined text-gray-400 cursor-pointer">
                 close
               </span>
