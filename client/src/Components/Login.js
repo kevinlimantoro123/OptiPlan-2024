@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const body = { name, pwd };
       //check credentials
-      const res = await fetch("http://localhost:5000/auth/login", {
+      const res = await fetch("http://18.141.176.42:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
