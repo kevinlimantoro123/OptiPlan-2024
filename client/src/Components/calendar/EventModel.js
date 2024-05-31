@@ -25,7 +25,7 @@ export default function EventModel() {
       try {
         const event_id = Number(selectedEvent.id);
         const res = await fetch(
-          "http://localhost:5000/calendar/events/" + event_id,
+          "http://18.141.176.42:5000/calendar/events/" + event_id,
           {
             method: "PUT",
             headers: {
@@ -43,7 +43,7 @@ export default function EventModel() {
       }
     } else {
       try {
-        const res = await fetch("http://localhost:5000/calendar/events", {
+        const res = await fetch("http://18.141.176.42:5000/calendar/events", {
           method: "POST",
           headers: {
             token: localStorage.token,
@@ -64,7 +64,7 @@ export default function EventModel() {
     try {
       const event_id = Number(selectedEvent.id);
       const res = await fetch(
-        "http://localhost:5000/calendar/events/" + event_id,
+        "http://18.141.176.42:5000/calendar/events/" + event_id,
         {
           method: "DELETE",
           headers: { token: localStorage.token },
