@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function EventModel() {
-  const {setShowEventModel, daySelected, selectedEvent, setSelectedEvent} = useContext(GlobalContext);
+  const { setShowEventModel, daySelected, selectedEvent, setSelectedEvent } =
+    useContext(GlobalContext);
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
@@ -10,14 +11,7 @@ export default function EventModel() {
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent ? selectedEvent.label : "blue"
   );
-  const labelsClasses = [
-    "indigo",
-    "gray",
-    "green",
-    "blue",
-    "red",
-    "purple",
-  ];
+  const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,14 +24,17 @@ export default function EventModel() {
     if (selectedEvent) {
       try {
         const event_id = Number(selectedEvent.id);
-        const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
-          method: "PUT",
-          headers: {
-            token: localStorage.token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          "http://localhost:5000/calendar/events/" + event_id,
+          {
+            method: "PUT",
+            headers: {
+              token: localStorage.token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
         await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
@@ -66,11 +63,14 @@ export default function EventModel() {
   async function handleDelete() {
     try {
       const event_id = Number(selectedEvent.id);
-      const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
-        method: "DELETE",
-        headers: { token: localStorage.token },
-      });
-      await res.json()
+      const res = await fetch(
+        "http://localhost:5000/calendar/events/" + event_id,
+        {
+          method: "DELETE",
+          headers: { token: localStorage.token },
+        }
+      );
+      await res.json();
       setSelectedEvent(null);
       setShowEventModel(false);
     } catch (err) {
@@ -88,16 +88,20 @@ export default function EventModel() {
           <div>
             {selectedEvent && (
               <span
-                onClick={() => {handleDelete()}}
+                onClick={() => {
+                  handleDelete();
+                }}
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >
                 delete
               </span>
             )}
-            <button onClick={() => {
+            <button
+              onClick={() => {
                 setShowEventModel(false);
                 setSelectedEvent(null);
-              }}>
+              }}
+            >
               <span className="material-icons-outlined text-gray-400 cursor-pointer">
                 close
               </span>
@@ -156,12 +160,12 @@ export default function EventModel() {
           <button
             type="submit"
             onClick={handleSubmit}
-            disabled={
-              !title? true : false
+            disabled={!title ? true : false}
+            className={
+              !title
+                ? "bg-gray-300 px-6 py-2 rounded text-white"
+                : "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
             }
-            className={!title
-              ? "bg-gray-300 px-6 py-2 rounded text-white" 
-              : "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"}
           >
             Save
           </button>
