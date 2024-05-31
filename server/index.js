@@ -11,6 +11,6 @@ app.use("/admin", require("./routes/admin"));
 app.use("/calendar", require("./routes/calendar"));
 app.use("/test", require("./routes/test"));
 
-app.listen(5000, () => {
-  console.log("Server started on port 5000");
+app.listen(process.env.PGPORT, () => {
+  console.log("Server started");
 });
