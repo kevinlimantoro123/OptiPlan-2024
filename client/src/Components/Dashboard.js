@@ -9,10 +9,13 @@ const Dashboard = () => {
 
   async function getName() {
     try {
-      const res = await fetch("http://18.141.176.42:5000/dashboard", {
-        method: "POST",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "https://opti-plan-2024-backend.vercel.app/dashboard",
+        {
+          method: "POST",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setName(parseRes.name);
     } catch (err) {
@@ -22,10 +25,13 @@ const Dashboard = () => {
 
   async function verify() {
     try {
-      const res = await fetch("http://18.141.176.42:5000/auth/verify", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "https://opti-plan-2024-backend.vercel.app/auth/verify",
+        {
+          method: "GET",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setVerified(parseRes.auth);
     } catch (err) {

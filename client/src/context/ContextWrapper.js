@@ -18,10 +18,13 @@ export default function ContextWrapper(props) {
 
   async function getAllEvents() {
     try {
-      const res = await fetch("http://18.141.176.42:5000/calendar", {
-        method: "POST",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "https://opti-plan-2024-backend.vercel.app/calendar",
+        {
+          method: "POST",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setSavedEvents(parseRes);
     } catch (err) {
