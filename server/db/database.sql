@@ -15,6 +15,7 @@ CREATE TABLE events (
     label VARCHAR(255) NOT NULL,
     day BIGINT NOT NULL,
     user_id INTEGER NOT NULL,
+    col VARCHAR,
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
         REFERENCES users(id)
