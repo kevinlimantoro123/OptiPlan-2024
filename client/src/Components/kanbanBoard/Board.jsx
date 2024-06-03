@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import Card from "./Card";
+import DropIndicator from "./DropIndicator";
+import BurnCard from "./BurnCard";
+import AddCard from "./AddCard";
 
 const Board = () => {
   const [cards, setCards] = useState([]);
@@ -23,48 +27,47 @@ const Board = () => {
   return (
     <div className="flex h-full w-full gap-3 overflow-scroll p-12">
       <Column
-        title="Meeting"
-        label="indigo"
+        title="Backlog"
+        col="backlog"
         headingColor="text-indigo-500"
         cards={cards}
         setCards={setCards}
       />
       <Column
-        title="Work"
-        label="red"
+        title="Todo"
+        col="todo"
         headingColor="text-red-200"
         cards={cards}
         setCards={setCards}
       />
       <Column
-        title="Class"
-        label="blue"
+        title="In Progress"
+        col="in progress"
         headingColor="text-blue-200"
         cards={cards}
         setCards={setCards}
       />
       <Column
-        title="Important"
-        label="green"
+        title="Completed"
+        col="completed"
         headingColor="text-green-200"
         cards={cards}
         setCards={setCards}
       />
-      <Column
-        title="Personal"
-        label="purple"
-        headingColor="text-purple-200"
-        cards={cards}
-        setCards={setCards}
-      />
+      <BurnCard setCards={setCards} />
     </div>
   );
 };
 
-const Column = ({ title, headingColor, cards, label, setCards }) => {
+const Column = ({ title, col, headingColor, cards, setCards }) => {
   const [active, setActive] = useState(false);
+  const negative1 = -1;
+  const filteredCards = cards.filter((e) => e.col === col);
 
-  const filteredCards = cards.filter((e) => e.label === label);
+  const handleDragStart = (e, card) => {
+    e.dataTransfer.setData("cardId", card.id);
+  };
+
   return (
     <div className="w-56 shrink-0">
       <div className="mb-3 flex items-center justify-between">
@@ -77,7 +80,13 @@ const Column = ({ title, headingColor, cards, label, setCards }) => {
         className={`h-full w-full transition-colors ${
           !active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}
-      ></div>
+      >
+        {filteredCards.map((e) => {
+          return <Card key={e.id} {...e} />;
+        })}
+        <DropIndicator beforeId={negative1} col={col} />
+        <AddCard col={col} setCards={setCards} />
+      </div>
     </div>
   );
 };
