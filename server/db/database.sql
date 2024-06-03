@@ -15,7 +15,16 @@ CREATE TABLE events (
     label VARCHAR(255) NOT NULL,
     day BIGINT NOT NULL,
     user_id INTEGER NOT NULL,
-    col VARCHAR,
+    CONSTRAINT fk_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+);
+
+CREATE TABLE cards (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    col VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL,
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
         REFERENCES users(id)

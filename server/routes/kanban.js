@@ -28,10 +28,9 @@ router.post("/cards", authorization, async (req, res) => {
     console.error(err.message);
   }
 });
-module.exports = router;
 
 //Delete card
-router.delete("/delete/:id", authorization, async (req, res) => {
+router.delete("/cards/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
     const deleteCard = await pool.query("DELETE FROM cards WHERE id = $1", [
@@ -42,3 +41,5 @@ router.delete("/delete/:id", authorization, async (req, res) => {
     console.error(err.message);
   }
 });
+
+module.exports = router;

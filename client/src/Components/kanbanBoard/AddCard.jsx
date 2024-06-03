@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const AddCard = ({ col, setCards }) => {
   const [title, setTitle] = useState("");
@@ -15,7 +16,6 @@ const AddCard = ({ col, setCards }) => {
         title: title.trim(),
         col,
       };
-
       const res = await fetch("http://localhost:5000/kanban/cards", {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ const AddCard = ({ col, setCards }) => {
   return (
     <>
       {adding ? (
-        <form onSubmit={handleSubmit}>
+        <motion.form layout onSubmit={handleSubmit}>
           <textarea
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
@@ -60,16 +60,17 @@ const AddCard = ({ col, setCards }) => {
               <FiPlus />
             </button>
           </div>
-        </form>
+        </motion.form>
       ) : (
-        <button
+        <motion.button
+          layout
           onClick={() => setAdding(true)}
           className="flex w-full items-center gap-1.5 px-3 py-1.5 text-xs text-neutral-400
         transition-colors hover:text-neutral-50"
         >
           <span>Add Card</span>
           <FiPlus />
-        </button>
+        </motion.button>
       )}
     </>
   );

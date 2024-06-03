@@ -9,7 +9,7 @@ const Board = () => {
 
   async function getEvents() {
     try {
-      const res = await fetch("http://localhost:5000/task", {
+      const res = await fetch("http://localhost:5000/kanban", {
         method: "GET",
         headers: { token: localStorage.token },
       });
@@ -25,7 +25,7 @@ const Board = () => {
   }, []);
 
   return (
-    <div className="flex h-full w-full gap-3 overflow-scroll p-12">
+    <div className="flex h-full w-full gap-4 overflow-scroll p-12">
       <Column
         title="Backlog"
         col="backlog"
@@ -50,7 +50,7 @@ const Board = () => {
       <Column
         title="Completed"
         col="completed"
-        headingColor="text-green-200"
+        headingColor="text-emerald-200"
         cards={cards}
         setCards={setCards}
       />
@@ -65,7 +65,7 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
   const filteredCards = cards.filter((e) => e.col === col);
 
   const handleDragStart = (e, card) => {
-    e.dataTransfer.setData("cardId", card.id);
+    e.dataTransfer.setData("cardId", card.id.toString());
   };
 
   return (
@@ -82,7 +82,7 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
         }`}
       >
         {filteredCards.map((e) => {
-          return <Card key={e.id} {...e} />;
+          return <Card key={e.id} {...e} handleDragStart={handleDragStart} />;
         })}
         <DropIndicator beforeId={negative1} col={col} />
         <AddCard col={col} setCards={setCards} />
