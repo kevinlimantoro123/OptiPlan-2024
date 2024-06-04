@@ -65,7 +65,107 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
   const filteredCards = cards.filter((e) => e.col === col);
 
   const handleDragStart = (e, card) => {
-    e.dataTransfer.setData("cardId", card.id.toString());
+    const cardId = "" + card.id;
+    e.dataTransfer.setData("cardId", cardId);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    highlightIndicator(e);
+    setActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setActive(false);
+    clearHighlights();
+  };
+
+  async function handleDragEnd(e) {
+    setActive(false);
+    clearHighlights();
+
+    const id = Number(e.dataTransfer.getData("cardId"));
+    const indicators = getIndicators();
+    const { element } = getNearestIndicator(e, indicators);
+
+    const before = element.getAttribute("data-before") || -1;
+
+    if (before !== id) {
+      let copy = [...cards];
+      let cardTransfer = copy.find((c) => c.id === id);
+      if (!cardTransfer) return;
+      cardTransfer = { ...cardTransfer, col };
+      copy = copy.filter((c) => c.id !== id);
+
+      try {
+        const body = { col };
+        const res = await fetch("http://localhost:5000/kanban/cards/" + id, {
+          method: "PUT",
+          headers: {
+            token: localStorage.token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        await res.json();
+      } catch (err) {
+        console.error(err.message);
+      }
+
+      const moveBack = before === -1;
+      if (moveBack) {
+        copy.push(cardTransfer);
+      } else {
+        const insertAtIndex = copy.findIndex((e) => e.id === before);
+        if (insertAtIndex === undefined) return;
+        copy.splice(insertAtIndex, 0, cardTransfer);
+      }
+      setCards(copy);
+    }
+  }
+
+  const highlightIndicator = (e) => {
+    const indicators = getIndicators();
+    clearHighlights(indicators);
+    const nearest = getNearestIndicator(e, indicators);
+    nearest.element.style.opacity = "1";
+  };
+
+  const getIndicators = () => {
+    return Array.from(document.querySelectorAll(`[data-col="${col}"]`));
+  };
+
+  const getNearestIndicator = (e, indicators) => {
+    const DIST_OFFSET = 50;
+
+    const nearest = indicators.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = e.clientY - (box.top + DIST_OFFSET);
+
+        if (offset < 0 && offset > closest.offset) {
+          return {
+            offset: offset,
+            element: child,
+          };
+        } else {
+          return closest;
+        }
+      },
+      {
+        offset: Number.NEGATIVE_INFINITY,
+        element: indicators[indicators.length - 1],
+      }
+    );
+    return nearest;
+  };
+
+  const clearHighlights = (e) => {
+    const indicators = e || getIndicators();
+
+    indicators.forEach((i) => {
+      i.style.opacity = "0";
+    });
   };
 
   return (
@@ -77,8 +177,11 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
         </span>
       </div>
       <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDragEnd}
         className={`h-full w-full transition-colors ${
-          !active ? "bg-neutral-800/50" : "bg-neutral-800/0"
+          active ? "bg-neutral-800/50" : "bg-neutral-800/0"
         }`}
       >
         {filteredCards.map((e) => {

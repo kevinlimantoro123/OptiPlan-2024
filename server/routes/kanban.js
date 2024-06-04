@@ -42,4 +42,19 @@ router.delete("/cards/:id", authorization, async (req, res) => {
   }
 });
 
+//Move card
+router.put("/cards/:id", authorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { col } = req.body;
+    const updateCard = await pool.query(
+      "UPDATE cards SET col = $1 WHERE id = $2",
+      [col, id]
+    );
+    res.json("Card has been moved");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 module.exports = router;
