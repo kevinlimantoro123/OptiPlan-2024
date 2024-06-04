@@ -5,11 +5,12 @@ import Sidebar from "./Sidebar";
 import Month from "./Month";
 import GlobalContext from "../../context/GlobalContext";
 import EventModel from "./EventModel";
-import { Navigate } from "react-router-dom";
+import Daily from "./Daily";
+import Weekly from "./Weekly";
 
 const Calendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const { monthIndex, showEventModel } = useContext(GlobalContext);
+  const [ currentMonth, setCurrentMonth ] = useState(getMonth());
+  const { monthIndex, showEventModel, selectedCalView } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -22,7 +23,11 @@ const Calendar = () => {
         <CalendarHeader />
         <div className="flex flex-1">
           <Sidebar />
-          <Month month={currentMonth} />
+          {selectedCalView === "month" 
+            ? <Month month={currentMonth} />
+            : selectedCalView === "week"
+            ? <Weekly />
+            : <Daily />}
         </div>
       </div>
     </React.Fragment>

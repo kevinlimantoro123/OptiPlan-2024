@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import GlobalContext from '../../context/GlobalContext';
+import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 
 export default function CalendarHeader() {
-    const{monthIndex, setMonthIndex} = useContext(GlobalContext);
+    const{ monthIndex, setMonthIndex, setSelectedCalView } = useContext(GlobalContext);
+    const navigate = useNavigate();
 
     function handlePrevMonth() {
         setMonthIndex(monthIndex - 1);
@@ -36,6 +38,15 @@ export default function CalendarHeader() {
             <h2 className='ml-4 text-xl text-gray-500 font-bold'>
                 {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
             </h2>
+            <button className="btn btn-primary ml-10 border-2 p-3 border-black" onClick={() => setSelectedCalView("month")}>
+                Month
+            </button>
+            <button className="btn btn-primary ml-10 border-2 p-3 border-black" onClick={() => setSelectedCalView("week")}>
+                Week
+            </button>
+            <button className="btn btn-primary ml-10 border-2 p-3 border-black" onClick={() => setSelectedCalView("day")}>
+                Day
+            </button>
         </header>
     )
 }
