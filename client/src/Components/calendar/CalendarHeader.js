@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 
 export default function CalendarHeader() {
-    const{ monthIndex, setMonthIndex, setSelectedCalView } = useContext(GlobalContext);
+    const{ monthIndex, setMonthIndex, setSelectedCalView, setDaySelected } = useContext(GlobalContext);
     const navigate = useNavigate();
 
     function handlePrevMonth() {
@@ -17,6 +17,7 @@ export default function CalendarHeader() {
 
     function handleReset() {
         setMonthIndex(dayjs().month() + Math.random());
+        setDaySelected(dayjs());
     }
 
     return (

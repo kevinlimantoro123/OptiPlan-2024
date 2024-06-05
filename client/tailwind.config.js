@@ -24,6 +24,9 @@ module.exports = {
       },
       gridTemplateColumns: {
         "1/5": "1fr 5fr"
+      },
+      gridTemplateRows: {
+        '48': 'repeat(48, minmax(0, 1fr))',
       }
     },
   },

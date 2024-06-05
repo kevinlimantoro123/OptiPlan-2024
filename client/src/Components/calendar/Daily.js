@@ -26,7 +26,7 @@ export default function Daily() {
     }
 
     return (
-        <div>
+        <div className="flex-1">
             <div>
                 <button onClick={handlePrevDay}>
                     <span className='material-icons-outlined cursor-pointer text-gray-600 mx-2'>
@@ -39,7 +39,9 @@ export default function Daily() {
                     </span>
                 </button>
             </div>
-            <ScrollDay />
+            <div>
+                <ScrollDay />
+            </div>
         </div>
     );
 }

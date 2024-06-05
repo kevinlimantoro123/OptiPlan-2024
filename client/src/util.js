@@ -13,3 +13,8 @@ export function getMonth(month = dayjs().month()) {
     })
     return daysMatrix;
 }
+
+export function getHours() {
+    let curr = 0;
+    return new Array(48).fill(1);
+}
