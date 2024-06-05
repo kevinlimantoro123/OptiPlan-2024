@@ -13,7 +13,7 @@ export default function Sidebar() {
             <SmallCalendar />
             <div>
                 <button
-                    className="cursor-pointer text-gray-600 mx-2 absolute bottom-0 left-0 pl-3 pb-3"
+                    className="cursor-pointer text-gray-600 mx-2 fixed bottom-0 left-0 pl-3 pb-3"
                     onClick={() => navigate("/dashboard")}
                 >
                     <span className="material-icons-outlined text-3xl">
