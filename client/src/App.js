@@ -3,6 +3,7 @@ import Login from "./Components/Login";
 import Layout from "./Components/Layout";
 import Dashboard from "./Components/Dashboard";
 import Calendar from "./Components/calendar/Calendar";
+import Kanban from "./Components/kanbanBoard/Kanban";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="calendar" element={<Calendar />} />
+        <Route path="task" element={<Kanban />} />
       </Route>
     </Routes>
   );

@@ -7,13 +7,11 @@ import ContextWrapper from "./context/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ContextWrapper>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
-    </ContextWrapper>
-  </React.StrictMode>
+  <ContextWrapper>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<App />} />
+      </Routes>
+    </BrowserRouter>
+  </ContextWrapper>
 );
