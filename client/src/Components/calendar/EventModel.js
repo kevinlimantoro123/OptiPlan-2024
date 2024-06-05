@@ -10,8 +10,12 @@ export default function EventModel() {
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent ? selectedEvent.label : "blue"
   );
-  const [startTime, setStartTime] = useState("empty");
-  const [endTime, setEndTime] = useState("empty");
+  const [startTime, setStartTime] = useState(
+    selectedEvent ? selectedEvent.starttime : "empty"
+  );
+  const [endTime, setEndTime] = useState(
+    selectedEvent ? selectedEvent.endtime : "empty"
+  );
   const labelsClasses = [
     "indigo",
     "gray",
@@ -28,6 +32,8 @@ export default function EventModel() {
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
+      startTime,
+      endTime
     };
     if (selectedEvent) {
       try {

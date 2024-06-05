@@ -7,9 +7,21 @@ export default function Day({day, rowIdx}) {
     const [ dayEvents, setDayEvents ] = useState([]);
     const { setDaySelected, setShowEventModel, savedEvents, setSelectedEvent } = useContext(GlobalContext);
 
+    function compare(a, b) {
+        if (a.starttime < b.starttime) {
+          return -1;
+        }
+        if (a.starttime > b.starttime) {
+          return 1;
+        }
+        return 0;
+    }
+
     useEffect(() => {
-        const events = savedEvents.filter(event => dayjs(Number(event.day)).format("DD-MM-YYYY") === day.format("DD-MM-YYYY"));
-        setDayEvents(events)
+        const events = savedEvents
+            .filter(event => dayjs(Number(event.day)).format("DD-MM-YYYY") === day.format("DD-MM-YYYY"))
+            .sort(compare);
+        setDayEvents(events);
     }, [savedEvents, day]);
 
     function getCurrentDayClass() {
@@ -34,7 +46,8 @@ export default function Day({day, rowIdx}) {
                     <div 
                         key={id}
                         onClick={() => setSelectedEvent(event)}
-                        className={`bg-${event.label}-500 p-1 mr-1 ml-1 text-white text-sm rounded mb-1 truncate`}>
+                        className={`bg-${event.label}-500 p-1 mr-1 ml-1 text-white text-sm rounded mb-1 truncate`}
+                    >
                         {event.title}
                     </div>
                 ))}
