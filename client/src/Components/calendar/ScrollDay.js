@@ -58,7 +58,7 @@ export default function ScrollDay() {
                         >
                             {event.title}
                         </div>
-                        //from top: 8px, to move one block = 42px
+                        //from top: 8px, to move one block = 42px, hm
                     ))}
                 </div>
             </div>
