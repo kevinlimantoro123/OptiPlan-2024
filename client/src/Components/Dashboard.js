@@ -10,7 +10,7 @@ const Dashboard = () => {
   async function getName() {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
-        method: "POST",
+        method: "GET",
         headers: { token: localStorage.token },
       });
       const parseRes = await res.json();

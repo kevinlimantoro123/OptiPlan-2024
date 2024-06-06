@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function EventModel() {
-  const {setShowEventModel, daySelected, selectedEvent, setSelectedEvent} = useContext(GlobalContext);
+  const { setShowEventModel, daySelected, selectedEvent, setSelectedEvent } =
+    useContext(GlobalContext);
   const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ""
@@ -38,14 +39,17 @@ export default function EventModel() {
     if (selectedEvent) {
       try {
         const event_id = Number(selectedEvent.id);
-        const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
-          method: "PUT",
-          headers: {
-            token: localStorage.token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          "http://localhost:5000/calendar/events/" + event_id,
+          {
+            method: "PUT",
+            headers: {
+              token: localStorage.token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
         await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
@@ -74,11 +78,14 @@ export default function EventModel() {
   async function handleDelete() {
     try {
       const event_id = Number(selectedEvent.id);
-      const res = await fetch("http://localhost:5000/calendar/events/" + event_id, {
-        method: "DELETE",
-        headers: { token: localStorage.token },
-      });
-      await res.json()
+      const res = await fetch(
+        "http://localhost:5000/calendar/events/" + event_id,
+        {
+          method: "DELETE",
+          headers: { token: localStorage.token },
+        }
+      );
+      await res.json();
       setSelectedEvent(null);
       setShowEventModel(false);
     } catch (err) {
@@ -96,16 +103,20 @@ export default function EventModel() {
           <div>
             {selectedEvent && (
               <span
-                onClick={() => {handleDelete()}}
+                onClick={() => {
+                  handleDelete();
+                }}
                 className="material-icons-outlined text-gray-400 cursor-pointer"
               >
                 delete
               </span>
             )}
-            <button onClick={() => {
+            <button
+              onClick={() => {
                 setShowEventModel(false);
                 setSelectedEvent(null);
-              }}>
+              }}
+            >
               <span className="material-icons-outlined text-gray-400 cursor-pointer">
                 close
               </span>
