@@ -3,18 +3,34 @@ import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
 export default function ContextWrapper(props) {
-    const [monthIndex, setMonthIndex] = useState(dayjs().month());
-    const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
-    const [daySelected, setDaySelected] = useState(dayjs());
-    const [showEventModel, setShowEventModel] = useState(false);
-    const [selectedEvent, setSelectedEvent] = useState(null);
-    const [savedEvents, setSavedEvents] = useState([]);
+    const [ monthIndex, setMonthIndex ] = useState(dayjs().month());
+    const [ smallCalendarMonth, setSmallCalendarMonth ] = useState(null);
+    const [ daySelected, setDaySelected ] = useState(dayjs());
+    const [ showEventModel, setShowEventModel ] = useState(false);
+    const [ selectedEvent, setSelectedEvent ] = useState(null);
+    const [ savedEvents, setSavedEvents ] = useState([]);
+    const [ selectedCalView, setSelectedCalView ] = useState("month");
+    const [ week, setWeek ] = useState([]);
 
     useEffect(() => {
         if (smallCalendarMonth !== null) {
             setMonthIndex(smallCalendarMonth);
         }
     }, [smallCalendarMonth]);
+
+    useEffect(() => {
+        setWeek(
+            [
+                daySelected.day(0),
+                daySelected.day(1),
+                daySelected.day(2),
+                daySelected.day(3),
+                daySelected.day(4),
+                daySelected.day(5),
+                daySelected.day(6)
+            ]
+        )
+    }, [daySelected]);
 
     async function getAllEvents() {
         try {
@@ -45,7 +61,11 @@ export default function ContextWrapper(props) {
             setShowEventModel,
             selectedEvent,
             setSelectedEvent,
-            savedEvents }}>
+            savedEvents,
+            selectedCalView,
+            setSelectedCalView,
+            week,
+            setWeek }}>
             {props.children}
         </GlobalContext.Provider>
     )
