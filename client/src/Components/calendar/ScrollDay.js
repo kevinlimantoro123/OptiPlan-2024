@@ -8,6 +8,7 @@ export default function ScrollDay() {
     
     const [ dayEvents, setDayEvents ] = useState([]);
     const { daySelected, setShowEventModel, savedEvents, setSelectedEvent } = useContext(GlobalContext);
+    const hours = getHours();
 
     function compare(a, b) {
         if (a.starttime < b.starttime) {
@@ -41,7 +42,6 @@ export default function ScrollDay() {
             .sort(compare);
         setDayEvents(events);
     }, [savedEvents, daySelected]);
-    const hours = getHours();
 
     return (
         <div>

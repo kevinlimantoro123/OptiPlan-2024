@@ -14,6 +14,10 @@ export function getMonth(month = dayjs().month()) {
     return daysMatrix;
 }
 
+export function getWeek() {
+    
+}
+
 export function getHours() {
     return [
         "00:00",
