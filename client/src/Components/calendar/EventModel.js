@@ -11,10 +11,10 @@ export default function EventModel() {
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent ? selectedEvent.label : "blue"
   );
-  const [startTime, setStartTime] = useState(
+  const [starttime, setStarttime] = useState(
     selectedEvent ? selectedEvent.starttime : "empty"
   );
-  const [endTime, setEndTime] = useState(
+  const [endtime, setEndtime] = useState(
     selectedEvent ? selectedEvent.endtime : "empty"
   );
   const labelsClasses = [
@@ -33,8 +33,8 @@ export default function EventModel() {
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
-      startTime,
-      endTime
+      starttime,
+      endtime
     };
     if (selectedEvent) {
       try {
@@ -145,10 +145,9 @@ export default function EventModel() {
               id="underline_select" 
               class="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               required
-              value={startTime}
+              value={starttime}
               onChange={(e) => {
-                setStartTime(e.target.value);
-                console.log(startTime);
+                setStarttime(e.target.value);
               }}
             >
                 <option value="empty" selected>Select a start time</option>
@@ -208,9 +207,9 @@ export default function EventModel() {
               id="underline_select" 
               class="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
               required
-              value={endTime}
+              value={endtime}
               onChange={(e) => {
-                setEndTime(e.target.value);
+                setEndtime(e.target.value);
               }}
             >
                 <option value="empty" selected>Select an end time</option>
@@ -303,13 +302,13 @@ export default function EventModel() {
             disabled={
               !title
                 ? true 
-                : startTime !== "empty" && endTime !== "empty" && endTime > startTime
+                : starttime !== "empty" && endtime !== "empty" && endtime > starttime
                 ? false
                 : true
             }
             className={!title
               ? "bg-gray-300 px-6 py-2 rounded text-white" 
-              : startTime !== "empty" && endTime !== "empty" && endTime > startTime
+              : starttime !== "empty" && endtime !== "empty" && endtime > starttime
               ? "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
               : "bg-gray-300 px-6 py-2 rounded text-white" 
             }
