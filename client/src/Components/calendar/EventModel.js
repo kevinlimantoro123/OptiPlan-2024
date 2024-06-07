@@ -19,11 +19,9 @@ export default function EventModel() {
   );
   const labelsClasses = [
     "indigo",
-    "gray",
-    "green",
+    "emerald",
     "blue",
-    "red",
-    "purple",
+    "red"
   ];
 
   async function handleSubmit(e) {
@@ -283,7 +281,7 @@ export default function EventModel() {
                 <span
                   key={i}
                   onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
+                  className={`bg-${lblClass}-200 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 >
                   {selectedLabel === lblClass && (
                     <span className="material-icons-outlined text-white text-sm">

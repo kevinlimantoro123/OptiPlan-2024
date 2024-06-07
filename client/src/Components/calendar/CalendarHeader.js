@@ -57,11 +57,8 @@ export default function CalendarHeader() {
     }
 
     return (
-        <header className='px-4 py-2 flex items-center'>
-            <h1 className='mr-10 text-xl text-gray-500 font-bold'>Calendar</h1>
-            <button onClick={handleReset} className='border rounded py-2 px-4 mr-5'>
-                Today
-            </button>
+        <header className='px-4 py-2 flex h-16 items-center bg-neutral-900'>
+            <h1 className='mr-10 text-xl text-neutral-200 font-bold'>Calendar</h1>
             <button 
                 onClick={selectedCalView === "day" 
                     ? handlePrevDay
@@ -71,7 +68,7 @@ export default function CalendarHeader() {
                 }
                 className='pt-1'
             >
-                <span className='material-icons-outlined cursor-pointer text-gray-600 mx-2'>
+                <span className='material-icons-outlined cursor-pointer text-neutral-200 mx-2 pl-36'>
                     chevron_left
                 </span>
             </button>
@@ -84,11 +81,11 @@ export default function CalendarHeader() {
                 }
                 className='pt-1'
             >
-                <span className='material-icons-outlined cursor-pointer text-gray-600 mx-2'>
+                <span className='material-icons-outlined cursor-pointer text-neutral-200 mx-2'>
                     chevron_right
                 </span>
             </button>
-            <h2 className='ml-4 text-xl pb-1 text-gray-500 font-bold'>
+            <h2 className='ml-4 text-xl pb-1 text-neutral-200 font-bold'>
                 {selectedCalView === "day" 
                     ? daySelected.format("DD MMMM YYYY (dddd)")
                     : selectedCalView === "week"
@@ -96,6 +93,12 @@ export default function CalendarHeader() {
                     : dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")
                 }
             </h2>
+            <button 
+                onClick={handleReset} 
+                className='absolute right-28 z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white' 
+            >
+                Today
+            </button> 
             <div className="absolute right-10 z-20">
                 <ViewSelector />
             </div>
