@@ -17,7 +17,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="home" element={<Home />} />
         <Route path="calendar" element={<Calendar />} />
-        <Route path="task" element={<Kanban />} />
+        <Route path="kanban" element={<Kanban />} />
         <Route path="line" element={<Line />} />
         <Route path="pie" element={<Pie />} />
       </Route>
