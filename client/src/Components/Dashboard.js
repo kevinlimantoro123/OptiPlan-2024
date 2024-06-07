@@ -1,15 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
-import Navbar from "./dashboard/Navbar";
-import Footer from "./dashboard/Footer";
-import Sidebar from "./dashboard/Sidebar";
-import ThemeSettings from "./dashboard/ThemeSettings";
 
-const Home = () => {
+const Dashboard = () => {
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(false);
 
   const navigate = useNavigate();
 
@@ -60,39 +54,21 @@ const Home = () => {
 
   if (verified) {
     return (
-      <div>
-        <div className="flex relative dark:bg-main-dark-bg">
-          <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            <button
-              type="button"
-              className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
-              style={{ background: "gray", borderRadius: "50%" }}
-            >
-              <FiSettings />
-            </button>
-          </div>
-          {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-              <Sidebar />
-            </div>
-          ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">
-              <Sidebar />
-            </div>
-          )}
-          <div
-            className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
-              activeMenu ? "md:ml-72" : "flex-2"
-            }`}
-          >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-              <Navbar />
-            </div>
-          </div>
-
-          <div></div>
-        </div>
-      </div>
+      <Fragment>
+        <h1>Welcome {name}</h1>
+        <button
+          className="btn btn-primary border-black border-2 p-2 m-2"
+          onClick={logout}
+        >
+          Logout
+        </button>
+        <br />
+        <span className="text-black border-black border-2 p-2 m-2">
+          <a className="h-full" href="/calendar">
+            calendar
+          </a>
+        </span>
+      </Fragment>
     );
   } else {
     return (
@@ -106,4 +82,4 @@ const Home = () => {
   }
 };
 
-export default Home;
+export default Dashboard;

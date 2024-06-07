@@ -88,7 +88,7 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
     const indicators = getIndicators();
     const { element } = getNearestIndicator(e, indicators);
 
-    const before = element.dataset.before || -1;
+    const before = element.getAttribute("data-before") || -1;
 
     if (before !== id) {
       let copy = [...cards];

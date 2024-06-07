@@ -1,11 +1,9 @@
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Layout from "./Components/Layout";
+import Dashboard from "./Components/Dashboard";
 import Calendar from "./Components/calendar/Calendar";
 import Kanban from "./Components/kanbanBoard/Kanban";
-import Home from "./Components/Home";
-import Line from "./Components/analytics/Line";
-import Pie from "./Components/analytics/Pie";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,11 +13,9 @@ function App() {
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="home" element={<Home />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="calendar" element={<Calendar />} />
         <Route path="task" element={<Kanban />} />
-        <Route path="line" element={<Line />} />
-        <Route path="pie" element={<Pie />} />
       </Route>
     </Routes>
   );

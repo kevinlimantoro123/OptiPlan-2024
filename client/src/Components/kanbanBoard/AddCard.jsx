@@ -24,8 +24,8 @@ const AddCard = ({ col, setCards }) => {
         },
         body: JSON.stringify(body),
       });
-      const parseRes = await res.json();
-      setCards((c) => [...c, parseRes]);
+      await res.json();
+      setCards((c) => [...c, body]);
       setAdding(false);
     } catch (err) {
       console.error(err.message);
