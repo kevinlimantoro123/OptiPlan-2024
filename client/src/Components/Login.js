@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   if (loggedIn) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/home" />;
   }
 
   return (
@@ -93,19 +93,18 @@ const Login = () => {
                 required
                 className="pl-12 px-5 pr-14 py-2 w-11/12 h-12 justify-self-center font-semibold placeholder-gray-400 text-black rounded-2xl border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
               />
-              <div 
-                className="w-5 h-5 absolute justify-self-end mr-10" 
-                onClick={() => setPwdVisible(!pwdVisible)}>
+              <div
+                className="w-5 h-5 absolute justify-self-end mr-10"
+                onClick={() => setPwdVisible(!pwdVisible)}
+              >
                 {pwdVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
               </div>
             </div>
           </div>
           <div className="grid p-3">
-            <button 
+            <button
               type="submit"
-              disabled={
-                !name || !pwd ? true : false
-              }
+              disabled={!name || !pwd ? true : false}
               className={
                 !name || !pwd
                   ? "w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 ring-gray-300 bg-gray-300 text-white"
@@ -121,7 +120,12 @@ const Login = () => {
         </div>
         <div className="grid p-3 pb-6">
           <span className="w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-blue-500 text-white">
-            <a className="w-full h-full flex items-center justify-center" href="/register">Sign up</a>
+            <a
+              className="w-full h-full flex items-center justify-center"
+              href="/register"
+            >
+              Sign up
+            </a>
           </span>
         </div>
       </div>
