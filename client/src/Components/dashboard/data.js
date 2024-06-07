@@ -4,25 +4,11 @@ import {
   AiOutlineBarChart,
   AiOutlineStock,
 } from "react-icons/ai";
-import {
-  FiShoppingBag,
-  FiEdit,
-  FiPieChart,
-  FiBarChart,
-  FiCreditCard,
-  FiStar,
-  FiShoppingCart,
-} from "react-icons/fi";
+import { FiPieChart } from "react-icons/fi";
 import { BsKanban, BsBarChart } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
-import { BiColorFill } from "react-icons/bi";
-import { IoMdContacts } from "react-icons/io";
-import { RiContactsLine, RiStockLine } from "react-icons/ri";
-import { MdOutlineSupervisorAccount } from "react-icons/md";
-import { HiOutlineRefresh } from "react-icons/hi";
-import { TiTick } from "react-icons/ti";
+import { RiStockLine } from "react-icons/ri";
 import { GiLouvrePyramid } from "react-icons/gi";
-import { GrLocation } from "react-icons/gr";
 
 export const links = [
   {
