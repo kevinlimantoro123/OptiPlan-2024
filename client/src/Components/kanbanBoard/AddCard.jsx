@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const AddCard = ({ col, setCards }) => {
+const AddCard = ({ col, setCards, refresh, setRefresh }) => {
   const [title, setTitle] = useState("");
   const [adding, setAdding] = useState(false);
 
@@ -27,6 +27,7 @@ const AddCard = ({ col, setCards }) => {
       await res.json();
       setCards((c) => [...c, body]);
       setAdding(false);
+      setRefresh(!refresh);
     } catch (err) {
       console.error(err.message);
     }
