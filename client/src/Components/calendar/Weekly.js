@@ -49,7 +49,7 @@ export default function Weekly() {
 
     return (
         <div className="flex-1">
-            <div className="grid grid-cols-7 pr-24">
+            <div className="relative grid grid-cols-7 pr-24">
                 {week.map((day, i) => (
                     <div>
                         <div className="bg-neutral-900 grid grid-cols-2 relative h-[42px]">
@@ -58,7 +58,7 @@ export default function Weekly() {
                             </div>
                             <div class="bg-gray-200 z-10 w-0.5 h-[2100px] ml-36 absolute"></div>
                         </div>
-                        <div className="relative z-10">
+                        <div className="relative z-20">
                             {weekEvents[i].map((event, id) => (
                                 <div 
                                     key={id}

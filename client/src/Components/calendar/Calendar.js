@@ -21,7 +21,7 @@ const Calendar = () => {
       {showEventModel && <EventModel />}
       <div className="h-screen flex flex-col bg-neutral-900">
         <CalendarHeader />
-        <div className="flex flex-1">
+        <div className="flex flex-1 overflow-y-scroll scrollbar">
           <Sidebar />
           {selectedCalView === "month" 
             ? <Month month={currentMonth} />
