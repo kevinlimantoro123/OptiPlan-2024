@@ -26,22 +26,31 @@ export default function Day({day, rowIdx}) {
 
     function getCurrentDayClass() {
         return day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY")
-            ? "bg-blue-600 text-white rounded-full w-7"
+            ? "bg-neutral-200 text-neutral-800 rounded-full w-7"
             : "";
     }
 
     return (
-        <div className="bg-neutral-900 flex flex-col">
-            <header className="flex flex-col items-center">
+        <div className="bg-neutral-900 transition-colors duration-150 ease-in-out rounded-xl m-1 hover:bg-neutral-800/50 flex flex-col">
+            <header 
+                className="flex flex-col items-center cursor-pointer"
+                onClick={() => {
+                    setDaySelected(day);
+                    setShowEventModel(true);
+                }}
+            >
                 {rowIdx === 0 && <p className="text-sm mt-1 text-neutral-200">{day.format('ddd').toUpperCase()}</p>}
                 <p className={`text-sm p-1 my-1 text-center text-neutral-200 ${getCurrentDayClass()}`}>
                     {day.format('DD')}
                 </p>
             </header>
-            <div className="flex-1 cursor-pointer" onClick={() => {
-                setDaySelected(day);
-                setShowEventModel(true);
-            }}>
+            <div 
+                className="flex-1 cursor-pointer" 
+                onClick={() => {
+                    setDaySelected(day);
+                    setShowEventModel(true);
+                }}
+            >
                 {dayEvents.map((event, id) => (
                     <div 
                         key={id}

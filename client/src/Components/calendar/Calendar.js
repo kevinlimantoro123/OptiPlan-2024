@@ -17,9 +17,9 @@ const Calendar = () => {
   }, [monthIndex]);
 
   return (
-    <React.Fragment>
+    <div>
       {showEventModel && <EventModel />}
-      <div className="h-screen flex flex-col">
+      <div className="h-screen flex flex-col bg-neutral-900">
         <CalendarHeader />
         <div className="flex flex-1">
           <Sidebar />
@@ -30,7 +30,7 @@ const Calendar = () => {
             : <Daily />}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

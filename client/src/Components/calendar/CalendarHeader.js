@@ -5,7 +5,7 @@ import ViewSelector from "./ViewSelector";
 
 export default function CalendarHeader() {
 
-    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week } = useContext(GlobalContext);
+    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week, setShowEventModel } = useContext(GlobalContext);
 
     function handlePrevMonth() {
         setMonthIndex(monthIndex - 1);
@@ -57,8 +57,8 @@ export default function CalendarHeader() {
     }
 
     return (
-        <header className='px-4 py-2 flex h-16 items-center bg-neutral-900'>
-            <h1 className='mr-10 text-xl text-neutral-200 font-bold'>Calendar</h1>
+        <header className='px-4 py-2 my-4 flex h-10 items-center bg-neutral-900'>
+            <h1 className='mr-10 ml-3 text-xl text-neutral-200 font-bold'>Calendar</h1>
             <button 
                 onClick={selectedCalView === "day" 
                     ? handlePrevDay
@@ -93,6 +93,12 @@ export default function CalendarHeader() {
                     : dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")
                 }
             </h2>
+            <button 
+                onClick={() => setShowEventModel(true)} 
+                className='absolute right-[188px] z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white'
+            >
+                Create
+            </button>
             <button 
                 onClick={handleReset} 
                 className='absolute right-28 z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white' 

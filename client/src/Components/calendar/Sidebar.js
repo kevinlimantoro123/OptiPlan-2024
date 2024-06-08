@@ -1,5 +1,4 @@
 import React from 'react';
-import CreateEventButton from './CreateEventButton';
 import SmallCalendar from './SmallCalendar';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +7,7 @@ export default function Sidebar() {
     const navigate = useNavigate();
 
     return (
-        <aside className='p-5 w-64 bg-neutral-900'>
-            <CreateEventButton />
+        <aside className='p-1 w-64 bg-neutral-900'>
             <SmallCalendar />
             <div>
                 <button

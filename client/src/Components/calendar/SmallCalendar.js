@@ -30,16 +30,16 @@ export default function SmallCalendar() {
         const currDay = day.format(format);
         const slcDay = daySelected && daySelected.format(format);
         if (nowDay === currDay) {
-            return 'bg-blue-500 rounded-full text-white'
+            return 'bg-neutral-200 rounded-full text-neutral-800'
         } else if (slcDay === currDay) {
-            return "bg-blue-100 rounded-full text-blue-600 font-bold"
+            return "bg-indigo-200 rounded-full text-neutral-800 font-bold"
         } else {
-            return "";
+            return "text-neutral-200";
         }
     }
 
     return (
-        <div className="mt-9">
+        <div className="mt-9 transition-colors duration-150 ease-in-out rounded-xl p-3 hover:bg-neutral-800/50">
             <header className="flex justify-between">
                 <p className="text-neutral-200 pl-3 font-bold">
                     {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
@@ -73,7 +73,7 @@ export default function SmallCalendar() {
                                     setDaySelected(day);
                                 }} 
                                 className={`py-1 w-full ${getDayClass(day)}`}>
-                                <span className="text-sm text-neutral-200">
+                                <span className="text-sm">
                                     {day.format('D')}
                                 </span>
                             </button>

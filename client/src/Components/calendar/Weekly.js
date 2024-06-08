@@ -49,14 +49,14 @@ export default function Weekly() {
 
     return (
         <div className="flex-1">
-            <div className="grid grid-cols-7 border border-gray-200 pr-24">
+            <div className="grid grid-cols-7 pr-24">
                 {week.map((day, i) => (
                     <div>
-                        <div className="grid grid-cols-2 relative h-[42px]">
-                            <div key={i} className="pl-12 mt-2 absolute">
+                        <div className="bg-neutral-900 grid grid-cols-2 relative h-[42px]">
+                            <div key={i} className="pl-12 mt-2 absolute text-neutral-200">
                                 {day.format("DD (ddd)")}
                             </div>
-                            <div class="bg-gray-200 w-0.5 h-[2100px] ml-36 absolute"></div>
+                            <div class="bg-gray-200 z-10 w-0.5 h-[2100px] ml-36 absolute"></div>
                         </div>
                         <div className="relative z-10">
                             {weekEvents[i].map((event, id) => (
@@ -67,14 +67,14 @@ export default function Weekly() {
                                         setSelectedEvent(event);
                                         setShowEventModel(true);
                                     }}
-                                    className={`bg-${event.label}-500 p-1 mr-12 ml-1 text-white absolute w-32 top-[${startCalculator(event.starttime)}px] h-[${heightCalculator(event.starttime, event.endtime)}px] text-sm rounded mb-1 truncate cursor-pointer`}
+                                    className={`bg-${event.label}-200 p-1 mr-12 ml-1 text-neutral-800 absolute w-32 top-[${startCalculator(event.starttime)}px] h-[${heightCalculator(event.starttime, event.endtime)}px] text-sm rounded mb-1 truncate cursor-pointer`}
                                 >
                                     {event.title}
                                 </div>
                             ))}
                         </div>
                         <div
-                            className="absolute w-36 h-[2100px] cursor-pointer z-0"
+                            className="absolute w-36 h-[2058px] cursor-pointer z-10"
                             onClick={() => {
                                 setDaySelected(day);
                                 setShowEventModel(true);
@@ -84,9 +84,6 @@ export default function Weekly() {
                 ))}
             </div>
             <div>
-                <div className="">
-
-                </div>
                 <div className="flex-1 grid grid-rows-48">
                     {hours.map((hour) => (
                         <React.Fragment key={hour}>
