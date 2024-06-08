@@ -5,7 +5,7 @@ import ViewSelector from "./ViewSelector";
 
 export default function CalendarHeader() {
 
-    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week, setShowEventModel } = useContext(GlobalContext);
+    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week, setShowEventModel, showGrid, setShowGrid } = useContext(GlobalContext);
 
     function handlePrevMonth() {
         setMonthIndex(monthIndex - 1);
@@ -93,6 +93,14 @@ export default function CalendarHeader() {
                     : dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")
                 }
             </h2>
+            {(selectedCalView === "day" || selectedCalView === "week") && (
+                <button
+                    onClick={() => setShowGrid(!showGrid)}
+                    className={`absolute right-[273px] z-20 bg-neutral-900 ${showGrid ? "text-emerald-200" : "text-red-200"} font-semibold py-[4.8px] px-6 mr-5 hover:text-white`}
+                >
+                    Show Grid
+                </button>
+            )}
             <button 
                 onClick={() => setShowEventModel(true)} 
                 className='absolute right-[188px] z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white'
