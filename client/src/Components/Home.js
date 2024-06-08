@@ -9,23 +9,9 @@ import { useStateContext } from "../context/ContextProvider";
 
 const Home = () => {
   const { activeMenu } = useStateContext();
-  const [name, setName] = useState("");
   const [verified, setVerified] = useState(false);
 
   const navigate = useNavigate();
-
-  async function getName() {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-      const parseRes = await res.json();
-      setName(parseRes.name);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
   async function verify() {
     try {
@@ -52,10 +38,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getName();
-  }, []);
-
-  useEffect(() => {
     verify();
   }, []);
 
@@ -66,7 +48,7 @@ const Home = () => {
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
             <button
               type="button"
-              className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
+              className="text-3xl p-3 hover:drop-shadow-xl hover:bg-gray-300 text-white"
               style={{ background: "gray", borderRadius: "50%" }}
             >
               <FiSettings />
@@ -77,7 +59,7 @@ const Home = () => {
               <Sidebar />
             </div>
           ) : (
-            <div className="w-0 bg-neutral-200">
+            <div className="w-0 bg-white">
               <Sidebar />
             </div>
           )}
