@@ -16,7 +16,7 @@ export default function ViewSelector() {
             <MenuButton className="inline-flex w-24 justify-center gap-x-1.5 bg-neutral-900 px-3 py-1.5 text-m font-semibold text-neutral-200 hover:text-white">
                 <div className="flex">
                     {selectedCalView.charAt(0).toUpperCase() + selectedCalView.slice(1)}
-                    <span class="material-icons-outlined ml-1">
+                    <span className="material-icons-outlined ml-1">
                       arrow_drop_down
                     </span>
                 </div>

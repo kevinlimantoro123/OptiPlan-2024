@@ -8,7 +8,7 @@ export default function HourSlot({ hour }) {
     return (
         <div 
             className={showGrid 
-                ? "z-0 border-t-2 border-neutral-600 bg-neutral-900 flex flex-col transition-colors duration-150 ease-in-out"
+                ? "z-0 border-t-2 border-neutral-600 bg-neutral-900 flex flex-col hover:border-neutral-200 transition-colors duration-150 ease-in-out"
                 : "z-0 border-t-2 border-neutral-900 bg-neutral-900 flex flex-col hover:border-neutral-200 transition-colors duration-150 ease-in-out"}
         >
             <header className="flex flex-col items-end">

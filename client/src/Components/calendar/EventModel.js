@@ -150,7 +150,7 @@ export default function EventModel() {
             <span className="material-icons-outlined text-neutral-200"></span>
             <select 
               id="underline_select" 
-              class="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
               required
               value={starttime}
               onChange={(e) => {
@@ -211,7 +211,7 @@ export default function EventModel() {
             <span className="material-icons-outlined text-neutral-200"></span>
             <select 
               id="underline_select" 
-              class="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
               required
               value={endtime}
               onChange={(e) => {
@@ -288,19 +288,22 @@ export default function EventModel() {
             </span>
             <div>
               {labelsClasses.map((lblClass, i) => (
-                <div className="grid grid-cols-1/6">
+                <div className="relative grid">
                   <span
                     key={i}
                     onClick={() => setSelectedLabel(lblClass)}
-                    className={`bg-${lblClass}-200 w-6 h-6 my-1 rounded-full flex items-center justify-center cursor-pointer`}
+                    className={`bg-${lblClass}-200 w-6 h-6 my-1.5 rounded-full flex items-center justify-center cursor-pointer`}
                   >
                     {selectedLabel === lblClass && (
-                      <span className="material-icons-outlined text-white text-sm">
+                      <span className="material-icons-outlined text-neutral-800 text-sm font-bold">
                         check
                       </span>
                     )}
                   </span>
-                  <div className="my-1 text-neutral-200">
+                  <div 
+                    className={`text-${lblClass}-200 absolute top-[5.5px] left-10 cursor-pointer`}
+                    onClick={() => setSelectedLabel(lblClass)}
+                  >
                     {labelNames[i]}
                   </div>
                 </div>

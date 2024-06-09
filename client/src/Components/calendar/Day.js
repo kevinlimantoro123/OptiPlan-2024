@@ -17,6 +17,12 @@ export default function Day({day, rowIdx}) {
         return 0;
     }
 
+    function getCurrentDayClass() {
+        return day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY")
+            ? "bg-indigo-200 text-neutral-800 rounded-full font-bold w-7"
+            : "";
+    }
+
     useEffect(() => {
         const events = savedEvents
             .filter(event => dayjs(Number(event.day)).format("DD-MM-YYYY") === day.format("DD-MM-YYYY"))
@@ -24,14 +30,8 @@ export default function Day({day, rowIdx}) {
         setDayEvents(events);
     }, [savedEvents, day]);
 
-    function getCurrentDayClass() {
-        return day.format("DD-MM-YYYY") === dayjs().format("DD-MM-YYYY")
-            ? "bg-neutral-200 text-neutral-800 rounded-full w-7"
-            : "";
-    }
-
     return (
-        <div className="bg-neutral-900 transition-colors duration-150 ease-in-out rounded-xl m-1 hover:bg-neutral-800/50 flex flex-col">
+        <div className="bg-neutral-900 transition-colors duration-150 ease-in-out rounded-xl m-1 hover:bg-neutral-800/50 z-0 hover:z-10 flex flex-col">
             <header 
                 className="flex flex-col items-center cursor-pointer"
                 onClick={() => {
@@ -55,9 +55,23 @@ export default function Day({day, rowIdx}) {
                     <div 
                         key={id}
                         onClick={() => setSelectedEvent(event)}
-                        className={`bg-${event.label}-200 p-1 mr-1 ml-1 text-neutral-800 text-sm rounded mb-1 truncate`}
+                        className={`bg-${event.label}-200 p-1 mr-1 ml-1 text-neutral-800 text-sm rounded mb-1 truncate grid relative`}
                     >
-                        {event.title}
+                        <div>
+                            {event.title}
+                        </div>
+                        <span className="material-icons-outlined absolute right-1 text-base pt-0.5 pr-0.5">
+                            {event.label === "indigo"
+                                ? "work_outline"
+                                : event.label === "emerald"
+                                ? "auto_stories"
+                                : event.label === "blue"
+                                ? "groups"
+                                : event.label === "red"
+                                ? "error_outline"
+                                : "sentiment_satisfied"
+                            }
+                        </span>
                     </div>
                 ))}
             </div>

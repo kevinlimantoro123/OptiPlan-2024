@@ -56,7 +56,7 @@ export default function Weekly() {
                             <div key={i} className="pl-12 mt-2 absolute text-neutral-200">
                                 {day.format("DD (ddd)")}
                             </div>
-                            <div class="bg-gray-200 z-10 w-0.5 h-[2100px] ml-36 absolute"></div>
+                            <div className="bg-gray-200 z-10 w-0.5 h-[2100px] ml-36 absolute"></div>
                         </div>
                         <div className="relative z-20">
                             {weekEvents[i].map((event, id) => (
