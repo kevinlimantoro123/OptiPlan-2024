@@ -76,7 +76,7 @@ const Navbar = () => {
         color="gray"
         icon={<AiOutlineMenu />}
       />
-      <div>
+      <div className="flex">
         <div
           className="flex items-center gap-2 cursor-pointer p-1 hover:bg-gray-200 rounded-lg"
           onClick={() => handleClick("userProfile")}
@@ -87,7 +87,7 @@ const Navbar = () => {
           </p>
           <MdKeyboardArrowDown className="text-gray-400 text-16" />
         </div>
-        {isClicked.UserProfile && <UserProfile />}
+        {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
   );

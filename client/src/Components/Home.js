@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
 import Footer from "./dashboard/Footer";
@@ -68,12 +68,11 @@ const Home = () => {
               activeMenu ? "md:ml-72" : "flex-2"
             }`}
           >
-            <div className="fixed bg-main-bg navbar w-full">
+            <div className="fixed md:static bg-main-bg navbar w-full">
               <Navbar />
             </div>
           </div>
-
-          <div></div>
+          <Outlet />
         </div>
       </div>
     );
