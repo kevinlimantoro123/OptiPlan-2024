@@ -49,16 +49,16 @@ export default function Weekly() {
 
     return (
         <div className="flex-1">
-            <div className="relative grid grid-cols-7 pr-24">
+            <div className="relative grid grid-cols-7 pr-24 flex-1">
                 {week.map((day, i) => (
                     <div>
                         <div className="bg-neutral-900 grid grid-cols-2 relative h-[42px]">
-                            <div key={i} className="pl-12 mt-2 absolute text-neutral-200">
+                            <div key={i} className="pl-12 mt-2 absolute text-neutral-200 w-full">
                                 {day.format("DD (ddd)")}
                             </div>
-                            <div className="bg-gray-200 z-10 w-0.5 h-[2100px] ml-36 absolute"></div>
+                            <div className="bg-gray-200 z-10 w-0.5 h-[2100px] absolute"></div>
                         </div>
-                        <div className="relative z-20">
+                        <div className="relative z-20 justify-center">
                             {weekEvents[i].map((event, id) => (
                                 <div 
                                     key={id}
@@ -67,7 +67,7 @@ export default function Weekly() {
                                         setSelectedEvent(event);
                                         setShowEventModel(true);
                                     }}
-                                    className={`bg-${event.label}-200 p-1 mr-12 ml-1 text-neutral-800 absolute w-32 top-[${startCalculator(event.starttime)}px] h-[${heightCalculator(event.starttime, event.endtime)}px] text-sm rounded mb-1 truncate cursor-pointer`}
+                                    className={`bg-${event.label}-200 p-1 mr-12 ml-3.5 text-neutral-800 absolute w-10/12 top-[${startCalculator(event.starttime)}px] h-[${heightCalculator(event.starttime, event.endtime)}px] text-sm rounded mb-1 truncate cursor-pointer`}
                                 >
                                     {event.title}
                                 </div>
