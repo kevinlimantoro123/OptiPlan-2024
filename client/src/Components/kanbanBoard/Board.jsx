@@ -6,6 +6,7 @@ import AddCard from "./AddCard";
 
 const Board = () => {
   const [cards, setCards] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   async function getEvents() {
     try {
@@ -22,7 +23,7 @@ const Board = () => {
 
   useEffect(() => {
     getEvents();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="flex h-full w-full gap-4 overflow-scroll p-12">
@@ -32,6 +33,8 @@ const Board = () => {
         headingColor="text-indigo-500"
         cards={cards}
         setCards={setCards}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
       <Column
         title="Todo"
@@ -39,6 +42,8 @@ const Board = () => {
         headingColor="text-red-200"
         cards={cards}
         setCards={setCards}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
       <Column
         title="In Progress"
@@ -46,6 +51,8 @@ const Board = () => {
         headingColor="text-blue-200"
         cards={cards}
         setCards={setCards}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
       <Column
         title="Completed"
@@ -53,13 +60,15 @@ const Board = () => {
         headingColor="text-emerald-200"
         cards={cards}
         setCards={setCards}
+        refresh={refresh}
+        setRefresh={setRefresh}
       />
       <BurnCard setCards={setCards} />
     </div>
   );
 };
 
-const Column = ({ title, col, headingColor, cards, setCards }) => {
+const Column = ({ title, col, headingColor, cards, setCards, refresh, setRefresh }) => {
   const [active, setActive] = useState(false);
   const negative1 = -1;
   const filteredCards = cards.filter((e) => e.col === col);
@@ -188,7 +197,7 @@ const Column = ({ title, col, headingColor, cards, setCards }) => {
           return <Card key={e.id} {...e} handleDragStart={handleDragStart} />;
         })}
         <DropIndicator beforeId={negative1} col={col} />
-        <AddCard col={col} setCards={setCards} />
+        <AddCard col={col} setCards={setCards} refresh={refresh} setRefresh={setRefresh}/>
       </div>
     </div>
   );

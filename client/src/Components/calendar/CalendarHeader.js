@@ -5,7 +5,7 @@ import ViewSelector from "./ViewSelector";
 
 export default function CalendarHeader() {
 
-    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week } = useContext(GlobalContext);
+    const{ monthIndex, setMonthIndex, setDaySelected, selectedCalView, daySelected, week, setShowEventModel, showGrid, setShowGrid } = useContext(GlobalContext);
 
     function handlePrevMonth() {
         setMonthIndex(monthIndex - 1);
@@ -57,8 +57,8 @@ export default function CalendarHeader() {
     }
 
     return (
-        <header className='px-4 py-2 flex h-16 items-center bg-neutral-900'>
-            <h1 className='mr-10 text-xl text-neutral-200 font-bold'>Calendar</h1>
+        <header className='px-4 py-2 my-4 flex h-10 items-center bg-neutral-900'>
+            <h1 className='ml-3 text-xl text-neutral-200 font-bold mr-44'>Calendar</h1>
             <button 
                 onClick={selectedCalView === "day" 
                     ? handlePrevDay
@@ -68,7 +68,7 @@ export default function CalendarHeader() {
                 }
                 className='pt-1'
             >
-                <span className='material-icons-outlined cursor-pointer text-neutral-200 mx-2 pl-36'>
+                <span className='material-icons-outlined cursor-pointer text-neutral-200 hover:text-white mx-2'>
                     chevron_left
                 </span>
             </button>
@@ -81,7 +81,7 @@ export default function CalendarHeader() {
                 }
                 className='pt-1'
             >
-                <span className='material-icons-outlined cursor-pointer text-neutral-200 mx-2'>
+                <span className='material-icons-outlined cursor-pointer text-neutral-200 hover:text-white mx-2'>
                     chevron_right
                 </span>
             </button>
@@ -93,6 +93,20 @@ export default function CalendarHeader() {
                     : dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")
                 }
             </h2>
+            {(selectedCalView === "day" || selectedCalView === "week") && (
+                <button
+                    onClick={() => setShowGrid(!showGrid)}
+                    className={`absolute right-[273px] z-20 bg-neutral-900 ${showGrid ? "text-emerald-200" : "text-red-200"} font-semibold py-[4.8px] px-6 mr-5 hover:text-white`}
+                >
+                    Show Grid
+                </button>
+            )}
+            <button 
+                onClick={() => setShowEventModel(true)} 
+                className='absolute right-[188px] z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white'
+            >
+                Create
+            </button>
             <button 
                 onClick={handleReset} 
                 className='absolute right-28 z-20 bg-neutral-900 text-neutral-200 font-semibold py-[4.8px] px-6 mr-5 hover:text-white' 

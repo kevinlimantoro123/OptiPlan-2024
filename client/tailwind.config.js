@@ -5,19 +5,15 @@ module.exports = {
   ],
   safelist: [
     "bg-indigo-200",
-    "bg-gray-500",
-    "bg-green-500",
     "bg-blue-200",
     "bg-red-200",
-    "bg-purple-500",
     "bg-emerald-200",
-    "text-indigo-500",
-    "text-gray-500",
-    "text-green-500",
+    "bg-yellow-200",
     "text-blue-200",
     "text-red-200",
-    "text-purple-500",
+    "text-indigo-200",
     "text-emerald-200",
+    "text-yellow-200",
     "top-[42px]",
     "top-[84px]",
     "top-[126px]",
@@ -125,7 +121,8 @@ module.exports = {
         sans: ["Open Sans"]
       },
       gridTemplateColumns: {
-        "1/5": "1fr 5fr"
+        "1/5": "1fr 5fr",
+        "1/6": "1fr 6fr"
       },
       gridTemplateRows: {
         '48': 'repeat(48, minmax(0, 1fr))',
