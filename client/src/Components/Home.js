@@ -1,5 +1,4 @@
 import { Fragment, useState, useEffect } from "react";
-<<<<<<< HEAD:client/src/Components/Home.js
 import { useNavigate, Outlet } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
@@ -10,12 +9,6 @@ import { useStateContext } from "../context/ContextProvider";
 
 const Home = () => {
   const { activeMenu } = useStateContext();
-=======
-import { useNavigate } from "react-router-dom";
-
-const Dashboard = () => {
-  const [name, setName] = useState("");
->>>>>>> origin/main:client/src/Components/Dashboard.js
   const [verified, setVerified] = useState(false);
 
   const navigate = useNavigate();
@@ -50,7 +43,6 @@ const Dashboard = () => {
 
   if (verified) {
     return (
-<<<<<<< HEAD:client/src/Components/Home.js
       <div>
         <div className="flex relative bg-neutral-200">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
@@ -85,23 +77,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-=======
-      <Fragment>
-        <h1>Welcome {name}</h1>
-        <button
-          className="btn btn-primary border-black border-2 p-2 m-2"
-          onClick={logout}
-        >
-          Logout
-        </button>
-        <br />
-        <span className="text-black border-black border-2 p-2 m-2">
-          <a className="h-full" href="/calendar">
-            calendar
-          </a>
-        </span>
-      </Fragment>
->>>>>>> origin/main:client/src/Components/Dashboard.js
     );
   } else {
     return (
@@ -115,4 +90,4 @@ const Dashboard = () => {
   }
 };
 
-export default Dashboard;
+export default Home;
