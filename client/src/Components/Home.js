@@ -6,10 +6,7 @@ import Sidebar from "./dashboard/Sidebar";
 import { useStateContext } from "../context/ContextProvider";
 
 const Home = () => {
-  const { activeMenu } = useStateContext();
-  const [verified, setVerified] = useState(false);
-
-  const navigate = useNavigate();
+  const { verified, setVerified, activeMenu } = useStateContext();
 
   async function verify() {
     try {
@@ -24,20 +21,11 @@ const Home = () => {
     }
   }
 
-  const logout = async (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      console.log("Logged out succcessfully");
-      setVerified(false);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   useEffect(() => {
     verify();
   }, []);
+
+  const navigate = useNavigate();
 
   if (verified) {
     return (

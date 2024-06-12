@@ -20,7 +20,6 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const [name, setName] = useState("");
   const {
     activeMenu,
     setActiveMenu,
@@ -29,24 +28,8 @@ const Navbar = () => {
     handleClick,
     screenSize,
     setScreenSize,
+    name,
   } = useStateContext();
-
-  async function getName() {
-    try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-      const parseRes = await res.json();
-      setName(parseRes.name);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-
-  useEffect(() => {
-    getName();
-  }, []);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
