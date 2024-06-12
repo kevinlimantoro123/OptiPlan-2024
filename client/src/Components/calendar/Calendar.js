@@ -9,8 +9,9 @@ import Daily from "./Daily";
 import Weekly from "./Weekly";
 
 const Calendar = () => {
-  const [ currentMonth, setCurrentMonth ] = useState(getMonth());
-  const { monthIndex, showEventModel, selectedCalView } = useContext(GlobalContext);
+  const [currentMonth, setCurrentMonth] = useState(getMonth());
+  const { monthIndex, showEventModel, selectedCalView } =
+    useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
@@ -23,11 +24,13 @@ const Calendar = () => {
         <CalendarHeader />
         <div className="flex flex-1 overflow-y-scroll scrollbar">
           <Sidebar />
-          {selectedCalView === "month" 
-            ? <Month month={currentMonth} />
-            : selectedCalView === "week"
-            ? <Weekly />
-            : <Daily />}
+          {selectedCalView === "month" ? (
+            <Month month={currentMonth} />
+          ) : selectedCalView === "week" ? (
+            <Weekly />
+          ) : (
+            <Daily />
+          )}
         </div>
       </div>
     </div>

@@ -13,9 +13,12 @@ function App() {
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="calendar" element={<Calendar />} />
-        <Route path="task" element={<Kanban />} />
+        <Route path="home" element={<Home />}>
+          <Route path="calendar" element={<Calendar />} />
+          <Route path="kanban" element={<Kanban />} />
+          <Route path="line" element={<Line />} />
+          <Route path="pie" element={<Pie />} />
+        </Route>
       </Route>
     </Routes>
   );
