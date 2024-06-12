@@ -72,7 +72,9 @@ const Home = () => {
               <Navbar />
             </div>
           </div>
-          <Outlet />
+          <div>
+            <Outlet />
+          </div>
         </div>
       </div>
     );
