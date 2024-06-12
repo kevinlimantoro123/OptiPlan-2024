@@ -1,11 +1,9 @@
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Layout from "./Components/Layout";
+import Dashboard from "./Components/Dashboard";
 import Calendar from "./Components/calendar/Calendar";
 import Kanban from "./Components/kanbanBoard/Kanban";
-import Home from "./Components/Home";
-import Line from "./Components/analytics/Line";
-import Pie from "./Components/analytics/Pie";
 import { Routes, Route } from "react-router-dom";
 
 function App() {

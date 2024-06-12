@@ -18,11 +18,11 @@ const Calendar = () => {
   }, [monthIndex]);
 
   return (
-    <React.Fragment>
+    <div>
       {showEventModel && <EventModel />}
-      <div className="h-screen flex flex-col">
+      <div className="h-screen flex flex-col bg-neutral-900">
         <CalendarHeader />
-        <div className="flex flex-1">
+        <div className="flex flex-1 overflow-y-scroll scrollbar">
           <Sidebar />
           {selectedCalView === "month" ? (
             <Month month={currentMonth} />
@@ -33,7 +33,7 @@ const Calendar = () => {
           )}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

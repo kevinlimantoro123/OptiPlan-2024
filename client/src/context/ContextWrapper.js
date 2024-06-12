@@ -3,14 +3,15 @@ import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
 export default function ContextWrapper(props) {
-  const [monthIndex, setMonthIndex] = useState(dayjs().month());
-  const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
-  const [daySelected, setDaySelected] = useState(dayjs());
-  const [showEventModel, setShowEventModel] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [savedEvents, setSavedEvents] = useState([]);
-  const [selectedCalView, setSelectedCalView] = useState("month");
-  const [week, setWeek] = useState([]);
+    const [ monthIndex, setMonthIndex ] = useState(dayjs().month());
+    const [ smallCalendarMonth, setSmallCalendarMonth ] = useState(null);
+    const [ daySelected, setDaySelected ] = useState(dayjs());
+    const [ showEventModel, setShowEventModel ] = useState(false);
+    const [ selectedEvent, setSelectedEvent ] = useState(null);
+    const [ savedEvents, setSavedEvents ] = useState([]);
+    const [ selectedCalView, setSelectedCalView ] = useState("month");
+    const [ week, setWeek ] = useState([]);
+    const [ showGrid, setShowGrid ] = useState(false);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -47,27 +48,27 @@ export default function ContextWrapper(props) {
     getAllEvents();
   }, [showEventModel]);
 
-  return (
-    <GlobalContext.Provider
-      value={{
-        monthIndex,
-        setMonthIndex,
-        smallCalendarMonth,
-        setSmallCalendarMonth,
-        daySelected,
-        setDaySelected,
-        showEventModel,
-        setShowEventModel,
-        selectedEvent,
-        setSelectedEvent,
-        savedEvents,
-        selectedCalView,
-        setSelectedCalView,
-        week,
-        setWeek,
-      }}
-    >
-      {props.children}
-    </GlobalContext.Provider>
-  );
+    return (
+        <GlobalContext.Provider value = {{ 
+            monthIndex, 
+            setMonthIndex, 
+            smallCalendarMonth,
+            setSmallCalendarMonth,
+            daySelected,
+            setDaySelected,
+            showEventModel, 
+            setShowEventModel,
+            selectedEvent,
+            setSelectedEvent,
+            savedEvents,
+            selectedCalView,
+            setSelectedCalView,
+            week,
+            setWeek,
+            showGrid,
+            setShowGrid
+            }}>
+            {props.children}
+        </GlobalContext.Provider>
+    )
 }
