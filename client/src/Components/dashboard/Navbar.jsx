@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
 import { useStateContext } from "../../context/ContextProvider";
 
@@ -69,13 +71,19 @@ const Navbar = () => {
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
   return (
-    <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
+    <div className="flex justify-between p-2 ml=1 mr-6 relative">
       <NavButton
         title="Menu"
         customFunc={handleActiveMenu}
         color="gray"
         icon={<AiOutlineMenu />}
       />
+      <Link
+        to="/"
+        className="items-center gap-3 mt-2 flex text-xl font-extrabold tracking-tight text-slate-900"
+      >
+        <SiShopware /> <span>OptiPlan</span>
+      </Link>
       <div className="flex">
         <div
           className="flex items-center gap-2 cursor-pointer p-1 hover:bg-gray-200 rounded-lg"

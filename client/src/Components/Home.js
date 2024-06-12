@@ -1,9 +1,11 @@
 import { Fragment, useState, useEffect } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
 import { useStateContext } from "../context/ContextProvider";
+import Calendar from "./calendar/Calendar";
+import Kanban from "./kanbanBoard/Kanban";
 
 const Home = () => {
   const { activeMenu } = useStateContext();
@@ -42,6 +44,11 @@ const Home = () => {
   if (verified) {
     return (
       <div>
+        { activeMenu && 
+          <div className="fixed w-full h-full bg-neutral-950/50 z-50">
+
+          </div>
+        }
         <div className="flex relative bg-neutral-200">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
             <button
@@ -53,25 +60,28 @@ const Home = () => {
             </button>
           </div>
           {activeMenu ? (
-            <div className="w-72 fixed sidebar bg-white">
+            <div className="w-72 z-50 fixed sidebar bg-white">
               <Sidebar />
             </div>
           ) : (
-            <div className="w-0 bg-white">
+            <div className="w-0 z-50 bg-white">
               <Sidebar />
             </div>
           )}
           <div
             className={`bg-main-bg min-h-screen w-full ${
-              activeMenu ? "md:ml-72" : "flex-2"
+              activeMenu ? "" : "flex-2"
             }`}
           >
             <div className="fixed md:static bg-main-bg navbar w-full">
               <Navbar />
             </div>
-          </div>
-          <div>
-            <Outlet />
+            <div>
+              <Routes>
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/kanban" element={<Kanban />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </div>

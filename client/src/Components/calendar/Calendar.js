@@ -20,9 +20,9 @@ const Calendar = () => {
   return (
     <div>
       {showEventModel && <EventModel />}
-      <div className="h-screen flex flex-col bg-neutral-900">
+      <div className="h-screen w-full flex flex-col bg-neutral-900">
         <CalendarHeader />
-        <div className="flex flex-1 overflow-y-scroll scrollbar">
+        <div className="flex flex-1">
           <Sidebar />
           {selectedCalView === "month" ? (
             <Month month={currentMonth} />

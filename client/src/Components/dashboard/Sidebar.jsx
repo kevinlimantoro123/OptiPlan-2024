@@ -2,11 +2,28 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { SiShopware } from "react-icons/si";
 import { MdOutlineCancel } from "react-icons/md";
+import { AiOutlineMenu } from "react-icons/ai";
 
 import { links } from "./data";
 import { useStateContext } from "../../context/ContextProvider";
 
+const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+  <button
+    type="button"
+    onClick={customFunc}
+    style={{ color }}
+    className="relative text-xl rounded-full p-3 hover:bg-gray-200"
+  >
+    <span
+      style={{ background: dotColor }}
+      className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
+    />
+    {icon}
+  </button>
+);
+
 const Sidebar = () => {
+
   const { activeMenu, setActiveMenu, screenSize, setScreenSize } =
     useStateContext();
   const activeLink =
@@ -19,20 +36,22 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   };
+
+  const handleActiveMenu = () => setActiveMenu(!activeMenu);
+
   return (
-    <div className="ml-3 h-screen overflow-auto pb-10">
+    <div className="h-screen overflow-auto">
       {activeMenu && (
         <>
-          <div className="flex justify-between items-center">
-            <Link
-              to="/"
-              onClick={() => handleCloseSidebar}
-              className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight text-slate-900"
-            >
-              <SiShopware /> <span>OptiPlan</span>
-            </Link>
+          <div className="p-1 pt-2 ml-1">
+            <NavButton
+              title="Menu"
+              customFunc={handleActiveMenu}
+              color="gray"
+              icon={<AiOutlineMenu />}
+            />
           </div>
-          <div className="mt-100">
+          <div className="mt-100 ml-3">
             {links.map((item) => (
               <div key={item.title}>
                 <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
