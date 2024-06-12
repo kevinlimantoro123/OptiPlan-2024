@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   if (loggedIn) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/home" />;
   }
 
   return (
@@ -94,19 +94,18 @@ const Login = () => {
                   required
                   className="pl-12 px-5 py-2 w-11/12 h-12 justify-self-center font-semibold bg-neutral-500 placeholder-gray-300 text-neutral-200 rounded-2xl border-none focus:ring-0"
                 />
-                <div 
-                  className="w-5 h-5 mb-0.5 absolute justify-self-end mr-10 text-gray-300 focus-within:text-neutral-200" 
-                  onClick={() => setPwdVisible(!pwdVisible)}>
+                <div
+                  className="w-5 h-5 mb-0.5 absolute justify-self-end mr-10 text-gray-300 focus-within:text-neutral-200"
+                  onClick={() => setPwdVisible(!pwdVisible)}
+                >
                   {pwdVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                 </div>
               </div>
             </div>
             <div className="grid p-3">
-              <button 
+              <button
                 type="submit"
-                disabled={
-                  !name || !pwd ? true : false
-                }
+                disabled={!name || !pwd ? true : false}
                 className={
                   !name || !pwd
                     ? "w-11/12 h-12 justify-self-center rounded-2xl border-none bg-neutral-500 text-neutral-200"
@@ -122,7 +121,12 @@ const Login = () => {
           </div>
           <div className="grid p-3 pb-6">
             <span className="w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-neutral-200">
-              <a className="w-full h-full flex items-center justify-center" href="/register">Sign up</a>
+              <a
+                className="w-full h-full flex items-center justify-center"
+                href="/register"
+              >
+                Sign up
+              </a>
             </span>
           </div>
         </div>
@@ -131,7 +135,10 @@ const Login = () => {
         <div className="text-neutral-200 text-6xl absolute top-0 font-bold pl-14 pt-14 pr-24">
           Your One-Stop Solution to Seamless Scheduling
         </div>
-        <img src="/images/optiplanSquares.gif" className="absolute bottom-0 right-0 m-12 h-56"/>
+        <img
+          src="/images/optiplanSquares.gif"
+          className="absolute bottom-0 right-0 m-12 h-56"
+        />
       </div>
     </div>
   );

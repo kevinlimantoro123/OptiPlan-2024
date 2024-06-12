@@ -2,9 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
-import Footer from "./dashboard/Footer";
 import Sidebar from "./dashboard/Sidebar";
-import ThemeSettings from "./dashboard/ThemeSettings";
 import { useStateContext } from "../context/ContextProvider";
 
 const Home = () => {
