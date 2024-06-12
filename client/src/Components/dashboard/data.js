@@ -15,7 +15,7 @@ export const links = [
     title: "Pages",
     links: [
       {
-        name: "dashboard",
+        name: "home",
         icon: <FaHome />,
       },
       {
