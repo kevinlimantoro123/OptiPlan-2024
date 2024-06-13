@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
 import GlobalContext from "../../context/GlobalContext";
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+const NavButton = ({ customFunc, icon, color, dotColor }) => (
   <button
     type="button"
     onClick={customFunc}
@@ -22,16 +22,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const {
-    activeMenu,
-    setActiveMenu,
-    isClicked,
-    setIsClicked,
-    handleClick,
-    screenSize,
-    setScreenSize,
-    name,
-  } = useContext(GlobalContext);
+  const { activeMenu, setActiveMenu, screenSize, setScreenSize, name } =
+    useContext(GlobalContext);
   const [openProfile, setOpenProfile] = useState(false);
 
   useEffect(() => {

@@ -1,13 +1,9 @@
-import React, { Fragment, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { MdOutlineCancel } from "react-icons/md";
+import React, { useContext } from "react";
 import { CgProfile } from "react-icons/cg";
 import GlobalContext from "../../context/GlobalContext";
 
 const UserProfile = () => {
-  const { name, setVerified, setIsClicked, initialState } =
-    useContext(GlobalContext);
-  const navigate = useNavigate();
+  const { name, setVerified } = useContext(GlobalContext);
 
   const logout = async (e) => {
     e.preventDefault();

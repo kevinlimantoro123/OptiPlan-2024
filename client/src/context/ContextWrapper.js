@@ -3,10 +3,6 @@ import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
 export default function ContextWrapper(props) {
-  const initialState = {
-    userProfile: false,
-  };
-
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
@@ -17,14 +13,9 @@ export default function ContextWrapper(props) {
   const [week, setWeek] = useState([]);
   const [showGrid, setShowGrid] = useState(true);
   const [activeMenu, setActiveMenu] = useState(true);
-  const [isClicked, setIsClicked] = useState(initialState);
   const [screenSize, setScreenSize] = useState(undefined);
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(true);
-
-  const handleClick = (clicked) => {
-    setIsClicked({ ...initialState, [clicked]: true });
-  };
 
   async function getName() {
     try {
@@ -100,9 +91,6 @@ export default function ContextWrapper(props) {
         setShowGrid,
         activeMenu,
         setActiveMenu,
-        isClicked,
-        setIsClicked,
-        handleClick,
         screenSize,
         setScreenSize,
         name,
