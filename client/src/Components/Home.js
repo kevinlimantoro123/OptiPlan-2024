@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useContext } from "react";
 import { useNavigate, Outlet, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
@@ -6,10 +6,11 @@ import Sidebar from "./dashboard/Sidebar";
 import { useStateContext } from "../context/ContextProvider";
 import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
+import GlobalContext from "../context/GlobalContext";
 
 const Home = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
-  const [verified, setVerified] = useState(false);
+  const { activeMenu, setActiveMenu } = useContext(GlobalContext);
+  const [ verified, setVerified ] = useState(false);
 
   const navigate = useNavigate();
 

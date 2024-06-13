@@ -3,15 +3,27 @@ import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
 export default function ContextWrapper(props) {
-    const [ monthIndex, setMonthIndex ] = useState(dayjs().month());
-    const [ smallCalendarMonth, setSmallCalendarMonth ] = useState(null);
-    const [ daySelected, setDaySelected ] = useState(dayjs());
-    const [ showEventModel, setShowEventModel ] = useState(false);
-    const [ selectedEvent, setSelectedEvent ] = useState(null);
-    const [ savedEvents, setSavedEvents ] = useState([]);
-    const [ selectedCalView, setSelectedCalView ] = useState("month");
-    const [ week, setWeek ] = useState([]);
-    const [ showGrid, setShowGrid ] = useState(true);
+
+  const initialState = {
+    userProfile: false,
+  };
+
+  const [ monthIndex, setMonthIndex ] = useState(dayjs().month());
+  const [ smallCalendarMonth, setSmallCalendarMonth ] = useState(null);
+  const [ daySelected, setDaySelected ] = useState(dayjs());
+  const [ showEventModel, setShowEventModel ] = useState(false);
+  const [ selectedEvent, setSelectedEvent ] = useState(null);
+  const [ savedEvents, setSavedEvents ] = useState([]);
+  const [ selectedCalView, setSelectedCalView ] = useState("month");
+  const [ week, setWeek ] = useState([]);
+  const [ showGrid, setShowGrid ] = useState(true);
+  const [ activeMenu, setActiveMenu ] = useState(true);
+  const [ isClicked, setIsClicked ] = useState(initialState);
+  const [ screenSize, setScreenSize ] = useState(undefined);
+
+  const handleClick = (clicked) => {
+    setIsClicked({ ...initialState, [clicked]: true });
+  };
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -66,8 +78,16 @@ export default function ContextWrapper(props) {
             week,
             setWeek,
             showGrid,
-            setShowGrid
-            }}>
+            setShowGrid,
+            activeMenu,
+            setActiveMenu,
+            isClicked,
+            setIsClicked,
+            handleClick,
+            screenSize,
+            setScreenSize
+          }}
+        >
             {props.children}
         </GlobalContext.Provider>
     )
