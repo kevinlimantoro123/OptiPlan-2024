@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
 import { useStateContext } from "../../context/ContextProvider";
+import GlobalContext from "../../context/GlobalContext";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <button
@@ -31,7 +32,7 @@ const Navbar = () => {
     handleClick,
     screenSize,
     setScreenSize,
-  } = useStateContext();
+  } = useContext(GlobalContext);
 
   async function getName() {
     try {
