@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
 import { useStateContext } from "../../context/ContextProvider";
@@ -33,7 +33,7 @@ const Navbar = () => {
     setScreenSize,
     name,
   } = useContext(GlobalContext);
-
+  const [openProfile, setOpenProfile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -71,7 +71,7 @@ const Navbar = () => {
       <div className="flex">
         <div
           className="flex items-center gap-2 cursor-pointer mr-6 p-1 hover:text-white rounded-lg"
-          onClick={() => handleClick("userProfile")}
+          onClick={() => setOpenProfile(!openProfile)}
         >
           <p>
             <span className="text-neutral-200 text-16">Hi, </span>{" "}
@@ -79,9 +79,13 @@ const Navbar = () => {
               {name}
             </span>
           </p>
-          {<MdKeyboardArrowDown className="text-neutral-200 text-16" />}
+          {openProfile ? (
+            <MdKeyboardArrowUp className="text-neutral-200 text-16" />
+          ) : (
+            <MdKeyboardArrowDown className="text-neutral-200 text-16" />
+          )}
         </div>
-        {isClicked.userProfile && <UserProfile />}
+        {openProfile && <UserProfile />}
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { useNavigate, Outlet, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
-import { useStateContext } from "../context/ContextProvider";
 import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
@@ -26,17 +25,6 @@ const Home = () => {
       console.error(err.message);
     }
   }
-
-  const logout = async (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      console.log("Logged out succcessfully");
-      setVerified(false);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
 
   useEffect(() => {
     verify();

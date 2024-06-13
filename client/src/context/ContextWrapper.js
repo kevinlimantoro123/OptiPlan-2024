@@ -3,27 +3,45 @@ import GlobalContext from "./GlobalContext";
 import dayjs from "dayjs";
 
 export default function ContextWrapper(props) {
-
   const initialState = {
     userProfile: false,
   };
 
-  const [ monthIndex, setMonthIndex ] = useState(dayjs().month());
-  const [ smallCalendarMonth, setSmallCalendarMonth ] = useState(null);
-  const [ daySelected, setDaySelected ] = useState(dayjs());
-  const [ showEventModel, setShowEventModel ] = useState(false);
-  const [ selectedEvent, setSelectedEvent ] = useState(null);
-  const [ savedEvents, setSavedEvents ] = useState([]);
-  const [ selectedCalView, setSelectedCalView ] = useState("month");
-  const [ week, setWeek ] = useState([]);
-  const [ showGrid, setShowGrid ] = useState(true);
-  const [ activeMenu, setActiveMenu ] = useState(true);
-  const [ isClicked, setIsClicked ] = useState(initialState);
-  const [ screenSize, setScreenSize ] = useState(undefined);
+  const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
+  const [daySelected, setDaySelected] = useState(dayjs());
+  const [showEventModel, setShowEventModel] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [savedEvents, setSavedEvents] = useState([]);
+  const [selectedCalView, setSelectedCalView] = useState("month");
+  const [week, setWeek] = useState([]);
+  const [showGrid, setShowGrid] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(true);
+  const [isClicked, setIsClicked] = useState(initialState);
+  const [screenSize, setScreenSize] = useState(undefined);
+  const [verified, setVerified] = useState(true);
+  const [name, setName] = useState("");
 
   const handleClick = (clicked) => {
     setIsClicked({ ...initialState, [clicked]: true });
   };
+
+  async function getName() {
+    try {
+      const res = await fetch("http://localhost:5000/dashboard", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await res.json();
+      setName(parseRes.name);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    getName();
+  }, []);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -60,35 +78,40 @@ export default function ContextWrapper(props) {
     getAllEvents();
   }, [showEventModel]);
 
-    return (
-        <GlobalContext.Provider value = {{ 
-            monthIndex, 
-            setMonthIndex, 
-            smallCalendarMonth,
-            setSmallCalendarMonth,
-            daySelected,
-            setDaySelected,
-            showEventModel, 
-            setShowEventModel,
-            selectedEvent,
-            setSelectedEvent,
-            savedEvents,
-            selectedCalView,
-            setSelectedCalView,
-            week,
-            setWeek,
-            showGrid,
-            setShowGrid,
-            activeMenu,
-            setActiveMenu,
-            isClicked,
-            setIsClicked,
-            handleClick,
-            screenSize,
-            setScreenSize
-          }}
-        >
-            {props.children}
-        </GlobalContext.Provider>
-    )
+  return (
+    <GlobalContext.Provider
+      value={{
+        monthIndex,
+        setMonthIndex,
+        smallCalendarMonth,
+        setSmallCalendarMonth,
+        daySelected,
+        setDaySelected,
+        showEventModel,
+        setShowEventModel,
+        selectedEvent,
+        setSelectedEvent,
+        savedEvents,
+        selectedCalView,
+        setSelectedCalView,
+        week,
+        setWeek,
+        showGrid,
+        setShowGrid,
+        activeMenu,
+        setActiveMenu,
+        isClicked,
+        setIsClicked,
+        handleClick,
+        screenSize,
+        setScreenSize,
+        verified,
+        setVerified,
+        name,
+        setName,
+      }}
+    >
+      {props.children}
+    </GlobalContext.Provider>
+  );
 }
