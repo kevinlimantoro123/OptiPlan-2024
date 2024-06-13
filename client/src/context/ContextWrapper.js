@@ -11,7 +11,7 @@ export default function ContextWrapper(props) {
     const [ savedEvents, setSavedEvents ] = useState([]);
     const [ selectedCalView, setSelectedCalView ] = useState("month");
     const [ week, setWeek ] = useState([]);
-    const [ showGrid, setShowGrid ] = useState(false);
+    const [ showGrid, setShowGrid ] = useState(true);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {

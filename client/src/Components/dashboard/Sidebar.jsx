@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { SiShopware } from "react-icons/si";
-import { MdOutlineCancel } from "react-icons/md";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { links } from "./data";
@@ -12,7 +10,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     type="button"
     onClick={customFunc}
     style={{ color }}
-    className="relative text-xl rounded-full p-3 hover:bg-gray-200"
+    className="relative text-xl rounded-full p-3 text-neutral-200 hover:text-white"
   >
     <span
       style={{ background: dotColor }}
@@ -29,7 +27,7 @@ const Sidebar = () => {
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-neutral-400 text-md m-2";
   const normalLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 hover:bg-neutral-200 m-2";
+    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-neutral-200 hover:bg-neutral-700 m-2";
 
   const handleCloseSidebar = () => {
     if (activeMenu && screenSize <= 900) {
@@ -40,25 +38,24 @@ const Sidebar = () => {
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
   return (
-    <div className="h-screen overflow-auto">
+    <div className="h-screen overflow-auto bg-neutral-800">
       {activeMenu && (
         <>
           <div className="p-1 pt-2 ml-1">
             <NavButton
               title="Menu"
               customFunc={handleActiveMenu}
-              color="gray"
               icon={<AiOutlineMenu />}
             />
           </div>
           <div className="mt-100 ml-3">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
+                <p className="text-neutral-200 m-3 mt-4 uppercase">{item.title}</p>
                 {item.links.map((link) => (
                   <NavLink
                     to={
-                      `${link.name}` === `home` ? `/home` : `/home/${link.name}`
+                      `/home/${link.name}`
                     }
                     key={link.name}
                     onClick={() => handleCloseSidebar}
