@@ -11,7 +11,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     type="button"
     onClick={customFunc}
     style={{ color }}
-    className="relative text-xl rounded-full p-3 hover:bg-gray-200"
+    className="relative text-xl rounded-full p-3 text-neutral-200 hover:text-white"
   >
     <span
       style={{ background: dotColor }}
@@ -71,29 +71,28 @@ const Navbar = () => {
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
   return (
-    <div className="flex justify-between p-2 ml=1 mr-6 relative">
+    <div className="flex justify-between p-2 ml=1 relative">
       <NavButton
         title="Menu"
         customFunc={handleActiveMenu}
-        color="gray"
         icon={<AiOutlineMenu />}
       />
       <Link
         to="/"
-        className="items-center gap-3 mt-2 flex text-xl font-extrabold tracking-tight text-slate-900"
+        className="items-center gap-3 mt-2 flex text-xl font-extrabold tracking-tight text-neutral-200"
       >
         <SiShopware /> <span>OptiPlan</span>
       </Link>
       <div className="flex">
         <div
-          className="flex items-center gap-2 cursor-pointer p-1 hover:bg-gray-200 rounded-lg"
+          className="flex items-center gap-2 cursor-pointer mr-6 p-1 hover:text-white rounded-lg"
           onClick={() => handleClick("userProfile")}
         >
           <p>
-            <span className="text-gray-500 text-16">Hi, </span>{" "}
-            <span className="text-gray-500 font-bold ml-1 text-16">{name}</span>
+            <span className="text-neutral-200 text-16">Hi, </span>{" "}
+            <span className="text-neutral-200 font-bold ml-1 text-16">{name}</span>
           </p>
-          <MdKeyboardArrowDown className="text-gray-400 text-16" />
+          <MdKeyboardArrowDown className="text-neutral-200 text-16" />
         </div>
         {isClicked.userProfile && <UserProfile />}
       </div>

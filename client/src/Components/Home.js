@@ -8,7 +8,7 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 
 const Home = () => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, setActiveMenu } = useStateContext();
   const [verified, setVerified] = useState(false);
 
   const navigate = useNavigate();
@@ -45,11 +45,9 @@ const Home = () => {
     return (
       <div>
         { activeMenu && 
-          <div className="fixed w-full h-full bg-neutral-950/50 z-50">
-
-          </div>
+          <div className="fixed w-full h-full bg-neutral-950/50 z-50" onClick={() => setActiveMenu(false)}></div>
         }
-        <div className="flex relative bg-neutral-200">
+        <div className="flex relative bg-neutral-900">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
             <button
               type="button"
@@ -60,11 +58,11 @@ const Home = () => {
             </button>
           </div>
           {activeMenu ? (
-            <div className="w-72 z-50 fixed sidebar bg-white">
+            <div className="w-72 z-50 fixed">
               <Sidebar />
             </div>
           ) : (
-            <div className="w-0 z-50 bg-white">
+            <div className="w-0 z-50">
               <Sidebar />
             </div>
           )}
