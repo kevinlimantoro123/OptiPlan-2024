@@ -19,8 +19,8 @@ export default function ContextWrapper(props) {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [screenSize, setScreenSize] = useState(undefined);
-  const [verified, setVerified] = useState(true);
   const [name, setName] = useState("");
+  const [verified, setVerified] = useState(true);
 
   const handleClick = (clicked) => {
     setIsClicked({ ...initialState, [clicked]: true });
@@ -105,10 +105,10 @@ export default function ContextWrapper(props) {
         handleClick,
         screenSize,
         setScreenSize,
-        verified,
-        setVerified,
         name,
         setName,
+        verified,
+        setVerified,
       }}
     >
       {props.children}

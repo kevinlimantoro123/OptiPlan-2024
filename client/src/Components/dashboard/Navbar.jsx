@@ -4,7 +4,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
-import { useStateContext } from "../../context/ContextProvider";
 import GlobalContext from "../../context/GlobalContext";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (

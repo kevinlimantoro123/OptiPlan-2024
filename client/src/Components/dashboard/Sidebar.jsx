@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
-
 import { links } from "./data";
-import { useStateContext } from "../../context/ContextProvider";
 import GlobalContext from "../../context/GlobalContext";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
