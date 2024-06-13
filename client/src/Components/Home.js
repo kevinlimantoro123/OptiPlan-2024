@@ -9,8 +9,8 @@ import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 
 const Home = () => {
-  const { activeMenu, setActiveMenu } = useContext(GlobalContext);
-  const [ verified, setVerified ] = useState(false);
+  const { verified, setVerified, activeMenu, setActiveMenu } =
+    useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -45,9 +45,12 @@ const Home = () => {
   if (verified) {
     return (
       <div>
-        { activeMenu && 
-          <div className="fixed w-full h-full bg-neutral-950/50 z-50" onClick={() => setActiveMenu(false)}></div>
-        }
+        {activeMenu && (
+          <div
+            className="fixed w-full h-full bg-neutral-950/50 z-50"
+            onClick={() => setActiveMenu(false)}
+          ></div>
+        )}
         <div className="flex relative bg-neutral-900">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
             <button

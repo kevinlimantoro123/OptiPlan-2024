@@ -22,8 +22,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Sidebar = () => {
-
   const { activeMenu, setActiveMenu, screenSize, setScreenSize } = useContext(GlobalContext);
+
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-neutral-400 text-md m-2";
   const normalLink =
@@ -51,11 +51,13 @@ const Sidebar = () => {
           <div className="mt-100 ml-3">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-neutral-200 m-3 mt-4 uppercase">{item.title}</p>
+                <p className="text-neutral-200 m-3 mt-4 uppercase">
+                  {item.title}
+                </p>
                 {item.links.map((link) => (
                   <NavLink
                     to={
-                      `/home/${link.name}`
+                      `${link.name}` === `home` ? `/home` : `/home/${link.name}`
                     }
                     key={link.name}
                     onClick={() => handleCloseSidebar}
