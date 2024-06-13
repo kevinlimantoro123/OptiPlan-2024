@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 
 import { links } from "./data";
 import { useStateContext } from "../../context/ContextProvider";
+import GlobalContext from "../../context/GlobalContext";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <button
@@ -21,8 +22,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu, screenSize, setScreenSize } =
-    useStateContext();
+  const { activeMenu, setActiveMenu, screenSize, setScreenSize } = useContext(GlobalContext);
+
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-neutral-400 text-md m-2";
   const normalLink =
