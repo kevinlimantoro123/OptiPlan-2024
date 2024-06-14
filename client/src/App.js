@@ -13,7 +13,7 @@ function App() {
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="home" element={<Home />}>
+        <Route path="home/*" element={<Home />}>
           <Route path="calendar" element={<Calendar />} />
           <Route path="kanban" element={<Kanban />} />
           <Route path="home" />

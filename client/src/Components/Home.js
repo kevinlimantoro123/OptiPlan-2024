@@ -40,15 +40,6 @@ const Home = () => {
           ></div>
         )}
         <div className="flex relative bg-neutral-900">
-          <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            <button
-              type="button"
-              className="text-3xl p-3 hover:drop-shadow-xl hover:bg-gray-300 text-white"
-              style={{ background: "gray", borderRadius: "50%" }}
-            >
-              <FiSettings />
-            </button>
-          </div>
           {activeMenu ? (
             <div className="w-72 z-50 fixed">
               <Sidebar />
