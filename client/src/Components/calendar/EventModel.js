@@ -30,7 +30,7 @@ export default function EventModel() {
     "Meeting",
     "Important",
     "Leisure"
-  ]
+  ];
 
   async function handleSubmit(e) {
     e.preventDefault();

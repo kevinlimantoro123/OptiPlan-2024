@@ -12,10 +12,11 @@ export default function ContextWrapper(props) {
   const [selectedCalView, setSelectedCalView] = useState("month");
   const [week, setWeek] = useState([]);
   const [showGrid, setShowGrid] = useState(true);
-  const [activeMenu, setActiveMenu] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(false);
   const [screenSize, setScreenSize] = useState(undefined);
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(true);
+  const [analyticsView, setAnalyticsView] = useState("Event Count");
 
   async function getName() {
     try {
@@ -97,6 +98,8 @@ export default function ContextWrapper(props) {
         setName,
         verified,
         setVerified,
+        analyticsView,
+        setAnalyticsView
       }}
     >
       {props.children}

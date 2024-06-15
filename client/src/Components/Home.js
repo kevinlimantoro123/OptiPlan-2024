@@ -6,6 +6,7 @@ import Sidebar from "./dashboard/Sidebar";
 import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
+import Analytics from "./analytics/Analytics";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu } =
@@ -61,6 +62,7 @@ const Home = () => {
               <Routes>
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
+                <Route path="/line" element={<Analytics />} />
               </Routes>
             </div>
           </div>
