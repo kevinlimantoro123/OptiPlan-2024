@@ -123,16 +123,25 @@ export default function YearChart() {
             red: 0,
             yellow: 0
         },
-    ]
+    ];
 
-    const [ monthEvents, setMonthEvents ] = useState(initialData);
     const { savedEvents } = useContext(GlobalContext);
+    const [ monthEvents, setMonthEvents ] = useState(initialData);
+    const [ selectedYear, setSelectedYear ] = useState(dayjs().year());
     const [ showWork, setShowWork ] = useState(true);
     const [ showStudy, setShowStudy ] = useState(true);
     const [ showMeet, setShowMeet ] = useState(true);
     const [ showImpt, setShowImpt ] = useState(true);
     const [ showLeis, setShowLeis ] = useState(true);
     const [ showTotal, setShowTotal ] = useState(true);
+
+    function handlePrevYear() {
+        setSelectedYear(dayjs().year(selectedYear - 1).year());
+    }
+
+    function handleNextYear() {
+        setSelectedYear(dayjs().year(selectedYear + 1).year());
+    }
 
     function indexCalc(type) {
         const counter = [ showTotal, showWork, showStudy, showMeet, showImpt, showLeis ];
@@ -193,29 +202,49 @@ export default function YearChart() {
 
     useEffect(() => {
         let tempData = [...initialData];
-        savedEvents.forEach(event => {
-            const month = dayjs(Number(event.day)).month();
-            tempData[month].count++;
-            if (event.label === "indigo") {
-                tempData[month].indigo++;
-            } else if (event.label === "emerald") {
-                tempData[month].emerald++;
-            } else if (event.label === "blue") {
-                tempData[month].blue++;
-            } else if (event.label === "red") {
-                tempData[month].red++;
-            } else {
-                tempData[month].yellow++;
-            }
-        });
+        savedEvents
+            .filter(event => dayjs(Number(event.day)).year() === selectedYear)
+            .forEach(event => {
+                const month = dayjs(Number(event.day)).month();
+                tempData[month].count++;
+                if (event.label === "indigo") {
+                    tempData[month].indigo++;
+                } else if (event.label === "emerald") {
+                    tempData[month].emerald++;
+                } else if (event.label === "blue") {
+                    tempData[month].blue++;
+                } else if (event.label === "red") {
+                    tempData[month].red++;
+                } else {
+                    tempData[month].yellow++;
+                }
+            });
         setMonthEvents(tempData);
-    }, [savedEvents]);
+    }, [savedEvents, selectedYear]);
 
 
     return (
         <div className="h-full w-10/12 relative">
-            <div>
-                Hello
+            <div className="flex flex-row items-center p-2 pb-4 ml-8">
+                <button 
+                    onClick={handlePrevYear}
+                    className='pt-1'
+                >
+                    <span className='material-icons-outlined cursor-pointer text-neutral-200 hover:text-white mx-1'>
+                        chevron_left
+                    </span>
+                </button>
+                <button 
+                    onClick={handleNextYear}
+                    className='pt-1'
+                >
+                    <span className='material-icons-outlined cursor-pointer text-neutral-200 hover:text-white mx-1'>
+                        chevron_right
+                    </span>
+                </button>
+                <div className="ml-2 text-xl font-bold">
+                    {selectedYear}
+                </div>
             </div>
             <ResponsiveContainer width="100%" height="80%">
                 <LineChart

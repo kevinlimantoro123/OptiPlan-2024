@@ -3,6 +3,7 @@ import GlobalContext from "../../context/GlobalContext";
 import EventCountPieChart from "./EventCountPieChart";
 import AnalyticsSelector from "./AnalyticsSelector";
 import YearChart from "./YearChart";
+import TimeSpent from "./TimeSpent";
 
 export default function Analytics() {
 
@@ -16,6 +17,8 @@ export default function Analytics() {
             <div className="h-[400px] w-full flex justify-center items-center mt-20">
                 { analyticsView === "Event Count"
                     ? <EventCountPieChart />
+                    : analyticsView === "Time Spent on Events"
+                    ? <TimeSpent />
                     : <YearChart />
                 }
             </div>
