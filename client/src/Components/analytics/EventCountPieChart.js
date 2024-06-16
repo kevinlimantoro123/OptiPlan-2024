@@ -36,6 +36,20 @@ export default function EventCountPieChart() {
 
     const { savedEvents } = useContext(GlobalContext);
     const [ eventData, setEventData ] = useState(initialData);
+
+    const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="p-4 bg-neutral-800/50 flex flex-col gap-4 rounded-md">
+                    <p className={`text-medium text-lg text-${payload[0].payload.label}-200`}>{payload[0].name}</p>
+                    <p className="text-sm">
+                    Event Count:
+                    <span className="ml-2">{payload[0].value}</span>
+                    </p>
+                </div>
+            );
+        }
+    };
     
     useEffect(() => {
         let tempData = [...initialData];
@@ -59,7 +73,7 @@ export default function EventCountPieChart() {
         <div className="h-full w-full">
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart width={400} height={400}>
-                    <Tooltip />
+                    <Tooltip content={CustomTooltip} />
                     <Legend />
                     <Pie
                         dataKey="count"
@@ -71,7 +85,7 @@ export default function EventCountPieChart() {
                         stroke="black"
                     >
                         {eventData.map((event, index) => (
-                        <Cell style={{outline: 'none'}} key={`cell-${index}`} fill={COLORS[index]} />
+                        <Cell style={{outline: 'none'}} key={`cell-${index}`} fill={COLORS[index]} name={event.name} label={event.label}/>
                         ))}
                     </Pie>
                 </PieChart>
