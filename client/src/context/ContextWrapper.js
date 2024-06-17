@@ -12,10 +12,11 @@ export default function ContextWrapper(props) {
   const [selectedCalView, setSelectedCalView] = useState("month");
   const [week, setWeek] = useState([]);
   const [showGrid, setShowGrid] = useState(true);
-  const [activeMenu, setActiveMenu] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(false);
   const [screenSize, setScreenSize] = useState(undefined);
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(true);
+  const [analyticsView, setAnalyticsView] = useState("Year Chart");
 
   async function getName() {
     try {
@@ -32,7 +33,7 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     getName();
-  }, []);
+  }, [verified]);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -67,7 +68,8 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     getAllEvents();
-  }, [showEventModel]);
+    console.log("refresh");
+  }, [showEventModel, verified]);
 
   return (
     <GlobalContext.Provider
@@ -97,6 +99,8 @@ export default function ContextWrapper(props) {
         setName,
         verified,
         setVerified,
+        analyticsView,
+        setAnalyticsView
       }}
     >
       {props.children}

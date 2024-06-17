@@ -39,8 +39,6 @@ const Navbar = () => {
   useEffect(() => {
     if (screenSize <= 900) {
       setActiveMenu(false);
-    } else {
-      setActiveMenu(true);
     }
   }, [screenSize]);
 
@@ -55,7 +53,7 @@ const Navbar = () => {
       />
       <Link
         to="/"
-        className="items-center gap-3 mt-2 flex text-xl font-extrabold tracking-tight text-neutral-200"
+        className="items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-3 mt-2 flex text-xl absolute font-extrabold tracking-tight text-neutral-200"
       >
         <SiShopware /> <span>OptiPlan</span>
       </Link>

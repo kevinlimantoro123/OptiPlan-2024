@@ -1,11 +1,11 @@
 import { Fragment, useEffect, useContext } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
 import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
+import Analytics from "./analytics/Analytics";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu } =
@@ -40,15 +40,6 @@ const Home = () => {
           ></div>
         )}
         <div className="flex relative bg-neutral-900">
-          <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            <button
-              type="button"
-              className="text-3xl p-3 hover:drop-shadow-xl hover:bg-gray-300 text-white"
-              style={{ background: "gray", borderRadius: "50%" }}
-            >
-              <FiSettings />
-            </button>
-          </div>
           {activeMenu ? (
             <div className="w-72 z-50 fixed">
               <Sidebar />
@@ -70,6 +61,7 @@ const Home = () => {
               <Routes>
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
+                <Route path="/analytics" element={<Analytics />} />
               </Routes>
             </div>
           </div>
