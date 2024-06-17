@@ -62,7 +62,7 @@ const Home = () => {
               <Routes>
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
-                <Route path="/line" element={<Analytics />} />
+                <Route path="/analytics" element={<Analytics />} />
               </Routes>
             </div>
           </div>
