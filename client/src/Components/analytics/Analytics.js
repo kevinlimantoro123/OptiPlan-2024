@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, PureComponent } from "react";
+import React, { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import EventCountPieChart from "./EventCountPieChart";
 import AnalyticsSelector from "./AnalyticsSelector";
@@ -15,7 +15,7 @@ export default function Analytics() {
                 <AnalyticsSelector />
             </div>
             <div className="h-[400px] w-full flex justify-center items-center mt-20">
-                { analyticsView === "Event Count"
+                { analyticsView === "Total Event Count"
                     ? <EventCountPieChart />
                     : analyticsView === "Time Spent on Events"
                     ? <TimeSpent />

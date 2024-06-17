@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
-import GlobalContext from "../../context/GlobalContext";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

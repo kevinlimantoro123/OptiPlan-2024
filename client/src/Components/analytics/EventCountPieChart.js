@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, PureComponent } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
@@ -43,7 +43,7 @@ export default function EventCountPieChart() {
                 <div className="p-4 bg-neutral-800/50 flex flex-col gap-4 rounded-md">
                     <p className={`text-medium text-lg text-${payload[0].payload.label}-200`}>{payload[0].name}</p>
                     <p className="text-sm">
-                    Event Count:
+                    Total Event Count:
                     <span className="ml-2">{payload[0].value}</span>
                     </p>
                 </div>
@@ -67,7 +67,7 @@ export default function EventCountPieChart() {
             }
         });
         setEventData(tempData);
-    }, [savedEvents]);
+    }, [savedEvents, initialData]);
 
     return (
         <div className="h-full w-full">
@@ -80,8 +80,8 @@ export default function EventCountPieChart() {
                         data={eventData}
                         cx="50%"
                         cy="50%"
-                        outerRadius={80}
-                        innerRadius={60}
+                        outerRadius={120}
+                        innerRadius={100}
                         stroke="black"
                     >
                         {eventData.map((event, index) => (

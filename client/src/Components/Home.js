@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useContext } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
 import Calendar from "./calendar/Calendar";

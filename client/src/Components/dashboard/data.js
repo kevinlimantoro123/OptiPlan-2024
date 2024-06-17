@@ -1,14 +1,6 @@
-import {
-  AiOutlineCalendar,
-  AiOutlineAreaChart,
-  AiOutlineBarChart,
-  AiOutlineStock,
-} from "react-icons/ai";
-import { FiPieChart } from "react-icons/fi";
-import { BsKanban, BsBarChart } from "react-icons/bs";
+import { AiOutlineCalendar, AiOutlineStock } from "react-icons/ai";
+import { BsKanban } from "react-icons/bs";
 import { FaHome } from "react-icons/fa";
-import { RiStockLine } from "react-icons/ri";
-import { GiLouvrePyramid } from "react-icons/gi";
 
 export const links = [
   {
