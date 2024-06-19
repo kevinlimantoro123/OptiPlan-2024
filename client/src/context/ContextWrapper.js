@@ -17,6 +17,21 @@ export default function ContextWrapper(props) {
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(true);
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
+  const [notifEvents, setNotifEvents] = useState([]);
+
+  async function getNotifEvents() {
+    try {
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await res.json();
+      parseRes = parseRes.filter((x) => x.day === dayjs());
+      setNotifEvents(parseRes);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   async function getName() {
     try {
@@ -30,6 +45,10 @@ export default function ContextWrapper(props) {
       console.error(err.message);
     }
   }
+
+  useEffect(() => {
+    getNotifEvents();
+  }, [savedEvents]);
 
   useEffect(() => {
     getName();
@@ -100,7 +119,9 @@ export default function ContextWrapper(props) {
         verified,
         setVerified,
         analyticsView,
-        setAnalyticsView
+        setAnalyticsView,
+        notifEvents,
+        setNotifEvents,
       }}
     >
       {props.children}

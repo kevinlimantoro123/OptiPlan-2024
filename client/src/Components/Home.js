@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useContext } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
 import Calendar from "./calendar/Calendar";
@@ -8,8 +10,14 @@ import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
 
 const Home = () => {
-  const { verified, setVerified, activeMenu, setActiveMenu } =
-    useContext(GlobalContext);
+  const {
+    verified,
+    setVerified,
+    activeMenu,
+    setActiveMenu,
+    notifEvents,
+    savedEvents,
+  } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -63,6 +71,22 @@ const Home = () => {
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/analytics" element={<Analytics />} />
               </Routes>
+            </div>
+            <div>
+              {/* {notifEvents.map((event) => {
+                toast.info("Upcoming event:" + `${event.title}`, {
+                  position: "bottom-right",
+                  autoClose: 5000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  transition: Slide,
+                });
+              })}
+              <ToastContainer stacked /> */}
             </div>
           </div>
         </div>
