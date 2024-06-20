@@ -19,20 +19,6 @@ export default function ContextWrapper(props) {
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
   const [notifEvents, setNotifEvents] = useState([]);
 
-  async function getNotifEvents() {
-    try {
-      const res = await fetch("http://localhost:5000/calendar", {
-        method: "POST",
-        headers: { token: localStorage.token },
-      });
-      const parseRes = await res.json();
-      parseRes = parseRes.filter((x) => x.day === dayjs());
-      setNotifEvents(parseRes);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-
   async function getName() {
     try {
       const res = await fetch("http://localhost:5000/dashboard", {
@@ -41,6 +27,19 @@ export default function ContextWrapper(props) {
       });
       const parseRes = await res.json();
       setName(parseRes.name);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  async function getNotifEvents() {
+    try {
+      const notif = savedEvents.filter(
+        (event) =>
+          dayjs(Number(event.day)).format("DD-MM-YYYY") ===
+          dayjs().format("DD-MM-YYYY")
+      );
+      setNotifEvents(notif);
     } catch (err) {
       console.error(err.message);
     }

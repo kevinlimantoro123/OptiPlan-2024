@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useContext } from "react";
+import { Fragment, useEffect, useContext, useState } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,16 +8,11 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
+import dayjs from "dayjs";
 
 const Home = () => {
-  const {
-    verified,
-    setVerified,
-    activeMenu,
-    setActiveMenu,
-    notifEvents,
-    savedEvents,
-  } = useContext(GlobalContext);
+  const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
+    useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -37,6 +32,23 @@ const Home = () => {
   useEffect(() => {
     verify();
   }, []);
+
+  const showNotif = () => {
+    console.log(notifEvents);
+    notifEvents.map((event) => {
+      toast.info("Upcoming event:" + `${event.title}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    });
+  };
 
   if (verified) {
     return (
@@ -73,20 +85,8 @@ const Home = () => {
               </Routes>
             </div>
             <div>
-              {/* {notifEvents.map((event) => {
-                toast.info("Upcoming event:" + `${event.title}`, {
-                  position: "bottom-right",
-                  autoClose: 5000,
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  transition: Slide,
-                });
-              })}
-              <ToastContainer stacked /> */}
+              <button onClick={showNotif}>SHOW NOTIF</button>
+              <ToastContainer stacked />
             </div>
           </div>
         </div>
