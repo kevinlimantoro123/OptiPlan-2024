@@ -8,12 +8,10 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
-import dayjs from "dayjs";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
     useContext(GlobalContext);
-
   const navigate = useNavigate();
 
   async function verify() {
@@ -23,6 +21,7 @@ const Home = () => {
         headers: { token: localStorage.token },
       });
       const parseRes = await res.json();
+
       setVerified(parseRes.auth);
     } catch (err) {
       console.error(err.message);
@@ -35,19 +34,6 @@ const Home = () => {
 
   const showNotif = () => {
     console.log(notifEvents);
-    notifEvents.map((event) => {
-      toast.info("Upcoming event:" + `${event.title}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide,
-      });
-    });
   };
 
   if (verified) {
@@ -85,7 +71,20 @@ const Home = () => {
               </Routes>
             </div>
             <div>
-              <button onClick={showNotif}>SHOW NOTIF</button>
+              <button onClick={showNotif}>button</button>
+              {notifEvents.map((event) => {
+                toast.info("Upcoming event: " + `${event.title}`, {
+                  position: "top-center",
+                  autoClose: 5000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  transition: Slide,
+                });
+              })}
               <ToastContainer stacked />
             </div>
           </div>
