@@ -18,6 +18,7 @@ export default function ContextWrapper(props) {
   const [verified, setVerified] = useState(true);
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
   const [notifEvents, setNotifEvents] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(false);
 
   async function getName() {
     try {
@@ -50,7 +51,7 @@ export default function ContextWrapper(props) {
     }
   }
 
-  function notify() {
+  async function notify() {
     try {
       notifEvents.map(async (event) => {
         const body = { notified: true };
@@ -75,11 +76,11 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     notify();
-  }, [savedEvents]);
+  }, [refreshKey]);
 
   useEffect(() => {
     getNotifEvents();
-  }, [savedEvents]);
+  }, [refreshKey]);
 
   useEffect(() => {
     getName();
@@ -153,6 +154,8 @@ export default function ContextWrapper(props) {
         setAnalyticsView,
         notifEvents,
         setNotifEvents,
+        refreshKey,
+        setRefreshKey,
       }}
     >
       {props.children}
