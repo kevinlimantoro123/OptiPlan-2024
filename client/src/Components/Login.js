@@ -26,11 +26,14 @@ const Login = () => {
     try {
       const body = { name, pwd };
       //check credentials
-      const res = await fetch("http://localhost:5000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "https://opti-plan-2024-backend.vercel.app/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       //store token in local machine
       const parseRes = await res.json();
       localStorage.setItem("token", parseRes.token);
