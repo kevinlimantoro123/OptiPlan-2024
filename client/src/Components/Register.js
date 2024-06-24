@@ -4,7 +4,7 @@ import {
   faTimes,
   faExclamation,
   faUser,
-  faLock
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -57,11 +57,14 @@ const Register = () => {
     e.preventDefault();
     try {
       const body = { name, pwd };
-      const res = await fetch("http://localhost:5000/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
       const parseRes = await res.json();
       localStorage.setItem("token", parseRes.token);
@@ -91,7 +94,12 @@ const Register = () => {
               </h1>
               <div className="grid p-3 pb-6">
                 <span className="w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-neutral-200">
-                  <a className="w-full h-full flex items-center justify-center" href="/login">Sign in</a>
+                  <a
+                    className="w-full h-full flex items-center justify-center"
+                    href="/login"
+                  >
+                    Sign in
+                  </a>
                 </span>
               </div>
             </section>
@@ -129,7 +137,7 @@ const Register = () => {
                       onBlur={() => setUserFocus(false)}
                     />
                     <div className="w-5 h-5 mb-0.5 absolute justify-self-end text-center mr-10 pointer-events-none">
-                      { name ? (
+                      {name ? (
                         validName ? (
                           <span className="text-green-500">
                             <FontAwesomeIcon icon={faCheck} />
@@ -138,18 +146,21 @@ const Register = () => {
                           <span className="text-red-500">
                             <FontAwesomeIcon icon={faTimes} />
                           </span>
-                        )) : (
-                          <span>
-                            <FontAwesomeIcon icon={faExclamation} />
-                          </span>
                         )
-                      }
+                      ) : (
+                        <span>
+                          <FontAwesomeIcon icon={faExclamation} />
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div>
                     {userFocus && name && !validName ? (
                       <div className="text-red-500 pl-12 px-5 py-2 w-11/12 h-3 text-xs justify-self-center">
-                        <p>4 - 24 characters, first character has to be a letter, no special characters/symbols</p>
+                        <p>
+                          4 - 24 characters, first character has to be a letter,
+                          no special characters/symbols
+                        </p>
                       </div>
                     ) : (
                       <div className="pl-12 px-5 py-2 w-11/12 text-xs"></div>
@@ -174,13 +185,14 @@ const Register = () => {
                       onFocus={() => setPwdFocus(true)}
                       onBlur={() => setPwdFocus(false)}
                     />
-                    <div 
-                      className="w-5 h-5 mb-0.5 absolute justify-self-end mr-16" 
-                      onClick={() => setPwdVisible(!pwdVisible)}>
+                    <div
+                      className="w-5 h-5 mb-0.5 absolute justify-self-end mr-16"
+                      onClick={() => setPwdVisible(!pwdVisible)}
+                    >
                       {pwdVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
                     </div>
                     <div className="w-5 h-5 mb-0.5 absolute justify-self-end text-center mr-10 pointer-events-none">
-                      { pwd ? (
+                      {pwd ? (
                         validPwd ? (
                           <span className="text-green-500">
                             <FontAwesomeIcon icon={faCheck} />
@@ -189,18 +201,21 @@ const Register = () => {
                           <span className="text-red-500">
                             <FontAwesomeIcon icon={faTimes} />
                           </span>
-                        )) : (
-                          <span>
-                            <FontAwesomeIcon icon={faExclamation} />
-                          </span>
                         )
-                      }
+                      ) : (
+                        <span>
+                          <FontAwesomeIcon icon={faExclamation} />
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div>
                     {pwdFocus && !validPwd ? (
                       <div className="text-red-500 pl-12 px-5 py-2 w-11/12 h-3 text-xs justify-self-center">
-                        <p>8 - 24 characters with numbers, uppercase, and lowercase letters</p>
+                        <p>
+                          8 - 24 characters with numbers, uppercase, and
+                          lowercase letters
+                        </p>
                       </div>
                     ) : (
                       <div className="pl-12 px-5 py-2 w-11/12 text-xs"></div>
@@ -225,13 +240,18 @@ const Register = () => {
                       onFocus={() => setMatchPwdFocus(true)}
                       onBlur={() => setMatchPwdFocus(false)}
                     />
-                    <div 
+                    <div
                       className="w-5 h-5 mb-0.5 absolute justify-self-end mr-16"
-                      onClick={() => setMatchVisible(!matchVisible)}>
-                      {matchVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                      onClick={() => setMatchVisible(!matchVisible)}
+                    >
+                      {matchVisible ? (
+                        <EyeOutlined />
+                      ) : (
+                        <EyeInvisibleOutlined />
+                      )}
                     </div>
                     <div className="w-5 h-5 absolute justify-self-end text-center mr-10 pointer-events-none">
-                      { matchPwd ? (
+                      {matchPwd ? (
                         validMatchPwd ? (
                           <span className="text-green-500">
                             <FontAwesomeIcon icon={faCheck} />
@@ -240,12 +260,12 @@ const Register = () => {
                           <span className="text-red-500">
                             <FontAwesomeIcon icon={faTimes} />
                           </span>
-                        )) : (
-                          <span>
-                            <FontAwesomeIcon icon={faExclamation} />
-                          </span>
                         )
-                      }
+                      ) : (
+                        <span>
+                          <FontAwesomeIcon icon={faExclamation} />
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div>
@@ -265,7 +285,7 @@ const Register = () => {
                       !validName || !validPwd || !validMatchPwd ? true : false
                     }
                     className={
-                      !validName || !validPwd || !validMatchPwd 
+                      !validName || !validPwd || !validMatchPwd
                         ? "w-11/12 h-12 justify-self-center rounded-2xl border-none bg-neutral-500 text-neutral-200"
                         : "w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-neutral-200"
                     }
@@ -279,7 +299,12 @@ const Register = () => {
               </div>
               <div className="grid p-3 pb-6">
                 <span className="w-11/12 h-12 justify-self-center rounded-2xl border-none ring-2 bg-gradient-to-r from-sky-500 to-indigo-500 text-neutral-200">
-                  <a className="w-full h-full flex items-center justify-center" href="/login">Sign in</a>
+                  <a
+                    className="w-full h-full flex items-center justify-center"
+                    href="/login"
+                  >
+                    Sign in
+                  </a>
                 </span>
               </div>
             </section>
@@ -290,7 +315,10 @@ const Register = () => {
         <div className="text-neutral-200 text-6xl absolute top-0 font-bold pl-14 pt-14 pr-24">
           Your One-Stop Solution to Seamless Scheduling
         </div>
-        <img src="/images/optiplanSquares.gif" className="absolute bottom-0 right-0 m-12 h-56"/>
+        <img
+          src="/images/optiplanSquares.gif"
+          className="absolute bottom-0 right-0 m-12 h-56"
+        />
       </div>
     </div>
   );

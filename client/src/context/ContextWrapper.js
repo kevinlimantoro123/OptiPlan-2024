@@ -20,10 +20,13 @@ export default function ContextWrapper(props) {
 
   async function getName() {
     try {
-      const res = await fetch("http://localhost:5000/dashboard", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/dashboard",
+        {
+          method: "GET",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setName(parseRes.name);
     } catch (err) {
@@ -55,10 +58,13 @@ export default function ContextWrapper(props) {
 
   async function getAllEvents() {
     try {
-      const res = await fetch("http://localhost:5000/calendar", {
-        method: "POST",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/calendar",
+        {
+          method: "POST",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setSavedEvents(parseRes);
     } catch (err) {
@@ -100,7 +106,7 @@ export default function ContextWrapper(props) {
         verified,
         setVerified,
         analyticsView,
-        setAnalyticsView
+        setAnalyticsView,
       }}
     >
       {props.children}
