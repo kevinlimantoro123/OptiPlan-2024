@@ -14,6 +14,19 @@ CREATE TABLE events (
     description TEXT,
     label VARCHAR(255) NOT NULL,
     day BIGINT NOT NULL,
+    starttime VARCHAR(6) NOT NULL,
+    endtime VARCHAR(6) NOT NULL,
+    user_id INTEGER NOT NULL,
+    notified BOOLEAN DEFAULT FALSE,
+    CONSTRAINT fk_user
+        FOREIGN KEY(user_id)
+        REFERENCES users(id)
+);
+
+CREATE TABLE cards (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    col VARCHAR(255) NOT NULL,
     user_id INTEGER NOT NULL,
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)

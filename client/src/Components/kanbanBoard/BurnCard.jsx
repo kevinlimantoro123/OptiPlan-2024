@@ -1,0 +1,48 @@
+import { useState } from "react";
+import { FaFire } from "react-icons/fa";
+import { FiTrash } from "react-icons/fi";
+
+const BurnCard = ({ setCards }) => {
+  const [active, setActive] = useState(false);
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setActive(true);
+  };
+
+  const handleDragLeave = (e) => {
+    setActive(false);
+  };
+
+  async function handleDragEnd(e) {
+    try {
+      const id = Number(e.dataTransfer.getData("cardId"));
+      const res = await fetch("http://localhost:5000/kanban/cards/" + id, {
+        method: "DELETE",
+        headers: { token: localStorage.token },
+      });
+      await res.json();
+      setCards((c) => c.filter((card) => card.id !== id));
+      setActive(false);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  return (
+    <div
+      onDrop={handleDragEnd}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      className={`mt-10 grid h-56 w-56 shrink-0 place-content-center rounded border text-3xl ${
+        active
+          ? "border-red-800 bg-red-800/20 text-red-500"
+          : "border-neutral-500 bg-neutral-500/20 text-neutral-500"
+      }`}
+    >
+      {active ? <FaFire className="animate-bounce" /> : <FiTrash />}
+    </div>
+  );
+};
+
+export default BurnCard;

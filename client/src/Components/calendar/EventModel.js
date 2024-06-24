@@ -11,7 +11,14 @@ export default function EventModel() {
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent ? selectedEvent.label : "blue"
   );
-  const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
+  const [starttime, setStarttime] = useState(
+    selectedEvent ? selectedEvent.starttime : "empty"
+  );
+  const [endtime, setEndtime] = useState(
+    selectedEvent ? selectedEvent.endtime : "empty"
+  );
+  const labelsClasses = ["indigo", "emerald", "blue", "red", "yellow"];
+  const labelNames = ["Work", "Study", "Meeting", "Important", "Leisure"];
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -20,6 +27,8 @@ export default function EventModel() {
       description,
       label: selectedLabel,
       day: daySelected.valueOf(),
+      starttime,
+      endtime,
     };
     if (selectedEvent) {
       try {
@@ -76,17 +85,17 @@ export default function EventModel() {
       );
       await res.json();
       setSelectedEvent(null);
-      setShowEventModel(false);
+      setShowEventModel(false); //ss
     } catch (err) {
       console.error(err.message);
     }
   }
 
   return (
-    <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4">
-        <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
-          <span className="material-icons-outlined text-gray-400">
+    <div className="h-screen w-full z-40 fixed left-0 top-0 flex justify-center items-center">
+      <form className="bg-neutral-700 rounded-lg shadow-2xl w-1/4">
+        <header className="bg-neutral-800 px-4 py-2 flex justify-between items-center">
+          <span className="material-icons-outlined text-neutral-200">
             drag_handle
           </span>
           <div>
@@ -95,7 +104,7 @@ export default function EventModel() {
                 onClick={() => {
                   handleDelete();
                 }}
-                className="material-icons-outlined text-gray-400 cursor-pointer"
+                className="material-icons-outlined text-neutral-200 cursor-pointer"
               >
                 delete
               </span>
@@ -106,7 +115,7 @@ export default function EventModel() {
                 setSelectedEvent(null);
               }}
             >
-              <span className="material-icons-outlined text-gray-400 cursor-pointer">
+              <span className="material-icons-outlined text-neutral-200 cursor-pointer">
                 close
               </span>
             </button>
@@ -114,6 +123,7 @@ export default function EventModel() {
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
+            {/* row 1 */}
             <div></div>
             <input
               type="text"
@@ -121,14 +131,144 @@ export default function EventModel() {
               placeholder="Add title"
               value={title}
               required
-              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 placeholder:text-neutral-400 text-xl font-semibold pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <span className="material-icons-outlined text-gray-400">
+            {/* row 2 */}
+            <span className="material-icons-outlined text-neutral-200">
               schedule
             </span>
-            <p>{daySelected.format("dddd, MMMM DD")}</p>
-            <span className="material-icons-outlined text-gray-400">
+            <p className="text-neutral-200 pl-1">
+              {daySelected.format("dddd, MMMM DD")}
+            </p>
+            <span className="material-icons-outlined text-neutral-200"></span>
+            <select
+              id="underline_select"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
+              required
+              value={starttime}
+              onChange={(e) => {
+                setStarttime(e.target.value);
+              }}
+            >
+              <option value="empty" selected>
+                Select a start time
+              </option>
+              <option value="00:00">00:00</option>
+              <option value="00:30">00:30</option>
+              <option value="01:00">01:00</option>
+              <option value="01:30">01:30</option>
+              <option value="02:00">02:00</option>
+              <option value="02:30">02:30</option>
+              <option value="03:00">03:00</option>
+              <option value="03:30">03:30</option>
+              <option value="04:00">04:00</option>
+              <option value="04:30">04:30</option>
+              <option value="05:00">05:00</option>
+              <option value="05:30">05:30</option>
+              <option value="06:00">06:00</option>
+              <option value="06:30">06:30</option>
+              <option value="07:00">07:00</option>
+              <option value="07:30">07:30</option>
+              <option value="08:00">08:00</option>
+              <option value="08:30">08:30</option>
+              <option value="09:00">09:00</option>
+              <option value="09:30">09:30</option>
+              <option value="10:00">10:00</option>
+              <option value="10:30">10:30</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+              <option value="22:30">22:30</option>
+              <option value="23:00">23:00</option>
+              <option value="23:30">23:30</option>
+              <option value="24:00">24:00</option>
+            </select>
+            <span className="material-icons-outlined text-neutral-200"></span>
+            <select
+              id="underline_select"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200 placeholder:text-neutral-400"
+              required
+              value={endtime}
+              onChange={(e) => {
+                setEndtime(e.target.value);
+              }}
+            >
+              <option value="empty" selected>
+                Select an end time
+              </option>
+              <option value="00:00">00:00</option>
+              <option value="00:30">00:30</option>
+              <option value="01:00">01:00</option>
+              <option value="01:30">01:30</option>
+              <option value="02:00">02:00</option>
+              <option value="02:30">02:30</option>
+              <option value="03:00">03:00</option>
+              <option value="03:30">03:30</option>
+              <option value="04:00">04:00</option>
+              <option value="04:30">04:30</option>
+              <option value="05:00">05:00</option>
+              <option value="05:30">05:30</option>
+              <option value="06:00">06:00</option>
+              <option value="06:30">06:30</option>
+              <option value="07:00">07:00</option>
+              <option value="07:30">07:30</option>
+              <option value="08:00">08:00</option>
+              <option value="08:30">08:30</option>
+              <option value="09:00">09:00</option>
+              <option value="09:30">09:30</option>
+              <option value="10:00">10:00</option>
+              <option value="10:30">10:30</option>
+              <option value="11:00">11:00</option>
+              <option value="11:30">11:30</option>
+              <option value="12:00">12:00</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="14:00">14:00</option>
+              <option value="14:30">14:30</option>
+              <option value="15:00">15:00</option>
+              <option value="15:30">15:30</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+              <option value="22:30">22:30</option>
+              <option value="23:00">23:00</option>
+              <option value="23:30">23:30</option>
+              <option value="24:00">24:00</option>
+            </select>
+            {/* row 3 */}
+            <span className="material-icons-outlined text-neutral-200">
               segment
             </span>
             <input
@@ -137,38 +277,59 @@ export default function EventModel() {
               placeholder="Description"
               value={description}
               required
-              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+              className="pt-3 bg-neutral-700 border-0 text-neutral-200 placeholder:text-neutral-400 text-xl font-semibold pb-2 w-full border-b-2 border-neutral-400 focus:outline-none focus:ring-0 focus:border-neutral-200"
               onChange={(e) => setDescription(e.target.value)}
             />
-            <span className="material-icons-outlined text-gray-400">
+            {/* row 4 */}
+            <span className="material-icons-outlined text-neutral-200">
               bookmark_border
             </span>
-            <div className="flex gap-x-2">
+            <div>
               {labelsClasses.map((lblClass, i) => (
-                <span
-                  key={i}
-                  onClick={() => setSelectedLabel(lblClass)}
-                  className={`bg-${lblClass}-500 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                >
-                  {selectedLabel === lblClass && (
-                    <span className="material-icons-outlined text-white text-sm">
-                      check
-                    </span>
-                  )}
-                </span>
+                <div className="relative grid">
+                  <span
+                    key={i}
+                    onClick={() => setSelectedLabel(lblClass)}
+                    className={`bg-${lblClass}-200 w-6 h-6 my-1.5 rounded-full flex items-center justify-center cursor-pointer`}
+                  >
+                    {selectedLabel === lblClass && (
+                      <span className="material-icons-outlined text-neutral-800 text-sm font-bold">
+                        check
+                      </span>
+                    )}
+                  </span>
+                  <div
+                    className={`text-${lblClass}-200 absolute top-[5.5px] left-10 cursor-pointer`}
+                    onClick={() => setSelectedLabel(lblClass)}
+                  >
+                    {labelNames[i]}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </div>
-        <footer className="flex justify-end border-t p-3">
+        <footer className="flex justify-end p-3">
           <button
             type="submit"
             onClick={handleSubmit}
-            disabled={!title ? true : false}
+            disabled={
+              !title
+                ? true
+                : starttime !== "empty" &&
+                  endtime !== "empty" &&
+                  endtime > starttime
+                ? false
+                : true
+            }
             className={
               !title
-                ? "bg-gray-300 px-6 py-2 rounded text-white"
-                : "bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
+                ? "px-6 py-2 rounded bg-neutral-500 text-neutral-200"
+                : starttime !== "empty" &&
+                  endtime !== "empty" &&
+                  endtime > starttime
+                ? "bg-gradient-to-r from-sky-500 to-indigo-500 hover:bg-blue-600 px-6 py-2 rounded text-neutral-200"
+                : "px-6 py-2 rounded bg-neutral-500 text-neutral-200"
             }
           >
             Save

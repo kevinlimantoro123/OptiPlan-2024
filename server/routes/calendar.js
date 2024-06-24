@@ -5,10 +5,10 @@ const pool = require("../db/database");
 //Create event
 router.post("/events", authorization, async (req, res) => {
   try {
-    const { title, description, label, day } = req.body;
+    const { title, description, label, day, starttime, endtime } = req.body;
     const event = await pool.query(
-      "INSERT INTO events (title, description, label, day, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *",
-      [title, description, label, day, req.user]
+      "INSERT INTO events (title, description, label, day, user_id, starttime, endtime) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [title, description, label, day, req.user, starttime, endtime]
     );
     res.json(event.rows[0]);
   } catch (err) {
@@ -20,10 +20,10 @@ router.post("/events", authorization, async (req, res) => {
 router.put("/events/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, label, day } = req.body;
+    const { title, description, label, day, starttime, endtime } = req.body;
     const updateEvent = await pool.query(
-      "UPDATE events SET title = $1, description = $2, label = $3, day = $4 WHERE id = $5 AND user_id = $6",
-      [title, description, label, day, id, req.user]
+      "UPDATE events SET title = $1, description = $2, label = $3, day = $4, starttime = $7, endtime = $8 WHERE id = $5 AND user_id = $6",
+      [title, description, label, day, id, req.user, starttime, endtime]
     );
     res.json(updateEvent);
   } catch (err) {
@@ -35,8 +35,9 @@ router.put("/events/:id", authorization, async (req, res) => {
 router.delete("/events/:id", authorization, async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteEvent = await pool.query("DELETE FROM events WHERE id = $1 AND user_id = $2",
-      [id, req.user],
+    const deleteEvent = await pool.query(
+      "DELETE FROM events WHERE id = $1 AND user_id = $2",
+      [id, req.user]
     );
     res.json("Event has been deleted");
   } catch (err) {

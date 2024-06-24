@@ -9,7 +9,8 @@ app.use("/auth", require("./routes/jwtAuth"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/admin", require("./routes/admin"));
 app.use("/calendar", require("./routes/calendar"));
-app.use("/test", require("./routes/test"));
+app.use("/kanban", require("./routes/kanban"));
+app.use("/notification", require("./routes/notification"));
 
 app.listen(process.env.PGPORT, () => {
   console.log("Server started");
