@@ -17,13 +17,10 @@ const BurnCard = ({ setCards }) => {
   async function handleDragEnd(e) {
     try {
       const id = Number(e.dataTransfer.getData("cardId"));
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
-        {
-          method: "DELETE",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/kanban/cards/" + id, {
+        method: "DELETE",
+        headers: { token: localStorage.token },
+      });
       await res.json();
       setCards((c) => c.filter((card) => card.id !== id));
       setActive(false);

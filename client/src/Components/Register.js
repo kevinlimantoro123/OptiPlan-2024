@@ -57,14 +57,11 @@ const Register = () => {
     e.preventDefault();
     try {
       const body = { name, pwd };
-      const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/auth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      const res = await fetch("https://localhost:5000/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
       const parseRes = await res.json();
       localStorage.setItem("token", parseRes.token);

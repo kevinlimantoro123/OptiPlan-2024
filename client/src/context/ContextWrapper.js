@@ -22,13 +22,10 @@ export default function ContextWrapper(props) {
 
   async function getName() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/dashboard",
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/dashboard", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       setName(parseRes.name);
     } catch (err) {
@@ -38,13 +35,10 @@ export default function ContextWrapper(props) {
 
   async function getNotifEvents() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
-        {
-          method: "POST",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       const notif = parseRes.filter(
         (event) =>
@@ -65,8 +59,7 @@ export default function ContextWrapper(props) {
         const body = { notified: true };
         const event_id = Number(event.id);
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/notification/events/" +
-            event_id,
+          "http://localhost:5000/notification/events/" + event_id,
           {
             method: "PUT",
             headers: {
@@ -119,13 +112,10 @@ export default function ContextWrapper(props) {
 
   async function getAllEvents() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
-        {
-          method: "POST",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       setSavedEvents(parseRes);
     } catch (err) {

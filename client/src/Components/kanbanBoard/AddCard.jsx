@@ -16,17 +16,14 @@ const AddCard = ({ col, setCards, refresh, setRefresh }) => {
         title: title.trim(),
         col,
       };
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/kanban/cards",
-        {
-          method: "POST",
-          headers: {
-            token: localStorage.token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const res = await fetch("http://localhost:5000/kanban/cards", {
+        method: "POST",
+        headers: {
+          token: localStorage.token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       await res.json();
       setCards((c) => [...c, body]);
       setAdding(false);

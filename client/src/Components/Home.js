@@ -13,17 +13,14 @@ const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
     useContext(GlobalContext);
   const navigate = useNavigate();
-  const [ homeNotifs, setHomeNotifs ] = useState([]);
+  const [homeNotifs, setHomeNotifs] = useState([]);
 
   async function verify() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/auth/verify",
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/auth/verify", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
 
       setVerified(parseRes.auth);
@@ -54,7 +51,8 @@ const Home = () => {
           theme: "dark",
           transition: Slide,
         });
-    }));
+      })
+    );
   }, [notifEvents]);
 
   if (verified) {
