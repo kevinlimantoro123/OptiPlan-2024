@@ -1,5 +1,7 @@
-import { Fragment, useEffect, useContext } from "react";
+import { Fragment, useEffect, useContext, useState } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./dashboard/Navbar";
 import Sidebar from "./dashboard/Sidebar";
 import Calendar from "./calendar/Calendar";
@@ -8,10 +10,10 @@ import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
 
 const Home = () => {
-  const { verified, setVerified, activeMenu, setActiveMenu } =
+  const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
     useContext(GlobalContext);
-
   const navigate = useNavigate();
+  const [ homeNotifs, setHomeNotifs ] = useState([]);
 
   async function verify() {
     try {
@@ -20,6 +22,7 @@ const Home = () => {
         headers: { token: localStorage.token },
       });
       const parseRes = await res.json();
+
       setVerified(parseRes.auth);
     } catch (err) {
       console.error(err.message);
@@ -29,6 +32,27 @@ const Home = () => {
   useEffect(() => {
     verify();
   }, []);
+
+  const showNotif = () => {
+    console.log(notifEvents);
+  };
+
+  useEffect(() => {
+    setHomeNotifs(
+      notifEvents.map((event) => {
+        toast.info("Upcoming event: " + `${event.title}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+    }));
+  }, [notifEvents]);
 
   if (verified) {
     return (
@@ -63,6 +87,10 @@ const Home = () => {
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/analytics" element={<Analytics />} />
               </Routes>
+            </div>
+            <div>
+              {homeNotifs}
+              <ToastContainer stacked />
             </div>
           </div>
         </div>

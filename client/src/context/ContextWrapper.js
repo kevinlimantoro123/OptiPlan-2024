@@ -17,6 +17,8 @@ export default function ContextWrapper(props) {
   const [name, setName] = useState("");
   const [verified, setVerified] = useState(true);
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
+  const [notifEvents, setNotifEvents] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(false);
 
   async function getName() {
     try {
@@ -31,9 +33,64 @@ export default function ContextWrapper(props) {
     }
   }
 
+  async function getNotifEvents() {
+    try {
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await res.json();
+      const notif = parseRes.filter(
+        (event) =>
+          dayjs(Number(event.day)).format("DD-MM-YYYY") ===
+            dayjs().format("DD-MM-YYYY") && event.notified === false
+      );
+      console.log("notif events are");
+      console.log(notif);
+      setNotifEvents(notif);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  async function notify() {
+    try {
+      notifEvents.map(async (event) => {
+        const body = { notified: true };
+        const event_id = Number(event.id);
+        const res = await fetch(
+          "http://localhost:5000/notification/events/" + event_id,
+          {
+            method: "PUT",
+            headers: {
+              token: localStorage.token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        await res.json();
+      });
+    } catch (err) {
+      console.err(err.message);
+    }
+  }
+
+  useEffect(() => {
+    notify();
+  }, [refreshKey]);
+
+  useEffect(() => {
+    getNotifEvents();
+  }, [refreshKey]);
+
   useEffect(() => {
     getName();
   }, [verified]);
+
+  useEffect(() => {
+    setRefreshKey(!refreshKey);
+  }, [savedEvents]);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
@@ -100,7 +157,11 @@ export default function ContextWrapper(props) {
         verified,
         setVerified,
         analyticsView,
-        setAnalyticsView
+        setAnalyticsView,
+        notifEvents,
+        setNotifEvents,
+        refreshKey,
+        setRefreshKey,
       }}
     >
       {props.children}

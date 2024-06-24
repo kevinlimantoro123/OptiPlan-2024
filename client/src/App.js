@@ -20,7 +20,6 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="home" />
         </Route>
-        <Route path="analytics" element={<Analytics />} />
       </Route>
     </Routes>
   );
