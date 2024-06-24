@@ -27,7 +27,7 @@ const Login = () => {
       const body = { name, pwd };
       //check credentials
       const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/auth/login",
+        "http://opti-plan-2024-backend.vercel.app/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

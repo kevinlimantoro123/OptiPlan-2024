@@ -17,10 +17,13 @@ const Home = () => {
 
   async function verify() {
     try {
-      const res = await fetch("http://localhost:5000/auth/verify", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/auth/verify",
+        {
+          method: "GET",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
 
       setVerified(parseRes.auth);

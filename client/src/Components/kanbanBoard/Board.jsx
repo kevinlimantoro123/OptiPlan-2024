@@ -10,10 +10,13 @@ const Board = () => {
 
   async function getEvents() {
     try {
-      const res = await fetch("http://localhost:5000/kanban", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/kanban",
+        {
+          method: "GET",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
       setCards(parseRes);
     } catch (err) {
@@ -68,7 +71,15 @@ const Board = () => {
   );
 };
 
-const Column = ({ title, col, headingColor, cards, setCards, refresh, setRefresh }) => {
+const Column = ({
+  title,
+  col,
+  headingColor,
+  cards,
+  setCards,
+  refresh,
+  setRefresh,
+}) => {
   const [active, setActive] = useState(false);
   const negative1 = -1;
   const filteredCards = cards.filter((e) => e.col === col);
@@ -108,14 +119,17 @@ const Column = ({ title, col, headingColor, cards, setCards, refresh, setRefresh
 
       try {
         const body = { col };
-        const res = await fetch("http://localhost:5000/kanban/cards/" + id, {
-          method: "PUT",
-          headers: {
-            token: localStorage.token,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
+        const res = await fetch(
+          "http://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
+          {
+            method: "PUT",
+            headers: {
+              token: localStorage.token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
         await res.json();
       } catch (err) {
         console.error(err.message);
@@ -197,7 +211,12 @@ const Column = ({ title, col, headingColor, cards, setCards, refresh, setRefresh
           return <Card key={e.id} {...e} handleDragStart={handleDragStart} />;
         })}
         <DropIndicator beforeId={negative1} col={col} />
-        <AddCard col={col} setCards={setCards} refresh={refresh} setRefresh={setRefresh}/>
+        <AddCard
+          col={col}
+          setCards={setCards}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        />
       </div>
     </div>
   );
