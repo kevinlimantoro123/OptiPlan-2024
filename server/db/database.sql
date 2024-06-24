@@ -17,6 +17,7 @@ CREATE TABLE events (
     starttime VARCHAR(6) NOT NULL,
     endtime VARCHAR(6) NOT NULL,
     user_id INTEGER NOT NULL,
+    notified BOOLEAN DEFAULT FALSE,
     CONSTRAINT fk_user
         FOREIGN KEY(user_id)
         REFERENCES users(id)

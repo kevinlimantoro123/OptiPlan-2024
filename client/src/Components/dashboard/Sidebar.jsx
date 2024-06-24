@@ -20,7 +20,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Sidebar = () => {
-  const { activeMenu, setActiveMenu, screenSize } = useContext(GlobalContext);
+  const { activeMenu, setActiveMenu, screenSize, refreshKey, setRefreshKey } =
+    useContext(GlobalContext);
 
   const activeLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-neutral-400 text-md m-2";
@@ -28,12 +29,16 @@ const Sidebar = () => {
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-neutral-200 hover:bg-neutral-700 m-2";
 
   const handleCloseSidebar = () => {
+    setRefreshKey(!refreshKey);
     if (activeMenu && screenSize <= 900) {
       setActiveMenu(false);
     }
   };
 
-  const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  const handleActiveMenu = () => {
+    setActiveMenu(!activeMenu);
+    setRefreshKey(!refreshKey);
+  };
 
   return (
     <div className="h-screen overflow-auto bg-neutral-800">

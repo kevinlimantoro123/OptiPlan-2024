@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { SiShopware } from "react-icons/si";
 import UserProfile from "../dashboard/UserProfile";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -22,8 +21,15 @@ const NavButton = ({ customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu, screenSize, setScreenSize, name } =
-    useContext(GlobalContext);
+  const {
+    activeMenu,
+    setActiveMenu,
+    screenSize,
+    setScreenSize,
+    name,
+    setRefreshKey,
+    refreshKey,
+  } = useContext(GlobalContext);
   const [openProfile, setOpenProfile] = useState(false);
 
   useEffect(() => {
@@ -42,7 +48,10 @@ const Navbar = () => {
     }
   }, [screenSize]);
 
-  const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  const handleActiveMenu = () => {
+    setActiveMenu(!activeMenu);
+    setRefreshKey(!refreshKey);
+  };
 
   return (
     <div className="flex justify-between p-2 ml=1 relative">
@@ -55,10 +64,7 @@ const Navbar = () => {
         to="/"
         className="items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-3 mt-1 flex text-xl absolute font-extrabold tracking-tight text-neutral-200"
       >
-        <img
-          src="/images/optiplanNoNameNoBg.gif"
-          className="h-6"
-        />
+        <img src="/images/optiplanNoNameNoBg.gif" className="h-6" />
         <span>OptiPlan</span>
       </Link>
       <div className="flex">

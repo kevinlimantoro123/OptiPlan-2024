@@ -34,7 +34,7 @@ export default function EventModel() {
       try {
         const event_id = Number(selectedEvent.id);
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/calendar/events/" +
+          "https://opti-plan-2024-backend.vercel.app/calendar/events/" +
             event_id,
           {
             method: "PUT",
@@ -54,7 +54,7 @@ export default function EventModel() {
     } else {
       try {
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/calendar/events",
+          "https://opti-plan-2024-backend.vercel.app/calendar/events",
           {
             method: "POST",
             headers: {
@@ -77,7 +77,7 @@ export default function EventModel() {
     try {
       const event_id = Number(selectedEvent.id);
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar/events/" + event_id,
+        "https://opti-plan-2024-backend.vercel.app/calendar/events/" + event_id,
         {
           method: "DELETE",
           headers: { token: localStorage.token },
