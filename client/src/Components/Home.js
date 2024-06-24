@@ -13,6 +13,7 @@ const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
     useContext(GlobalContext);
   const navigate = useNavigate();
+  const [ homeNotifs, setHomeNotifs ] = useState([]);
 
   async function verify() {
     try {
@@ -35,6 +36,23 @@ const Home = () => {
   const showNotif = () => {
     console.log(notifEvents);
   };
+
+  useEffect(() => {
+    setHomeNotifs(
+      notifEvents.map((event) => {
+        toast.info("Upcoming event: " + `${event.title}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+    }));
+  }, [notifEvents]);
 
   if (verified) {
     return (
@@ -71,20 +89,7 @@ const Home = () => {
               </Routes>
             </div>
             <div>
-              <button onClick={showNotif}>button</button>
-              {notifEvents.map((event) => {
-                toast.info("Upcoming event: " + `${event.title}`, {
-                  position: "top-center",
-                  autoClose: 5000,
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "dark",
-                  transition: Slide,
-                });
-              })}
+              {homeNotifs}
               <ToastContainer stacked />
             </div>
           </div>

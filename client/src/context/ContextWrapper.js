@@ -45,6 +45,8 @@ export default function ContextWrapper(props) {
           dayjs(Number(event.day)).format("DD-MM-YYYY") ===
             dayjs().format("DD-MM-YYYY") && event.notified === false
       );
+      console.log("notif events are");
+      console.log(notif);
       setNotifEvents(notif);
     } catch (err) {
       console.error(err.message);
@@ -85,6 +87,10 @@ export default function ContextWrapper(props) {
   useEffect(() => {
     getName();
   }, [verified]);
+
+  useEffect(() => {
+    setRefreshKey(!refreshKey);
+  }, [savedEvents]);
 
   useEffect(() => {
     if (smallCalendarMonth !== null) {
