@@ -60,7 +60,7 @@ const Sidebar = () => {
                 {item.links.map((link) => (
                   <NavLink
                     to={
-                      `${link.name}` === `home` ? `/home` : `/home/${link.name}`
+                      `/home/${link.name}`
                     }
                     key={link.name}
                     onClick={() => handleCloseSidebar}

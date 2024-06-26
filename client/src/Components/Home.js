@@ -8,6 +8,7 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
+import MainHomepage from "./homepage/MainHomepage";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
@@ -32,10 +33,6 @@ const Home = () => {
   useEffect(() => {
     verify();
   }, []);
-
-  const showNotif = () => {
-    console.log(notifEvents);
-  };
 
   useEffect(() => {
     setHomeNotifs(
@@ -84,6 +81,7 @@ const Home = () => {
             </div>
             <div>
               <Routes>
+                <Route path="/home" element={<MainHomepage />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/analytics" element={<Analytics />} />

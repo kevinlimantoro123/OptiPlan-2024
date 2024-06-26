@@ -6,6 +6,7 @@ import Calendar from "./Components/calendar/Calendar";
 import Kanban from "./Components/kanbanBoard/Kanban";
 import { Routes, Route } from "react-router-dom";
 import Analytics from "./Components/analytics/Analytics";
+import MainHomepage from "./Components/homepage/MainHomepage";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="calendar" element={<Calendar />} />
           <Route path="kanban" element={<Kanban />} />
           <Route path="analytics" element={<Analytics />} />
-          <Route path="home" />
+          <Route path="home" element={<MainHomepage />} />
         </Route>
       </Route>
     </Routes>
