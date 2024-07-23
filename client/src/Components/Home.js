@@ -8,6 +8,7 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
+import Homepage from "./homepage/Homepage";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
@@ -84,6 +85,7 @@ const Home = () => {
             </div>
             <div>
               <Routes>
+                <Route path="/home" element={<Homepage />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/analytics" element={<Analytics />} />

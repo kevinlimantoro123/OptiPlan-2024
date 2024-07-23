@@ -19,6 +19,7 @@ export default function ContextWrapper(props) {
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
   const [notifEvents, setNotifEvents] = useState([]);
   const [refreshKey, setRefreshKey] = useState(false);
+  const [finishedLoading, setFinishedLoading] = useState("");
 
   async function getName() {
     try {
@@ -45,8 +46,6 @@ export default function ContextWrapper(props) {
           dayjs(Number(event.day)).format("DD-MM-YYYY") ===
             dayjs().format("DD-MM-YYYY") && event.notified === false
       );
-      console.log("notif events are");
-      console.log(notif);
       setNotifEvents(notif);
     } catch (err) {
       console.error(err.message);
@@ -75,6 +74,12 @@ export default function ContextWrapper(props) {
       console.err(err.message);
     }
   }
+
+  useEffect(() => {
+    if (name && verified && savedEvents) {
+      setFinishedLoading("done");
+    }
+  }, [savedEvents, verified, name]);
 
   useEffect(() => {
     notify();
@@ -125,7 +130,6 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     getAllEvents();
-    console.log("refresh");
   }, [showEventModel, verified]);
 
   return (
@@ -162,6 +166,8 @@ export default function ContextWrapper(props) {
         setNotifEvents,
         refreshKey,
         setRefreshKey,
+        finishedLoading,
+        setFinishedLoading
       }}
     >
       {props.children}

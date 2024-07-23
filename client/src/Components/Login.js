@@ -1,8 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import GlobalContext from "../context/GlobalContext";
 
 const Login = () => {
   const userRef = useRef();
@@ -12,6 +13,9 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [pwdVisible, setPwdVisible] = useState(false);
+  const { verified, setVerified, finishedLoading, setFinishedLoading, savedEvents } = useContext(GlobalContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     userRef.current.focus();
@@ -43,9 +47,29 @@ const Login = () => {
     }
   };
 
-  if (loggedIn) {
-    return <Navigate to="/home" />;
+  async function verify() {
+    try {
+      const res = await fetch("http://localhost:5000/auth/verify", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
+      const parseRes = await res.json();
+
+      setVerified(parseRes.auth);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
+
+  useEffect(() => {
+    verify();
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (loggedIn && verified && finishedLoading) {
+      navigate("/home/home");
+    }
+  }, [verified, loggedIn, finishedLoading, savedEvents]);
 
   return (
     <div className="h-screen w-full bg-black fixed left-0 top-0 flex items-center">
