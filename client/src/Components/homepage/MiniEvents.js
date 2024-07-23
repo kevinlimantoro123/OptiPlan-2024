@@ -39,6 +39,12 @@ export default function MiniEvents() {
 
     useEffect(() => {
         const events = savedEvents
+            .filter(
+                event => 
+                    dayjs(Number(event.day)).format("DD") >= dayjs().format("DD") &&
+                    dayjs(Number(event.day)).format("MM") >= dayjs().format("MM") &&
+                    dayjs(Number(event.day)).format("YYYY") >= dayjs().format("YYYY")
+            )
             .sort(compare)
             .filter((e, index) => index < 6);
         setUpcomingEvents(events);

@@ -66,7 +66,8 @@ const Login = () => {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (loggedIn && verified && finishedLoading) {
+    console.log(savedEvents.message);
+    if (loggedIn && verified && finishedLoading && savedEvents.message !== 'Token is not valid') {
       navigate("/home/home");
     }
   }, [verified, loggedIn, finishedLoading, savedEvents]);
