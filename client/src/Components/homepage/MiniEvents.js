@@ -46,7 +46,7 @@ export default function MiniEvents() {
                     dayjs(Number(event.day)).format("YYYY") >= dayjs().format("YYYY")
             )
             .sort(compare)
-            .filter((e, index) => index < 2);
+            .filter((e, index) => index < 6);
         setUpcomingEvents(events);
     }, [savedEvents]);
 
