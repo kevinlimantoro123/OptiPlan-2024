@@ -122,10 +122,13 @@ module.exports = {
       },
       gridTemplateColumns: {
         "1/5": "1fr 5fr",
-        "1/6": "1fr 6fr"
+        "1/6": "1fr 6fr",
+        "3/5": "3fr 2fr"
       },
       gridTemplateRows: {
         '48': 'repeat(48, minmax(0, 1fr))',
+        "2/5": "2fr 3fr",
+        "1/9": "1fr 8fr"
       }
     },
   },

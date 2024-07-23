@@ -1,19 +1,22 @@
 import React from "react";
+import MiniChart from "./MiniChart";
+import MiniKanban from "./MiniKanban";
+import MiniEvents from "./MiniEvents";
 
 export default function Homepage() {
     
     return (
-        <div className="grid grid-cols-2 h-[90vh] justify-items-center">
-            <div className="grid grid-rows-2 gap-2 p-2 w-full justify-items-center">
-                <div className="w-4/5 h-full bg-neutral-800 rounded-3xl">
-                    1
+        <div className="grid grid-cols-3/5 h-[88vh] gap-16 mt-6 mr-16 items-center justify-center">
+            <div className="grid grid-rows-2/5 gap-16 h-[90%] ml-16 justify-items-center">
+                <div className="w-full h-full bg-neutral-800 rounded-3xl">
+                    <MiniKanban />
                 </div>
-                <div className="w-4/5 h-full bg-neutral-500 rounded-3xl">
-                    2
+                <div className="w-full h-full bg-neutral-800 rounded-3xl">
+                    <MiniChart />
                 </div>
             </div>
-            <div className="w-4/5 h-full bg-neutral-800 p-2 rounded-3xl">
-                Hello
+            <div className="w-full mr-10 h-[90%] bg-neutral-800 rounded-3xl">
+                <MiniEvents />
             </div>
         </div>
     )
