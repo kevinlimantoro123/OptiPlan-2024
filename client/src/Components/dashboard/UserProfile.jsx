@@ -3,7 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import GlobalContext from "../../context/GlobalContext";
 
 const UserProfile = () => {
-  const { name, setVerified } = useContext(GlobalContext);
+  const { name, setVerified, setFinishedLoading } = useContext(GlobalContext);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -11,6 +11,7 @@ const UserProfile = () => {
       localStorage.removeItem("token");
       console.log("Logged out succcessfully");
       setVerified(false);
+      setFinishedLoading("");
     } catch (err) {
       console.error(err.message);
     }

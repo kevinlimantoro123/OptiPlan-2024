@@ -76,11 +76,10 @@ export default function ContextWrapper(props) {
   }
 
   useEffect(() => {
-    if (name) {
-      console.log(name);
+    if (name && verified && savedEvents) {
       setFinishedLoading("done");
     }
-  }, [name]);
+  }, [savedEvents, verified, name]);
 
   useEffect(() => {
     notify();

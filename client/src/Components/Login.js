@@ -13,7 +13,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [pwdVisible, setPwdVisible] = useState(false);
-  const { verified, setVerified, finishedLoading, setFinishedLoading } = useContext(GlobalContext);
+  const { verified, setVerified, finishedLoading, setFinishedLoading, savedEvents } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -66,11 +66,14 @@ const Login = () => {
   }, [loggedIn]);
 
   useEffect(() => {
+    console.log(verified);
+    console.log(loggedIn);
+    console.log(finishedLoading);
+    console.log(savedEvents);
     if (loggedIn && verified && finishedLoading) {
       navigate("/home/home");
-      setFinishedLoading("");
     }
-  }, [verified, loggedIn, finishedLoading]);
+  }, [verified, loggedIn, finishedLoading, savedEvents]);
 
   return (
     <div className="h-screen w-full bg-black fixed left-0 top-0 flex items-center">
