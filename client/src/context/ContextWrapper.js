@@ -19,6 +19,7 @@ export default function ContextWrapper(props) {
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
   const [notifEvents, setNotifEvents] = useState([]);
   const [refreshKey, setRefreshKey] = useState(false);
+  const [finishedLoading, setFinishedLoading] = useState("");
 
   async function getName() {
     try {
@@ -73,6 +74,13 @@ export default function ContextWrapper(props) {
       console.err(err.message);
     }
   }
+
+  useEffect(() => {
+    if (name) {
+      console.log(name);
+      setFinishedLoading("done");
+    }
+  }, [name]);
 
   useEffect(() => {
     notify();
@@ -159,6 +167,8 @@ export default function ContextWrapper(props) {
         setNotifEvents,
         refreshKey,
         setRefreshKey,
+        finishedLoading,
+        setFinishedLoading
       }}
     >
       {props.children}

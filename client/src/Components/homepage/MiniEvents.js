@@ -6,7 +6,6 @@ export default function MiniEvents() {
 
     const [ upcomingEvents, setUpcomingEvents ] = useState([]);
     const { savedEvents } = useContext(GlobalContext);
-    console.log(savedEvents);
 
     function compare(a, b) {
         const dayA = dayjs(Number(a.day));
