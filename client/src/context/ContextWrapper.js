@@ -24,7 +24,7 @@ export default function ContextWrapper(props) {
   async function getName() {
     try {
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/dashboard",
+        "https://opti-plan-2024-backend.vercel.app/dashboard",
         {
           method: "GET",
           headers: { token: localStorage.token },
@@ -40,7 +40,7 @@ export default function ContextWrapper(props) {
   async function getNotifEvents() {
     try {
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
+        "https://opti-plan-2024-backend.vercel.app/calendar",
         {
           method: "POST",
           headers: { token: localStorage.token },
@@ -64,7 +64,7 @@ export default function ContextWrapper(props) {
         const body = { notified: true };
         const event_id = Number(event.id);
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/notification/events/" +
+          "https://opti-plan-2024-backend.vercel.app/notification/events/" +
             event_id,
           {
             method: "PUT",
@@ -125,7 +125,7 @@ export default function ContextWrapper(props) {
   async function getAllEvents() {
     try {
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
+        "https://opti-plan-2024-backend.vercel.app/calendar",
         {
           method: "POST",
           headers: { token: localStorage.token },

@@ -37,7 +37,7 @@ const Login = () => {
       const body = { name, pwd };
       //check credentials
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/auth/login",
+        "https://opti-plan-2024-backend.vercel.app/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ const Login = () => {
   async function verify() {
     try {
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/auth/verify",
+        "https://opti-plan-2024-backend.vercel.app/auth/verify",
         {
           method: "GET",
           headers: { token: localStorage.token },

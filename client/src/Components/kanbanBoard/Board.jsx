@@ -11,7 +11,7 @@ const Board = () => {
   async function getEvents() {
     try {
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/kanban",
+        "https://opti-plan-2024-backend.vercel.app/kanban",
         {
           method: "GET",
           headers: { token: localStorage.token },
@@ -120,7 +120,7 @@ const Column = ({
       try {
         const body = { col };
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
+          "https://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
           {
             method: "PUT",
             headers: {

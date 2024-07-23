@@ -18,7 +18,7 @@ const BurnCard = ({ setCards }) => {
     try {
       const id = Number(e.dataTransfer.getData("cardId"));
       const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
+        "https://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
         {
           method: "DELETE",
           headers: { token: localStorage.token },
