@@ -6,7 +6,7 @@ export default function MiniKanban() {
   async function getEvents() {
     try {
       const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/kanban",
+        "http://opti-plan-2024-backend.vercel.app/kanban",
         {
           method: "GET",
           headers: { token: localStorage.token },

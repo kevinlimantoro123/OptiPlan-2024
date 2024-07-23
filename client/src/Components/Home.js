@@ -19,7 +19,7 @@ const Home = () => {
   async function verify() {
     try {
       const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/auth/verify",
+        "http://opti-plan-2024-backend.vercel.app/auth/verify",
         {
           method: "GET",
           headers: { token: localStorage.token },

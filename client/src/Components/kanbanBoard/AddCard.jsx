@@ -17,7 +17,7 @@ const AddCard = ({ col, setCards, refresh, setRefresh }) => {
         col,
       };
       const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/kanban/cards",
+        "http://opti-plan-2024-backend.vercel.app/kanban/cards",
         {
           method: "POST",
           headers: {

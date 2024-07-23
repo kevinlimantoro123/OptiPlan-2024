@@ -58,7 +58,7 @@ const Register = () => {
     try {
       const body = { name, pwd };
       const res = await fetch(
-        "https://opti-plan-2024-backend.vercel.app/auth/register",
+        "http://opti-plan-2024-backend.vercel.app/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
