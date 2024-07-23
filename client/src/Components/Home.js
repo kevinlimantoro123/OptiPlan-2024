@@ -8,22 +8,20 @@ import Calendar from "./calendar/Calendar";
 import Kanban from "./kanbanBoard/Kanban";
 import GlobalContext from "../context/GlobalContext";
 import Analytics from "./analytics/Analytics";
+import Homepage from "./homepage/Homepage";
 
 const Home = () => {
   const { verified, setVerified, activeMenu, setActiveMenu, notifEvents } =
     useContext(GlobalContext);
   const navigate = useNavigate();
-  const [ homeNotifs, setHomeNotifs ] = useState([]);
+  const [homeNotifs, setHomeNotifs] = useState([]);
 
   async function verify() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/auth/verify",
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/auth/verify", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
 
       setVerified(parseRes.auth);
@@ -54,7 +52,8 @@ const Home = () => {
           theme: "dark",
           transition: Slide,
         });
-    }));
+      })
+    );
   }, [notifEvents]);
 
   if (verified) {
@@ -86,6 +85,7 @@ const Home = () => {
             </div>
             <div>
               <Routes>
+                <Route path="/home" element={<Homepage />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/analytics" element={<Analytics />} />

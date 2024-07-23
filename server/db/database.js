@@ -1,7 +1,11 @@
 const Pool = require("pg").Pool;
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  user: "postgres",
+  password: "postgres",
+  host: "localhost",
+  port: 5432,
+  database: "optiplan",
 });
 
 module.exports = pool;

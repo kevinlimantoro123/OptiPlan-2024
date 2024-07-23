@@ -19,16 +19,14 @@ export default function ContextWrapper(props) {
   const [analyticsView, setAnalyticsView] = useState("Year Chart");
   const [notifEvents, setNotifEvents] = useState([]);
   const [refreshKey, setRefreshKey] = useState(false);
+  const [finishedLoading, setFinishedLoading] = useState("");
 
   async function getName() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/dashboard",
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/dashboard", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       setName(parseRes.name);
     } catch (err) {
@@ -38,21 +36,16 @@ export default function ContextWrapper(props) {
 
   async function getNotifEvents() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
-        {
-          method: "POST",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       const notif = parseRes.filter(
         (event) =>
           dayjs(Number(event.day)).format("DD-MM-YYYY") ===
             dayjs().format("DD-MM-YYYY") && event.notified === false
       );
-      console.log("notif events are");
-      console.log(notif);
       setNotifEvents(notif);
     } catch (err) {
       console.error(err.message);
@@ -65,8 +58,7 @@ export default function ContextWrapper(props) {
         const body = { notified: true };
         const event_id = Number(event.id);
         const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/notification/events/" +
-            event_id,
+          "http://localhost:5000/notification/events/" + event_id,
           {
             method: "PUT",
             headers: {
@@ -82,6 +74,12 @@ export default function ContextWrapper(props) {
       console.err(err.message);
     }
   }
+
+  useEffect(() => {
+    if (name && verified && savedEvents) {
+      setFinishedLoading("done");
+    }
+  }, [savedEvents, verified, name]);
 
   useEffect(() => {
     notify();
@@ -119,13 +117,10 @@ export default function ContextWrapper(props) {
 
   async function getAllEvents() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/calendar",
-        {
-          method: "POST",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/calendar", {
+        method: "POST",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       setSavedEvents(parseRes);
     } catch (err) {
@@ -135,7 +130,6 @@ export default function ContextWrapper(props) {
 
   useEffect(() => {
     getAllEvents();
-    console.log("refresh");
   }, [showEventModel, verified]);
 
   return (
@@ -172,6 +166,8 @@ export default function ContextWrapper(props) {
         setNotifEvents,
         refreshKey,
         setRefreshKey,
+        finishedLoading,
+        setFinishedLoading
       }}
     >
       {props.children}

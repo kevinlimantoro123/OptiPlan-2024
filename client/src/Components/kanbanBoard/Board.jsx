@@ -10,13 +10,10 @@ const Board = () => {
 
   async function getEvents() {
     try {
-      const res = await fetch(
-        "http://opti-plan-2024-backend.vercel.app/kanban",
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const res = await fetch("http://localhost:5000/kanban", {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
       const parseRes = await res.json();
       setCards(parseRes);
     } catch (err) {
@@ -119,17 +116,14 @@ const Column = ({
 
       try {
         const body = { col };
-        const res = await fetch(
-          "http://opti-plan-2024-backend.vercel.app/kanban/cards/" + id,
-          {
-            method: "PUT",
-            headers: {
-              token: localStorage.token,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          }
-        );
+        const res = await fetch("http://localhost:5000/kanban/cards/" + id, {
+          method: "PUT",
+          headers: {
+            token: localStorage.token,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
         await res.json();
       } catch (err) {
         console.error(err.message);
