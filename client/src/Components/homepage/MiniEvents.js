@@ -52,7 +52,7 @@ export default function MiniEvents() {
             </div>
             <div className="h-full w-full grid grid-rows-6 items-center justify-items-center px-4 pb-6">
                 {upcomingEvents.map(event =>
-                    <div className={`bg-${event.label}-200 h-3/4 w-11/12 rounded-2xl items-center grid grid-cols-3`}>
+                    <div className={`bg-${event.label}-200 text-neutral-800 h-3/4 w-11/12 rounded-2xl items-center grid grid-cols-3`}>
                         <span className="material-icons-outlined pl-6">
                             {event.label === "indigo"
                                 ? "work_outline"

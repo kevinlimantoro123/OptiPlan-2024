@@ -128,40 +128,6 @@ export default function MiniChart() {
     const { savedEvents } = useContext(GlobalContext);
     const [ monthEvents, setMonthEvents ] = useState(initialData);
 
-    const CustomTooltip = ({ active, payload, label }) => {
-        if (active && payload && payload.length) {
-            return (
-                <div className="p-4 bg-neutral-800/50 flex flex-col gap-4 rounded-md">
-                    <p className="text-medium text-lg text-neutral-200">{label}</p>
-                    <p className="text-sm text-blue-400">
-                    Total Events:
-                    <span className="ml-2">{payload[0].value}</span>
-                    </p>
-                    <p className="text-sm text-indigo-200">
-                    Work Events:
-                    <span className="ml-2">{payload[1].value}</span>
-                    </p>
-                    <p className="text-sm text-emerald-200">
-                    Study Events:
-                    <span className="ml-2">{payload[2].value}</span>
-                    </p>
-                    <p className="text-sm text-blue-200">
-                    Meetings:
-                    <span className="ml-2">{payload[3].value}</span>
-                    </p>
-                    <p className="text-sm text-red-200">
-                    Important Events:
-                    <span className="ml-2">{payload[4].value}</span>
-                    </p>
-                    <p className="text-sm text-yellow-200">
-                    Leisure Events:
-                    <span className="ml-2">{payload[5].value}</span>
-                    </p>
-                </div>
-            );
-        }
-    };
-
     useEffect(() => {
         let tempData = [...initialData];
         savedEvents
@@ -198,7 +164,6 @@ export default function MiniChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis allowDecimals={false} />
-                    <Tooltip content={<CustomTooltip />} />
                     <Legend />
                     <Line type="monotone" dataKey="count" name="Total" stroke="#3b82f6" dot={false} />
                     <Line type="monotone" dataKey="indigo" name="Work" stroke="#c7d2fe" dot={false} />
