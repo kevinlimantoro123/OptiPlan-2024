@@ -66,10 +66,6 @@ const Login = () => {
   }, [loggedIn]);
 
   useEffect(() => {
-    console.log(verified);
-    console.log(loggedIn);
-    console.log(finishedLoading);
-    console.log(savedEvents);
     if (loggedIn && verified && finishedLoading) {
       navigate("/home/home");
     }
