@@ -61,7 +61,7 @@ const Navbar = () => {
         icon={<AiOutlineMenu />}
       />
       <Link
-        to="/"
+        to="/home/home"
         className="items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-3 mt-1 flex text-xl absolute font-extrabold tracking-tight text-neutral-200"
       >
         <img src="/images/optiplanNoNameNoBg.gif" className="h-6" />
