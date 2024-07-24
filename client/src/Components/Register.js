@@ -77,7 +77,7 @@ const Register = () => {
       setSuccess(true);
     } catch (err) {
       setIsLoading(false);
-      setErrMsg("Username taken");
+      setErrMsg("Username taken / Registration failed");
       errRef.current.focus();
     }
   };
@@ -106,10 +106,10 @@ const Register = () => {
             <section>
               <p
                 ref={errRef}
-                className={errMsg ? "errmsg" : "offscreen"}
+                className="w-full text-center text-neutral-200"
                 aria-live="assertive"
               >
-                {errMsg ? errMsg + " :(" : ""}
+                {errMsg}
               </p>
               <h1 className="p-5 pt-8 text-center text-xl text-neutral-200 font-bold">
                 Register
