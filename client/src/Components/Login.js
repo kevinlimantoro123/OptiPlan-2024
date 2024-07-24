@@ -32,11 +32,14 @@ const Login = () => {
       setIsLoading(true);
       const body = { name, pwd };
       //check credentials
-      const res = await fetch("http://localhost:5000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
       //store token in local machine
       const parseRes = await res.json();
       localStorage.setItem("token", parseRes.token);
@@ -52,10 +55,13 @@ const Login = () => {
 
   async function verify() {
     try {
-      const res = await fetch("http://localhost:5000/auth/verify", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
+      const res = await fetch(
+        "http://opti-plan-2024-backend.vercel.app/auth/verify",
+        {
+          method: "GET",
+          headers: { token: localStorage.token },
+        }
+      );
       const parseRes = await res.json();
 
       setVerified(parseRes.auth);
@@ -69,7 +75,6 @@ const Login = () => {
   }, [loggedIn]);
 
   useEffect(() => {
-    console.log(savedEvents.message);
     if (loggedIn && verified && finishedLoading && savedEvents.message !== 'Token is not valid') {
       setIsLoading(false);
       navigate("/home/home");
