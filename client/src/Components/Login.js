@@ -85,8 +85,8 @@ const Login = () => {
   }, [verified, loggedIn, finishedLoading, savedEvents]);
 
   return (
-    <div className="h-screen w-full bg-black fixed left-0 top-0 flex items-center">
-      <div className="border-neutral-700 bg-neutral-800 w-5/12 min-w-96 h-full flex items-center shrink-0">
+    <div className="h-screen w-full bg-gradient-to-br from-neutral-800 to-black fixed left-0 top-0 flex items-center">
+      <div className="w-5/12 min-w-96 h-full flex items-center shrink-0">
         <div className="w-full">
           <p
             ref={errRef}
