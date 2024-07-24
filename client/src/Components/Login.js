@@ -13,13 +13,8 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [pwdVisible, setPwdVisible] = useState(false);
-  const {
-    verified,
-    setVerified,
-    finishedLoading,
-    setFinishedLoading,
-    savedEvents,
-  } = useContext(GlobalContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const { verified, setVerified, finishedLoading, setFinishedLoading, savedEvents } = useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -34,6 +29,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const body = { name, pwd };
       //check credentials
       const res = await fetch(
@@ -46,11 +42,15 @@ const Login = () => {
       );
       //store token in local machine
       const parseRes = await res.json();
+      if (parseRes.message === 'Invalid Credentials') {
+        throw "invalid credentials";
+      }
       localStorage.setItem("token", parseRes.token);
       setName("");
       setPwd("");
       setLoggedIn(true);
     } catch (err) {
+      setIsLoading(false);
       setErrMsg("Login failed");
       errRef.current.focus();
     }
@@ -78,7 +78,8 @@ const Login = () => {
   }, [loggedIn]);
 
   useEffect(() => {
-    if (loggedIn && verified && finishedLoading) {
+    if (loggedIn && verified && finishedLoading && savedEvents.message !== 'Token is not valid') {
+      setIsLoading(false);
       navigate("/home/home");
     }
   }, [verified, loggedIn, finishedLoading, savedEvents]);
@@ -89,7 +90,7 @@ const Login = () => {
         <div className="w-full">
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className="text-neutral-200 w-full text-center"
             aria-live="assertive"
           >
             {errMsg}
@@ -138,7 +139,17 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <div className="grid p-3">
+            <div className="grid p-3 relative items-center">
+              {isLoading &&
+                <div
+                  className="inline-block absolute justify-self-end mr-[51px] text-neutral-200 h-7 w-7 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                  role="status"
+                >
+                  <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                    Loading...
+                  </span>
+                </div>
+              }
               <button
                 type="submit"
                 disabled={!name || !pwd ? true : false}
@@ -172,7 +183,7 @@ const Login = () => {
           Your One-Stop Solution to Seamless Scheduling
         </div>
         <img
-          src="/images/optiplanSquares.gif"
+          src="/images/optiplanNoBg.gif"
           className="absolute bottom-0 right-0 m-12 h-56"
         />
       </div>
