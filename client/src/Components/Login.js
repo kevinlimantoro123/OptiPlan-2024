@@ -42,6 +42,9 @@ const Login = () => {
       );
       //store token in local machine
       const parseRes = await res.json();
+      if (parseRes.message === 'Invalid Credentials') {
+        throw "invalid credentials";
+      }
       localStorage.setItem("token", parseRes.token);
       setName("");
       setPwd("");
@@ -87,7 +90,7 @@ const Login = () => {
         <div className="w-full">
           <p
             ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
+            className="text-neutral-200 w-full text-center"
             aria-live="assertive"
           >
             {errMsg}
