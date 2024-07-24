@@ -74,11 +74,7 @@ const Register = () => {
       setMatchPwd("");
       setSuccess(true);
     } catch (err) {
-      if (err.response?.status === 409) {
-        setErrMsg("Username taken");
-      } else {
-        setErrMsg("Registration failed");
-      }
+      setErrMsg("Username taken");
       errRef.current.focus();
     }
   };
@@ -107,7 +103,7 @@ const Register = () => {
             <section>
               <p
                 ref={errRef}
-                className="text-neutral-200 font-bold text-2xl absolute top-0 pt-12 w-5/12 text-center"
+                className={errMsg ? "errmsg" : "offscreen"}
                 aria-live="assertive"
               >
                 {errMsg ? errMsg + " :(" : ""}
