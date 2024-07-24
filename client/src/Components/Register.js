@@ -32,6 +32,8 @@ const Register = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     userRef.current.focus(); //Sets focus to current user ref
@@ -56,6 +58,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const body = { name, pwd };
       const res = await fetch("http://localhost:5000/auth/register", {
         method: "POST",
@@ -64,13 +67,13 @@ const Register = () => {
       });
 
       const parseRes = await res.json();
-      localStorage.setItem("token", parseRes.token);
 
       setName("");
       setPwd("");
       setMatchPwd("");
       setSuccess(true);
     } catch (err) {
+      setIsLoading(false);
       if (err.response?.status === 409) {
         setErrMsg("Username taken");
       } else {
@@ -275,7 +278,17 @@ const Register = () => {
                     )}
                   </div>
                 </div>
-                <div className="grid p-3">
+                <div className="grid p-3 relative items-center">
+                  {isLoading &&
+                    <div
+                      className="inline-block absolute justify-self-end mr-[51px] text-neutral-200 h-7 w-7 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status"
+                    >
+                      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                        Loading...
+                      </span>
+                    </div>
+                  }
                   <button
                     type="submit"
                     disabled={
