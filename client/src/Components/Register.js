@@ -83,7 +83,7 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen w-full bg-gradient-to-br from-neutral-800 to-black left-0 top-0 flex items-center">
+    <div className="h-screen w-full bg-gradient-to-r from-neutral-800 to-black left-0 top-0 flex items-center">
       <div className="w-5/12 min-w-96 h-full flex items-center shrink-0">
         <div className="w-full">
           {success ? (
@@ -320,13 +320,14 @@ const Register = () => {
           )}
         </div>
       </div>
-      <div>
-        <div className="text-neutral-200 text-6xl absolute top-0 font-bold pl-14 pt-14 pr-24">
-          Your One-Stop Solution to Seamless Scheduling
-        </div>
+      <div className="w-7/12 h-screen">
         <img
-          src="/images/optiplanSquares.gif"
-          className="absolute bottom-0 right-0 m-12 h-56"
+          src="/images/tagline.png"
+          className="absolute top-0 h-2/5 pt-14 pl-14"
+        />
+        <img
+          src="/images/optiplanNoBg.gif"
+          className="absolute bottom-0 right-0 m-12 h-[30vh]"
         />
       </div>
     </div>
