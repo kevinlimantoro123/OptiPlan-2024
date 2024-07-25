@@ -17,10 +17,12 @@ export default function EventModel() {
   const [endtime, setEndtime] = useState(
     selectedEvent ? selectedEvent.endtime : "empty"
   );
+  const [isLoading, setIsLoading] = useState(false);
   const labelsClasses = ["indigo", "emerald", "blue", "red", "yellow"];
   const labelNames = ["Work", "Study", "Meeting", "Important", "Leisure"];
 
   async function handleSubmit(e) {
+    setIsLoading(true);
     e.preventDefault();
     const body = {
       title,
@@ -48,7 +50,9 @@ export default function EventModel() {
         await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.error(err.message);
       }
     } else {
@@ -67,7 +71,9 @@ export default function EventModel() {
         await res.json();
         setSelectedEvent(null);
         setShowEventModel(false);
+        setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
         console.error(err.message);
       }
     }
@@ -75,6 +81,7 @@ export default function EventModel() {
 
   async function handleDelete() {
     try {
+      setIsLoading(true);
       const event_id = Number(selectedEvent.id);
       const res = await fetch(
         "http://opti-plan-2024-backend.vercel.app/calendar/events/" + event_id,
@@ -85,8 +92,10 @@ export default function EventModel() {
       );
       await res.json();
       setSelectedEvent(null);
-      setShowEventModel(false); //ss
+      setShowEventModel(false);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       console.error(err.message);
     }
   }
@@ -310,11 +319,25 @@ export default function EventModel() {
           </div>
         </div>
         <footer className="flex justify-end p-3">
+          {isLoading &&
+            <div className="absolute w-[84px] h-10 flex items-center justify-center">
+              <div
+                className="inline-block absolute justify-self-end text-neutral-200 h-6 w-6 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              >
+                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                  Loading...
+                </span>
+              </div>
+            </div>
+          }
           <button
             type="submit"
             onClick={handleSubmit}
             disabled={
-              !title
+              isLoading
+                ? true
+                : !title
                 ? true
                 : starttime !== "empty" &&
                   endtime !== "empty" &&
@@ -323,7 +346,9 @@ export default function EventModel() {
                 : true
             }
             className={
-              !title
+              isLoading
+                ? "px-6 py-2 rounded bg-neutral-500 text-neutral-500"
+                : !title
                 ? "px-6 py-2 rounded bg-neutral-500 text-neutral-200"
                 : starttime !== "empty" &&
                   endtime !== "empty" &&

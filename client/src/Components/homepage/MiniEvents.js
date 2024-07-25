@@ -37,14 +37,30 @@ export default function MiniEvents() {
         }
     }
 
+    function isUpcoming(event) {
+        const dayA = dayjs(Number(event.day));
+        const dayB = dayjs();
+        if (dayA.format("YYYY") < dayB.format("YYYY")) {
+            return false;
+        } else if (dayA.format("YYYY") === dayB.format("YYYY")) {
+            if (dayA.format("MM") < dayB.format("MM")) {
+                return false;
+            } else if (dayA.format("MM") === dayB.format("MM")) {
+                if (dayA.format("DD") < dayB.format("DD")) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
     useEffect(() => {
         const events = savedEvents
-            .filter(
-                event => 
-                    dayjs(Number(event.day)).format("DD") >= dayjs().format("DD") &&
-                    dayjs(Number(event.day)).format("MM") >= dayjs().format("MM") &&
-                    dayjs(Number(event.day)).format("YYYY") >= dayjs().format("YYYY")
-            )
+            .filter(event => isUpcoming(event))
             .sort(compare)
             .filter((e, index) => index < 6);
         setUpcomingEvents(events);
