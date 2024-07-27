@@ -19,6 +19,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    localStorage.removeItem("token");
+    setVerified(false);
+    setFinishedLoading("");
     userRef.current.focus();
   }, []);
 
