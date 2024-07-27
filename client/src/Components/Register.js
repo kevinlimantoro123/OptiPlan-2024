@@ -32,7 +32,7 @@ const Register = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
-  
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -77,18 +77,14 @@ const Register = () => {
       setSuccess(true);
     } catch (err) {
       setIsLoading(false);
-      if (err.response?.status === 409) {
-        setErrMsg("Username taken");
-      } else {
-        setErrMsg("Registration failed");
-      }
+      setErrMsg("Username taken / Registration failed");
       errRef.current.focus();
     }
   };
 
   return (
-    <div className="h-screen w-full bg-black fixed left-0 top-0 flex items-center">
-      <div className="border-neutral-700 bg-neutral-800 w-5/12 min-w-96 h-full flex items-center shrink-0">
+    <div className="h-screen w-full bg-gradient-to-r from-neutral-800 to-black left-0 top-0 flex items-center">
+      <div className="w-5/12 min-w-96 h-full flex items-center shrink-0">
         <div className="w-full">
           {success ? (
             <section>
@@ -110,10 +106,10 @@ const Register = () => {
             <section>
               <p
                 ref={errRef}
-                className="text-neutral-200 font-bold text-2xl absolute top-0 pt-12 w-5/12 text-center"
+                className="w-full text-center text-neutral-200"
                 aria-live="assertive"
               >
-                {errMsg ? errMsg + " :(" : ""}
+                {errMsg}
               </p>
               <h1 className="p-5 pt-8 text-center text-xl text-neutral-200 font-bold">
                 Register
@@ -282,7 +278,7 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="grid p-3 relative items-center">
-                  {isLoading &&
+                  {isLoading && (
                     <div
                       className="inline-block absolute justify-self-end mr-[51px] text-neutral-200 h-7 w-7 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                       role="status"
@@ -291,7 +287,7 @@ const Register = () => {
                         Loading...
                       </span>
                     </div>
-                  }
+                  )}
                   <button
                     type="submit"
                     disabled={
@@ -324,13 +320,14 @@ const Register = () => {
           )}
         </div>
       </div>
-      <div>
-        <div className="text-neutral-200 text-6xl absolute top-0 font-bold pl-14 pt-14 pr-24">
-          Your One-Stop Solution to Seamless Scheduling
-        </div>
+      <div className="w-7/12 h-screen">
         <img
-          src="/images/optiplanSquares.gif"
-          className="absolute bottom-0 right-0 m-12 h-56"
+          src="/images/tagline.png"
+          className="absolute top-0 h-2/5 pt-14 pl-14"
+        />
+        <img
+          src="/images/optiplanNoBg.gif"
+          className="absolute bottom-0 right-0 m-12 h-[30vh]"
         />
       </div>
     </div>

@@ -105,10 +105,19 @@ const Home = () => {
   } else {
     return (
       <Fragment>
-        <h1>INVALID CREDENTIALS/SESSION HAS EXPIRED</h1>
-        <button className="btn btn-primary" onClick={() => navigate("/login")}>
-          Sign in
-        </button>
+        <div className="h-screen w-screen flex items-center justify-center bg-neutral-900">
+          <div className="grid grid-rows-2 justify-items-center">
+            <h1 className="text-neutral-200">
+              Session has expired
+            </h1>
+            <button 
+              className="text-center text-blue-500 underline" 
+              onClick={() => navigate("/login")}
+            >
+              Sign in
+            </button>
+          </div>
+        </div>
       </Fragment>
     );
   }
